@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Country whereSlug($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Country whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Region $region
  */
 class Country extends Model
 {
@@ -32,5 +33,10 @@ class Country extends Model
     public function region()
     {
     	return $this->belongsTo('App\Region','region_id');
+    }
+
+    public function getCountryBySlug($slug)
+    {
+    	return $this->whereSlug($slug)->firstOrFail();
     }
 }

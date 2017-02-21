@@ -44,4 +44,9 @@ class Category extends Model
     {
     	return $this->where('special',0)->get();
     }
+
+    public function getSubcategoryByCategorySlug($slug)
+    {
+    	return $this->whereSlug($slug)->firstOrFail()->subcategories();
+    }
 }

@@ -11,4 +11,10 @@ class PageController extends Controller
     {
 		dd($category);
     }
+
+    public function getCategory($slug,Category $category)
+    {
+        $this->data['subcategories'] = $category->getSubcategoryByCategorySlug($slug);
+        dd($this->data);
+    }
 }

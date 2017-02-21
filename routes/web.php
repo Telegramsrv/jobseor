@@ -15,3 +15,23 @@ Route::get('/', [
 	'as' => 'page.index',
     'uses' => 'PageController@index'
 ]);
+
+Route::get('/country', [
+	'as' => 'country.list',
+	'uses' => 'CountryController@index'
+]);
+
+Route::get('/region/{slug}', [
+	'as' => 'country.index',
+	'uses' => 'CountryController@region'
+]);
+
+Route::get('/country/{slug}', [
+	'as' => 'country.index',
+	'uses' => 'CountryController@getOne'
+]);
+
+Route::get('/category/{slug}', [
+	'as' => 'category.index',
+	'uses' => 'PageController@getCategory'
+]);
