@@ -30,6 +30,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUserId($value)
  * @mixin \Eloquent
+ * @property int $role_id
+ * @property int $balance
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereBalance($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereRoleId($value)
  */
 class User extends Authenticatable
 {
