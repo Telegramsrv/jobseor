@@ -27,5 +27,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
-    //
+    protected $primaryKey = 'country_id';
+
+    public function region()
+    {
+    	return $this->belongsTo('App\Region','region_id');
+    }
 }

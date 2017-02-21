@@ -2,6 +2,10 @@
 
 namespace App\Http\Sections;
 
+use App\Region;
+use AdminDisplay;
+use AdminForm;
+use AdminFormElement;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -37,7 +41,17 @@ class Country extends Section
      */
     public function onDisplay()
     {
-        // todo: remove if unused
+	    $display = AdminDisplay::datatables()->with('region')
+	                           ->setHtmlAttribute('class', 'table-primary');
+	    $display->setColumns(
+		    \AdminColumn::text('country_id', '#')->setWidth('30px'),
+		    \AdminColumn::text('name', 'Название')->setWidth('250px'),
+		    \AdminColumn::text('slug', 'Slug')->setWidth('250px'),
+		    \AdminColumn::text('region.name', 'Регион')->setWidth('250px'),
+		    \AdminColumn::image('image', 'Картинка')->setWidth('100px')
+	    );
+
+	    return $display;
     }
 
     /**
@@ -47,7 +61,31 @@ class Country extends Section
      */
     public function onEdit($id)
     {
-        // todo: remove if unused
+	    return AdminForm::panel()->addBody(
+		    [
+			    AdminFormElement::text('name', 'Название')->required(),
+			    AdminFormElement::text('slug', 'Slug')->required(),
+			    AdminFormElement::select('region_id', 'Регион', Region::class)->setDisplay('name')->required(),
+			    AdminFormElement::wysiwyg('body','Текст'),
+			    AdminFormElement::image('image', 'Картинка')->setUploadPath(
+				    function (\Illuminate\Http\UploadedFile $file) {
+					    return 'image/country';
+				    }
+			    )
+			                    ->setUploadSettings(
+				                    [
+					                    'resize' => [
+						                    30,
+						                    20,
+						                    function ($constraint) {
+							                    $constraint->upsize();
+							                    $constraint->aspectRatio();
+						                    }
+					                    ]
+				                    ]
+			                    )
+		    ]
+	    );
     }
 
     /**
@@ -56,21 +94,5 @@ class Country extends Section
     public function onCreate()
     {
         return $this->onEdit(null);
-    }
-
-    /**
-     * @return void
-     */
-    public function onDelete($id)
-    {
-        // todo: remove if unused
-    }
-
-    /**
-     * @return void
-     */
-    public function onRestore($id)
-    {
-        // todo: remove if unused
     }
 }

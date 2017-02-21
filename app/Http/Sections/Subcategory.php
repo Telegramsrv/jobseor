@@ -50,7 +50,7 @@ class Subcategory extends Section
 			\AdminColumn::text('category.name', 'Категория')->setWidth('250px'),
 			\AdminColumn::text('weight', 'Вес')->setWidth('30px'),
 			\AdminColumn::image('image', 'Картинка')->setWidth('100px')
-		)->paginate(20);
+		);
 
 		return $display;
 	}

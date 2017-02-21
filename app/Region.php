@@ -19,5 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Region extends Model
 {
-    //
+    protected $primaryKey = 'region_id';
+
+    public function countries()
+    {
+    	return $this->hasMany('App\Country');
+    }
 }

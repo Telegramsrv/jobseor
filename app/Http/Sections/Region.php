@@ -2,6 +2,9 @@
 
 namespace App\Http\Sections;
 
+use AdminDisplay;
+use AdminForm;
+use AdminFormElement;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -37,7 +40,15 @@ class Region extends Section
      */
     public function onDisplay()
     {
-        // todo: remove if unused
+	    $display = AdminDisplay::table()
+	                           ->setHtmlAttribute('class', 'table-primary');
+	    $display->setColumns(
+		    \AdminColumn::text('region_id', '#')->setWidth('30px'),
+		    \AdminColumn::text('name', 'Название')->setWidth('250px'),
+		    \AdminColumn::text('slug', 'Slug')->setWidth('250px')
+		)->paginate(20);
+
+	    return $display;
     }
 
     /**
@@ -47,7 +58,12 @@ class Region extends Section
      */
     public function onEdit($id)
     {
-        // todo: remove if unused
+	    return AdminForm::panel()->addBody(
+		    [
+			    AdminFormElement::text('name', 'Название')->required(),
+			    AdminFormElement::text('slug', 'Slug')->required(),
+		    ]
+	    );
     }
 
     /**
@@ -56,21 +72,5 @@ class Region extends Section
     public function onCreate()
     {
         return $this->onEdit(null);
-    }
-
-    /**
-     * @return void
-     */
-    public function onDelete($id)
-    {
-        // todo: remove if unused
-    }
-
-    /**
-     * @return void
-     */
-    public function onRestore($id)
-    {
-        // todo: remove if unused
     }
 }

@@ -46,7 +46,7 @@ class Category extends Section
 			\AdminColumn::text('category_id', '#')->setWidth('30px'),
 			\AdminColumn::text('name', 'Название')->setWidth('250px'),
 			\AdminColumn::text('slug', 'Slug')->setWidth('250px'),
-			\AdminColumnEditable::checkbox('special', 'Спецыализация')->setWidth('50px'),
+			\AdminColumnEditable::checkbox('special', 'Специализация')->setWidth('50px'),
 			\AdminColumn::text('weight', 'Вес')->setWidth('30px'),
 			\AdminColumn::image('image', 'Картинка')->setWidth('100px')
 		)->paginate(20);
