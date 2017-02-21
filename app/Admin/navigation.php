@@ -34,6 +34,30 @@ return [
         'url'   => route('admin.information'),
     ],
 
+    [
+    	'title' => 'Категории и подкатегории',
+        'pages' => [
+	        (new Page(\App\Category::class))
+		        ->setPriority(0)
+	            ->setTitle('Категории'),
+	        (new Page(\App\Subcategory::class))
+		        ->setPriority(50)
+	            ->setTitle('Подкатегории'),
+        ]
+    ],
+
+    [
+	    'title' => 'Страны и регионы',
+	    'pages' => [
+		    (new Page(\App\Country::class))
+			    ->setPriority(0)
+			    ->setTitle('Страны'),
+		    (new Page(\App\Region::class))
+			    ->setPriority(50)
+			    ->setTitle('Регионы'),
+	    ]
+    ]
+
     // Examples
     // [
     //    'title' => 'Content',
