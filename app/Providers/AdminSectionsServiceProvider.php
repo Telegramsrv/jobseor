@@ -16,6 +16,10 @@ class AdminSectionsServiceProvider extends ServiceProvider
         \App\Subcategory::class => 'App\Http\Sections\Subcategory',
         \App\Country::class => 'App\Http\Sections\Country',
         \App\Region::class => 'App\Http\Sections\Region',
+        \App\Company::class => 'App\Http\Sections\Company',
+        \App\Employer::class => 'App\Http\Sections\Employer',
+        \App\Payment::class => 'App\Http\Sections\Payment',
+        \App\Role::class => 'App\Http\Sections\Role',
     ];
 
     /**

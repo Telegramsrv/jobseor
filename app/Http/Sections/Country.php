@@ -29,7 +29,7 @@ class Country extends Section
     /**
      * @var string
      */
-    protected $title;
+    protected $title = 'Страны';
 
     /**
      * @var string

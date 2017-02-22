@@ -26,4 +26,9 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     protected $primaryKey = 'company_id';
+
+    public function user()
+    {
+    	return $this->hasOne('App\User','user_id');
+    }
 }

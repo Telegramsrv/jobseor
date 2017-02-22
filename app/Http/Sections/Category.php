@@ -28,7 +28,7 @@ class Category extends Section
 	/**
 	 * @var string
 	 */
-	protected $title;
+	protected $title = 'Категории';
 
 	/**
 	 * @var string
@@ -66,7 +66,7 @@ class Category extends Section
 				AdminFormElement::text('name', 'Название')->required(),
 				AdminFormElement::text('slug', 'Slug')->required(),
 				AdminFormElement::number('weight', 'Вес')->required(),
-				AdminFormElement::checkbox('special', 'Спецыализация'),
+				AdminFormElement::checkbox('special', 'Специализация'),
 				AdminFormElement::image('image', 'Картинка')->setUploadPath(
 					function (\Illuminate\Http\UploadedFile $file) {
 						return 'image/category';

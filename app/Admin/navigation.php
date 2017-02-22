@@ -56,6 +56,30 @@ return [
 			    ->setPriority(50)
 			    ->setTitle('Регионы'),
 	    ]
+    ],
+
+    [
+	    'title' => 'Соискатели и компании',
+	    'pages' => [
+		    (new Page(\App\Employer::class))
+			    ->setPriority(0)
+			    ->setTitle('Соискатели'),
+		    (new Page(\App\Company::class))
+			    ->setPriority(50)
+			    ->setTitle('Компании'),
+	    ]
+    ],
+
+    [
+	    'title' => 'Настройки',
+	    'pages' => [
+		    (new Page(\App\Role::class))
+			    ->setPriority(0)
+			    ->setTitle('Роли'),
+		    (new Page(\App\User::class))
+			    ->setPriority(50)
+			    ->setTitle('Пользователи'),
+	    ]
     ]
 
     // Examples

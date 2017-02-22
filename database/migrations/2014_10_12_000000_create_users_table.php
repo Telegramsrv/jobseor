@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('role_id');
 	        $table->string('image');
-	        $table->integer('balance');
+	        $table->double('balance');
 	        $table->rememberToken();
             $table->timestamps();
         });
