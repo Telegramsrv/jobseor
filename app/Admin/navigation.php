@@ -59,28 +59,23 @@ return [
     ],
 
     [
-	    'title' => 'Соискатели и компании',
+	    'title' => 'Пользователи',
 	    'pages' => [
 		    (new Page(\App\Employer::class))
-			    ->setPriority(0)
+			    ->setPriority(50)
 			    ->setTitle('Соискатели'),
 		    (new Page(\App\Company::class))
-			    ->setPriority(50)
+			    ->setPriority(100)
 			    ->setTitle('Компании'),
+		    (new Page(\App\Role::class))
+			    ->setPriority(200)
+			    ->setTitle('Роли'),
+		    (new Page(\App\User::class))
+			    ->setPriority(0)
+			    ->setTitle('Пользователи'),
 	    ]
     ],
 
-    [
-	    'title' => 'Настройки',
-	    'pages' => [
-		    (new Page(\App\Role::class))
-			    ->setPriority(0)
-			    ->setTitle('Роли'),
-		    (new Page(\App\User::class))
-			    ->setPriority(50)
-			    ->setTitle('Пользователи'),
-	    ]
-    ]
 
     // Examples
     // [

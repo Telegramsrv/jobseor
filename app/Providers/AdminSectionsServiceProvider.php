@@ -20,6 +20,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         \App\Employer::class => 'App\Http\Sections\Employer',
         \App\Payment::class => 'App\Http\Sections\Payment',
         \App\Role::class => 'App\Http\Sections\Role',
+        \App\User::class => 'App\Http\Sections\User',
     ];
 
     /**

@@ -20,4 +20,9 @@ use Illuminate\Database\Eloquent\Model;
 class Employer extends Model
 {
     protected $primaryKey = 'employer_id';
+
+    public function user()
+    {
+    	return $this->hasOne('App\User','user_id');
+    }
 }

@@ -39,6 +39,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -59,6 +60,6 @@ class User extends Authenticatable
 
     public function role()
     {
-    	return $this->hasOne('App\Rols','role_id');
+    	return $this->belongsTo('App\Role','role_id');
     }
 }
