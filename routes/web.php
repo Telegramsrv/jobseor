@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', [
 	'as' => 'page.index',
     'uses' => 'PageController@index'
@@ -35,3 +37,6 @@ Route::get('/category/{slug}', [
 	'as' => 'category.index',
 	'uses' => 'PageController@getCategory'
 ]);
+
+
+Route::get('/home', 'UserController@index');
