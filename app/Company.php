@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Company whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Company whereWebsite($value)
  * @mixin \Eloquent
+ * @property-read \App\User $user
  */
 class Company extends Model
 {

@@ -34,6 +34,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $balance
  * @method static \Illuminate\Database\Query\Builder|\App\User whereBalance($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRoleId($value)
+ * @property-read \App\Role $role
  */
 class User extends Authenticatable
 {

@@ -76,6 +76,21 @@ return [
 	    ]
     ],
 
+    [
+	    'title' => 'Стаж и образование',
+	    'pages' => [
+		    (new Page(\App\Experience::class))
+			    ->setPriority(50)
+			    ->setTitle('Стаж'),
+		    (new Page(\App\Education::class))
+			    ->setPriority(100)
+			    ->setTitle('Образование'),
+		    (new Page(\App\EducationType::class))
+			    ->setPriority(200)
+			    ->setTitle('Виды образования'),
+	    ]
+    ],
+
 
     // Examples
     // [
