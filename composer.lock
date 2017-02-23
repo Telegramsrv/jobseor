@@ -62,16 +62,16 @@
         },
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "25c8de637ddf79567d721c1856616be01db7b960"
+                "reference": "e82de98cef0d6597b1b686be0b5813a3a4bb53c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/25c8de637ddf79567d721c1856616be01db7b960",
-                "reference": "25c8de637ddf79567d721c1856616be01db7b960",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/e82de98cef0d6597b1b686be0b5813a3a4bb53c5",
+                "reference": "e82de98cef0d6597b1b686be0b5813a3a4bb53c5",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2017-02-20T12:54:53+00:00"
+            "time": "2017-02-22T12:27:33+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -1236,12 +1236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelRUS/SleepingOwlAdmin.git",
-                "reference": "19cdd28fdf0a3f99607af57857a34fa2d4902be7"
+                "reference": "8c055b36ad76c2817f58a45dbb220c1e62759b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/19cdd28fdf0a3f99607af57857a34fa2d4902be7",
-                "reference": "19cdd28fdf0a3f99607af57857a34fa2d4902be7",
+                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/8c055b36ad76c2817f58a45dbb220c1e62759b50",
+                "reference": "8c055b36ad76c2817f58a45dbb220c1e62759b50",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1294,7 @@
                 "crud",
                 "laravel"
             ],
-            "time": "2017-02-20T20:16:24+00:00"
+            "time": "2017-02-22T10:21:31+00:00"
         },
         {
             "name": "league/flysystem",
