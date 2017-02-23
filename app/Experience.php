@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Experience whereYearEnd($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Experience whereYearStart($value)
  * @mixin \Eloquent
+ * @property-read \App\User $user
  */
 class Experience extends Model
 {

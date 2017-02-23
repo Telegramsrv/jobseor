@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Company;
-use App\Employer;
+use App\Applicant;
 use App\User;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
 		            ]);
 	        }
 	        if ($user->role_id == 3) {
-		        Employer::create([
+		        Applicant::create([
                         'user_id' => $user->user_id
                     ]);
 	        }

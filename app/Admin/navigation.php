@@ -61,15 +61,12 @@ return [
     [
 	    'title' => 'Пользователи',
 	    'pages' => [
-		    (new Page(\App\Employer::class))
+		    (new Page(\App\Applicant::class))
 			    ->setPriority(50)
 			    ->setTitle('Соискатели'),
 		    (new Page(\App\Company::class))
 			    ->setPriority(100)
 			    ->setTitle('Компании'),
-		    (new Page(\App\Role::class))
-			    ->setPriority(200)
-			    ->setTitle('Роли'),
 		    (new Page(\App\User::class))
 			    ->setPriority(0)
 			    ->setTitle('Пользователи'),
@@ -85,12 +82,23 @@ return [
 		    (new Page(\App\Education::class))
 			    ->setPriority(100)
 			    ->setTitle('Образование'),
+	    ]
+    ],
+
+    [
+	    'title' => 'Настройки',
+	    'pages' => [
+		    (new Page(\App\Currency::class))
+			    ->setPriority(0)
+			    ->setTitle('Валюта'),
+		    (new Page(\App\Role::class))
+			    ->setPriority(100)
+			    ->setTitle('Роли'),
 		    (new Page(\App\EducationType::class))
 			    ->setPriority(200)
 			    ->setTitle('Виды образования'),
 	    ]
     ],
-
 
     // Examples
     // [

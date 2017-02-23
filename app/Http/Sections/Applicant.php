@@ -10,13 +10,13 @@ use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Employer
+ * Class Applicant
  *
- * @property \App\Employer $model
+ * @property \App\Applicant $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */
-class Employer extends Section
+class Applicant extends Section
 {
 	/**
 	 * @see http://sleepingowladmin.ru/docs/model_configuration#ограничение-прав-доступа
@@ -43,7 +43,7 @@ class Employer extends Section
 		$display = AdminDisplay::datatables()->with('user')
 		                       ->setHtmlAttribute('class', 'table-primary');
 		$display->setColumns(
-			\AdminColumn::text('employer_id', '#')->setWidth('10px'),
+			\AdminColumn::text('Applicant_id', '#')->setWidth('10px'),
 			\AdminColumn::text('user.name', 'ФИО')->setWidth('100px'),
 			\AdminColumn::text('user.email', 'Email')->setWidth('100px'),
 			\AdminColumn::text('user.balance', 'Баланс')->setWidth('50px')
