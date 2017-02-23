@@ -63,6 +63,7 @@ class Applicant extends Section
 			[
 				AdminFormElement::text('user.name', 'ФИО')->setReadOnly(true),
 				AdminFormElement::date('birthday', 'День рождения'),
+				AdminFormElement::wysiwyg('description','Дополнительная информация'),
 				AdminFormElement::file('summary', 'Резюме')->setUploadPath(
 					function (\Illuminate\Http\UploadedFile $file) {
 						return 'uploads/summary';

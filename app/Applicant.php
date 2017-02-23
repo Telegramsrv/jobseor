@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Applicant whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Applicant whereUpdatedAt($value)
  * @property int $applicant_id
+ * @property string $description
+ * @method static \Illuminate\Database\Query\Builder|\App\Applicant whereDescription($value)
  */
 class Applicant extends Model
 {
