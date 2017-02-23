@@ -24,6 +24,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
         \App\EducationType::class => 'App\Http\Sections\EducationType',
         \App\Experience::class => 'App\Http\Sections\Experience',
         \App\Currency::class => 'App\Http\Sections\Currency',
+        \App\Summary::class => 'App\Http\Sections\Summary',
     ];
 
     /**

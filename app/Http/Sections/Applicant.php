@@ -43,7 +43,7 @@ class Applicant extends Section
 		$display = AdminDisplay::datatables()->with('user')
 		                       ->setHtmlAttribute('class', 'table-primary');
 		$display->setColumns(
-			\AdminColumn::text('Applicant_id', '#')->setWidth('10px'),
+			\AdminColumn::text('applicant_id', '#')->setWidth('10px'),
 			\AdminColumn::text('user.name', 'ФИО')->setWidth('100px'),
 			\AdminColumn::text('user.email', 'Email')->setWidth('100px'),
 			\AdminColumn::text('user.balance', 'Баланс')->setWidth('50px')
