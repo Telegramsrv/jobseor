@@ -16,8 +16,9 @@ class CreateEmployersTable extends Migration
         Schema::create('employers', function (Blueprint $table) {
             $table->increments('employer_id');
             $table->integer('user_id');
-            $table->date('birthday');
-            $table->string('summary');
+            $table->date('birthday')->nullable();
+            $table->string('summary')->nullable();
+	        $table->timestamps();
         });
     }
 

@@ -27,6 +27,10 @@ class Company extends Model
 {
     protected $primaryKey = 'company_id';
 
+	protected $fillable = [
+		'user_id'
+	];
+
     public function user()
     {
     	return $this->hasOne('App\User','user_id');

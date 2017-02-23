@@ -61,6 +61,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="role-1" class="col-md-4 control-label">Компания</label>
+                            <div class="col-md-6">
+                                <input id="role-1" type="radio" class="form-control" name="role_id" value="2" required>
+                            </div>
+                            <br/>
+                            <label for="role-4" class="col-md-4 control-label">Соискатель</label>
+                            <div class="col-md-6">
+                                <input id="role-2" type="radio" class="form-control" name="role_id" value="3" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
