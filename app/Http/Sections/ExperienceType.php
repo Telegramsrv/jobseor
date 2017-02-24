@@ -40,7 +40,7 @@ class ExperienceType extends Section
      */
     public function onDisplay()
     {
-	    $display = AdminDisplay::datatables()->with('user')->with('category')->with('country')
+	    $display = AdminDisplay::table()
 	                           ->setHtmlAttribute('class', 'table-primary');
 	    $display->setColumns(
 		    \AdminColumn::text('experience_type_id', '#')->setWidth('10px'),

@@ -50,6 +50,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Currency $currency
  * @property-read \App\ExperienceType $experiencetype
  * @method static \Illuminate\Database\Query\Builder|\App\Vacancy whereEmploymentId($value)
+ * @property-read \App\ExperienceType $experience_type
+ * @property-read \App\Subcategory $subcategory
  */
 class Vacancy extends Model
 {
@@ -65,6 +67,11 @@ class Vacancy extends Model
 		return $this->belongsTo('App\Category', 'category_id');
 	}
 
+	public function subcategory()
+	{
+		return $this->belongsTo('App\Subcategory', 'subcategory_id');
+	}
+
 	public function country()
 	{
 		return $this->belongsTo('App\Country', 'country_id');
@@ -75,7 +82,7 @@ class Vacancy extends Model
 		return $this->belongsTo('App\Currency', 'currency_id');
 	}
 
-	public function experiencetype()
+	public function experience_type()
 	{
 		return $this->belongsTo('App\ExperienceType', 'experience_type_id');
 	}
