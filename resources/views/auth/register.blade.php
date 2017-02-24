@@ -7,14 +7,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+                        {!! Form::open(['route' => 'register', 'method' => 'post']) !!}
+
+                        {!! Form::token() !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                {!! Form::text('name', old('name'), [ 'class' => 'form-control', 'id' => 'name', 'required', 'autofocus']) !!}
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -28,7 +29,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                {!! Form::email('email', old('email'), [ 'class' => 'form-control', 'id' => 'email', 'required']) !!}
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -42,7 +43,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                {!! Form::password('password',[ 'class' => 'form-control', 'id' => 'password', 'required']) !!}
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -56,19 +57,19 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                {!! Form::password('password_confirmation',[ 'class' => 'form-control', 'id' => 'password-confirm', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="role-1" class="col-md-4 control-label">Компания</label>
                             <div class="col-md-6">
-                                <input id="role-1" type="radio" class="form-control" name="role_id" value="2" required>
+                                {!! Form::radio('role_id', '2', false, [ 'class' => 'form-control', 'id' => 'role-1', 'required']) !!}
                             </div>
                             <br/>
                             <label for="role-4" class="col-md-4 control-label">Соискатель</label>
                             <div class="col-md-6">
-                                <input id="role-2" type="radio" class="form-control" name="role_id" value="3" required>
+                                {!! Form::radio('role_id', '3', false, [ 'class' => 'form-control', 'id' => 'role-2', 'required']) !!}
                             </div>
                         </div>
 
@@ -79,7 +80,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
