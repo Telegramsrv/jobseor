@@ -86,6 +86,18 @@ return [
     ],
 
     [
+	    'title' => 'Резюме и вакансии',
+	    'pages' => [
+		    (new Page(\App\Summary::class))
+			    ->setPriority(50)
+			    ->setTitle('Резюме'),
+		    (new Page(\App\Vacancy::class))
+			    ->setPriority(100)
+			    ->setTitle('Вакансии'),
+	    ]
+    ],
+
+    [
 	    'title' => 'Настройки',
 	    'pages' => [
 		    (new Page(\App\Currency::class))
@@ -95,8 +107,14 @@ return [
 			    ->setPriority(100)
 			    ->setTitle('Роли'),
 		    (new Page(\App\EducationType::class))
-			    ->setPriority(200)
+			    ->setPriority(150)
 			    ->setTitle('Виды образования'),
+		    (new Page(\App\Employment::class))
+			    ->setPriority(200)
+			    ->setTitle('Типы зайнятости'),
+		    (new Page(\App\ExperienceType::class))
+			    ->setPriority(250)
+			    ->setTitle('Виды стажа'),
 	    ]
     ],
 

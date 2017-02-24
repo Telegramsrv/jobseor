@@ -63,6 +63,7 @@ class Summary extends Section
 	    return AdminForm::panel()->addBody(
 		    [
 			    AdminFormElement::text('user.name', 'ФИО')->setReadOnly(true),
+			    AdminFormElement::text('user.email', 'Email')->setReadOnly(true),
 			    AdminFormElement::text('title', 'Название')->required(),
 			    AdminFormElement::number('salary', 'Зарплата от')->required(),
 			    AdminFormElement::select('currency_id', 'Валюта', Currency::class)->setDisplay('name')->required(),
