@@ -24,7 +24,7 @@ Route::get('/country', [
 ]);
 
 Route::get('/region/{slug}', [
-	'as' => 'country.index',
+	'as' => 'region.index',
 	'uses' => 'CountryController@region'
 ]);
 

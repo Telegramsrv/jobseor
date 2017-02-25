@@ -47,6 +47,11 @@ class Category extends Model
 
     public function getSubcategoryByCategorySlug($slug)
     {
-    	return $this->whereSlug($slug)->firstOrFail()->subcategories();
+    	return $this->whereSlug($slug)->firstOrFail()->subcategories()->get();
+    }
+
+    public function getCategoryBySlug($slug)
+    {
+    	return $this->whereSlug($slug)->firstOrFail();
     }
 }

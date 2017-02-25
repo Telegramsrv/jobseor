@@ -26,11 +26,11 @@ class Region extends Model
 
     public function countries()
     {
-    	return $this->hasMany('App\Country','region_id','region_id');
+    	return $this->hasMany('App\Country','region_id');
     }
 
-    public function getCountriesBySlug($slug)
+    public function getRegionBySlug($slug)
     {
-	    return $this->whereSlug($slug)->firstOrFail()->countries();
+	    return $this->whereSlug($slug)->firstOrFail();
     }
 }
