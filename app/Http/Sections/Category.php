@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Category
  *
- * @property \App\Category $model
+ * @property \App\Model\Category $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

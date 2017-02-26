@@ -5,7 +5,7 @@ namespace App\Http\Sections;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
-use App\EducationType;
+use App\Model\EducationType;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -13,7 +13,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Experience
  *
- * @property \App\Experience $model
+ * @property \App\Model\Experience $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

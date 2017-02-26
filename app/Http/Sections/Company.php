@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Company
  *
- * @property \App\Company $model
+ * @property \App\Model\Company $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Company;
-use App\Applicant;
-use App\User;
+use App\Model\Company;
+use App\Model\Applicant;
+use App\Model\User;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

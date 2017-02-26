@@ -5,13 +5,13 @@ namespace App\Http\Sections;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
-use App\Category;
-use App\Country;
-use App\Currency;
-use App\EducationType;
-use App\Employment;
-use App\ExperienceType;
-use App\Subcategory;
+use App\Model\Category;
+use App\Model\Country;
+use App\Model\Currency;
+use App\Model\EducationType;
+use App\Model\Employment;
+use App\Model\ExperienceType;
+use App\Model\Subcategory;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -19,7 +19,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Vacancy
  *
- * @property \App\Vacancy $model
+ * @property \App\Model\Vacancy $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

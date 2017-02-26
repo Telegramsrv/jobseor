@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Currency
  *
- * @property \App\Currency $model
+ * @property \App\Model\Currency $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

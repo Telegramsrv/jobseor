@@ -5,7 +5,7 @@ namespace App\Http\Sections;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
-use App\Currency;
+use App\Model\Currency;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -13,7 +13,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Summary
  *
- * @property \App\Summary $model
+ * @property \App\Model\Summary $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

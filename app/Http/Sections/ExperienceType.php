@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class ExperienceType
  *
- * @property \App\ExperienceType $model
+ * @property \App\Model\ExperienceType $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

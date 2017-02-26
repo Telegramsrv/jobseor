@@ -2,7 +2,7 @@
 
 namespace App\Http\Sections;
 
-use App\Category;
+use App\Model\Category;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
@@ -13,7 +13,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Subcategory
  *
- * @property \App\Subcategory $model
+ * @property \App\Model\Subcategory $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

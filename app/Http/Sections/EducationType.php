@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class EducationType
  *
- * @property \App\EducationType $model
+ * @property \App\Model\EducationType $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

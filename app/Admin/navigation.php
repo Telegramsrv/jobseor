@@ -7,19 +7,19 @@ use SleepingOwl\Admin\Navigation\Page;
 // 	   return auth()->user()->isSuperAdmin();
 // });
 //
-// AdminNavigation::addPage(\App\User::class)->setTitle('test')->setPages(function(Page $page) {
+// AdminNavigation::addPage(\App\Model\User::class)->setTitle('test')->setPages(function(Page $page) {
 // 	  $page
 //		  ->addPage()
 //	  	  ->setTitle('Dashboard')
 //		  ->setUrl(route('admin.dashboard'))
 //		  ->setPriority(100);
 //
-//	  $page->addPage(\App\User::class);
+//	  $page->addPage(\App\Model\User::class);
 // });
 //
 // // or
 //
-// AdminSection::addMenuPage(\App\User::class)
+// AdminSection::addMenuPage(\App\Model\User::class)
 
 return [
     [
@@ -37,10 +37,10 @@ return [
     [
     	'title' => 'Категории и подкатегории',
         'pages' => [
-	        (new Page(\App\Category::class))
+	        (new Page(\App\Model\Category::class))
 		        ->setPriority(0)
 	            ->setTitle('Категории'),
-	        (new Page(\App\Subcategory::class))
+	        (new Page(\App\Model\Subcategory::class))
 		        ->setPriority(50)
 	            ->setTitle('Подкатегории'),
         ]
@@ -49,10 +49,10 @@ return [
     [
 	    'title' => 'Страны и регионы',
 	    'pages' => [
-		    (new Page(\App\Country::class))
+		    (new Page(\App\Model\Country::class))
 			    ->setPriority(0)
 			    ->setTitle('Страны'),
-		    (new Page(\App\Region::class))
+		    (new Page(\App\Model\Region::class))
 			    ->setPriority(50)
 			    ->setTitle('Регионы'),
 	    ]
@@ -61,13 +61,13 @@ return [
     [
 	    'title' => 'Пользователи',
 	    'pages' => [
-		    (new Page(\App\Applicant::class))
+		    (new Page(\App\Model\Applicant::class))
 			    ->setPriority(50)
 			    ->setTitle('Соискатели'),
-		    (new Page(\App\Company::class))
+		    (new Page(\App\Model\Company::class))
 			    ->setPriority(100)
 			    ->setTitle('Компании'),
-		    (new Page(\App\User::class))
+		    (new Page(\App\Model\User::class))
 			    ->setPriority(0)
 			    ->setTitle('Пользователи'),
 	    ]
@@ -76,10 +76,10 @@ return [
     [
 	    'title' => 'Стаж и образование',
 	    'pages' => [
-		    (new Page(\App\Experience::class))
+		    (new Page(\App\Model\Experience::class))
 			    ->setPriority(50)
 			    ->setTitle('Стаж'),
-		    (new Page(\App\Education::class))
+		    (new Page(\App\Model\Education::class))
 			    ->setPriority(100)
 			    ->setTitle('Образование'),
 	    ]
@@ -88,10 +88,10 @@ return [
     [
 	    'title' => 'Резюме и вакансии',
 	    'pages' => [
-		    (new Page(\App\Summary::class))
+		    (new Page(\App\Model\Summary::class))
 			    ->setPriority(50)
 			    ->setTitle('Резюме'),
-		    (new Page(\App\Vacancy::class))
+		    (new Page(\App\Model\Vacancy::class))
 			    ->setPriority(100)
 			    ->setTitle('Вакансии'),
 	    ]
@@ -100,19 +100,19 @@ return [
     [
 	    'title' => 'Настройки',
 	    'pages' => [
-		    (new Page(\App\Currency::class))
+		    (new Page(\App\Model\Currency::class))
 			    ->setPriority(0)
 			    ->setTitle('Валюта'),
-		    (new Page(\App\Role::class))
+		    (new Page(\App\Model\Role::class))
 			    ->setPriority(100)
 			    ->setTitle('Роли'),
-		    (new Page(\App\EducationType::class))
+		    (new Page(\App\Model\EducationType::class))
 			    ->setPriority(150)
 			    ->setTitle('Виды образования'),
-		    (new Page(\App\Employment::class))
+		    (new Page(\App\Model\Employment::class))
 			    ->setPriority(200)
 			    ->setTitle('Типы зайнятости'),
-		    (new Page(\App\ExperienceType::class))
+		    (new Page(\App\Model\ExperienceType::class))
 			    ->setPriority(250)
 			    ->setTitle('Виды стажа'),
 	    ]
@@ -123,11 +123,11 @@ return [
     //    'title' => 'Content',
     //    'pages' => [
     //
-    //        \App\User::class,
+    //        \App\Model\User::class,
     //
     //        // or
     //
-    //        (new Page(\App\User::class))
+    //        (new Page(\App\Model\User::class))
     //            ->setPriority(100)
     //            ->setIcon('fa fa-user')
     //            ->setUrl('users')

@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Currency
+ * App\Model\Currency
  *
  * @property int $currency_id
  * @property string $name
- * @method static \Illuminate\Database\Query\Builder|\App\Currency whereCurrencyId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Currency whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Currency whereCurrencyId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Currency whereName($value)
  * @mixin \Eloquent
  */
 class Currency extends Model

@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Region
  *
- * @property \App\Region $model
+ * @property \App\Model\Region $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

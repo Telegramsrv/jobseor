@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
-use App\Region;
+use App\Model\Country;
+use App\Model\Region;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -16,7 +16,7 @@ class CountryController extends Controller
 
     public function region($slug, Region $region)
     {
-    	$this->data['regions'][] = $region->getRegionBySlug($slug);
+    	$this->data['regions'] = [ $region->getRegionBySlug($slug)];
 	    return view('country.list', $this->data);
     }
 

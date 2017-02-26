@@ -2,7 +2,7 @@
 
 namespace App\Http\Sections;
 
-use App\Region;
+use App\Model\Region;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
@@ -13,7 +13,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Country
  *
- * @property \App\Country $model
+ * @property \App\Model\Country $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

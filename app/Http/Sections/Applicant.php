@@ -12,7 +12,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Applicant
  *
- * @property \App\Applicant $model
+ * @property \App\Model\Applicant $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */

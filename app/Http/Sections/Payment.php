@@ -9,7 +9,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Payment
  *
- * @property \App\Payment $model
+ * @property \App\Model\Payment $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */
