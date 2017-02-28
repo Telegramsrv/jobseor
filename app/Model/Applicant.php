@@ -35,6 +35,11 @@ class Applicant extends Model
 
     public function user()
     {
-    	return $this->hasOne('App\Model\User','user_id');
+    	return $this->hasOne('App\Model\User', 'user_id');
+    }
+
+    public function country()
+    {
+    	return $this->belongsTo('App\Model\Country', 'country_id');
     }
 }

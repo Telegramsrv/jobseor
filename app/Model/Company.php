@@ -34,6 +34,6 @@ class Company extends Model
 
     public function user()
     {
-    	return $this->hasOne('App\Model\User','user_id');
+    	return $this->belongsTo('App\Model\User','user_id');
     }
 }

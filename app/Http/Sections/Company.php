@@ -44,9 +44,8 @@ class Company extends Section
 	                           ->setHtmlAttribute('class', 'table-primary');
 	    $display->setColumns(
 		    \AdminColumn::text('company_id', '#')->setWidth('10px'),
-		    \AdminColumn::text('name', 'Название')->setWidth('150px'),
 		    \AdminColumn::text('website', 'Сайт')->setWidth('250px'),
-		    \AdminColumn::text('user.name', 'Имя Пользователя')->setWidth('100px'),
+		    \AdminColumn::text('user.name', 'Название')->setWidth('100px'),
 		    \AdminColumn::text('user.email', 'Email')->setWidth('100px'),
 		    \AdminColumn::text('user.balance', 'Баланс')->setWidth('50px'),
 		    \AdminColumnEditable::checkbox('agency', 'Агенство')->setWidth('50px')
@@ -64,10 +63,10 @@ class Company extends Section
     {
 	    return AdminForm::panel()->addBody(
 		    [
-			    AdminFormElement::text('name', 'Название компании')->required(),
 			    AdminFormElement::text('website', 'Сайт'),
 			    AdminFormElement::checkbox('agency', 'Агенство'),
-			    AdminFormElement::text('user.name', 'ФИО Пользователя')->setReadOnly(true)
+			    AdminFormElement::wysiwyg('description','Дополнительная информация'),
+			    AdminFormElement::text('user.name', 'Название компании')->setReadOnly(true)
 	            ]
 	    );
     }

@@ -19,6 +19,8 @@ class CreateApplicantsTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('summary')->nullable();
             $table->longText('description')->nullable();
+            $table->integer('country_id')->nullable();
+            $table->string('city')->nullable();
 	        $table->timestamps();
         });
     }
