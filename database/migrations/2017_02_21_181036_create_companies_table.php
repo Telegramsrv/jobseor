@@ -19,7 +19,6 @@ class CreateCompaniesTable extends Migration
 	        $table->string('name')->nullable();
 	        $table->string('website')->nullable();
 	        $table->boolean('agency')->nullable();
-	        $table->integer('rating')->default(0);
             $table->timestamps();
         });
     }

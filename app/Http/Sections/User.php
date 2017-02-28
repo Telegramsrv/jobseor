@@ -66,7 +66,7 @@ class User extends Section
 			[
 				AdminFormElement::text('name', 'ФИО')->required(),
 				AdminFormElement::text('email', 'Email')->required(),
-//				AdminFormElement::password('password', 'Пароль')->hasWithBcrypt()->required(),
+				AdminFormElement::password('password', 'Пароль')->hasWithBcrypt()->required(),
 				AdminFormElement::select('role_id', 'Роль', Role::class)->setDisplay('name'),
 				AdminFormElement::number('balance', 'Баланс')->setMin(0),
 				AdminFormElement::image('image', 'Картинка')->setUploadPath(
