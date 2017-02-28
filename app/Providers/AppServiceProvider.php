@@ -6,6 +6,9 @@ use App\Model\Company;
 use App\Model\Applicant;
 use App\Model\User;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;//commit must fixed
+
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         User::created(function ($user){
         	if ($user->role_id == 2) {
 		        Company::create([
