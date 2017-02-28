@@ -25,65 +25,41 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+       <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 col-xs-2" id="logo">
+            <a href="http://jobseor.com">
+              <img title="Поиск вакансий в Европе" src="image/jobseor.png" alt="Логотип компании"  class="logotype" />
+            </a>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-6 float_right" style="margin-left: -15px;" id="headermenu">
+          <div class="enter">
+              <a href="/visa-country.php" style="padding-left: 10px; padding-right: 10px">Визы и страны</a>
+              <a href="/poisk-rezume.php" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a> 
+              <a href="/dobavit-rezume.php" style="padding-left: 10px; padding-right: 10px;">Добавить резюме</a> 
+                <a href="/dobavit-vakansiyu.php" style="padding-left: 10px; padding-right: 10px;">Добавить вакансию</a> 
+            <a href="{{ route('login') }}" style="padding-left: 10x; padding-right: 10px;">Войти</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
         @yield('content')
     </div>
-
+<footer>
+          <div class="footer_logo">
+            <a href="">
+              <img title="Поиск вакансий, доска вакансий" src="image/jobseor-company.png" alt="Доска поиска вакансий" />
+            </a>
+          </div>
+    <div class="footer_right">
+        <p><a href="/support.php" >Техническая поддержка </a></p>
+        <p>Все права защищены ®</p>
+    </div>
+  </footer>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
