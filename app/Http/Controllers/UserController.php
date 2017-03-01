@@ -28,7 +28,6 @@ class UserController extends Controller
 		if ($request->user()->role_id == 2)
 		{
 			$this->data['company'] = $request->user()->company;
-			dd($this->data);
 			return view('user.company.home', $this->data);
 		}
 
@@ -37,7 +36,8 @@ class UserController extends Controller
 			$this->data['applicant'] = $request->user()->applicant;
 			return view('user.applicant.home', $this->data);
 		}
-
-		return redirect('/admin');
+		if ($request->user()->role_id == 1)
+			return redirect('/admin');
+		return redirect('/');
 	}
 }
