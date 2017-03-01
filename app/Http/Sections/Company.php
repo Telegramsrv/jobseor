@@ -44,8 +44,8 @@ class Company extends Section
 	                           ->setHtmlAttribute('class', 'table-primary');
 	    $display->setColumns(
 		    \AdminColumn::text('company_id', '#')->setWidth('10px'),
-		    \AdminColumn::text('website', 'Сайт')->setWidth('250px'),
 		    \AdminColumn::text('user.name', 'Название')->setWidth('100px'),
+		    \AdminColumn::text('website', 'Сайт')->setWidth('250px'),
 		    \AdminColumn::text('user.email', 'Email')->setWidth('100px'),
 		    \AdminColumn::text('user.balance', 'Баланс')->setWidth('50px'),
 		    \AdminColumnEditable::checkbox('agency', 'Агенство')->setWidth('50px')

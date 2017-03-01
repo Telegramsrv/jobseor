@@ -40,8 +40,22 @@
               <a href="/visa-country.php" style="padding-left: 10px; padding-right: 10px">Визы и страны</a>
               <a href="/poisk-rezume.php" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a> 
               <a href="/dobavit-rezume.php" style="padding-left: 10px; padding-right: 10px;">Добавить резюме</a> 
-                <a href="/dobavit-vakansiyu.php" style="padding-left: 10px; padding-right: 10px;">Добавить вакансию</a> 
-            <a href="{{ route('login') }}" style="padding-left: 10x; padding-right: 10px;">Войти</a>
+              <a href="/dobavit-vakansiyu.php" style="padding-left: 10px; padding-right: 10px;">Добавить вакансию</a>
+              @if (Auth::guest())
+              <a href="{{ route('login') }}" style="padding-left: 10px; padding-right: 10px;">Войти</a>
+              @else
+
+              <a href="{{ route('logout') }}"
+                 onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                  Выйти
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>
+
+              @endif
           </div>
         </div>
       </div>

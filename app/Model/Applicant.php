@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Applicant extends Model
 {
-    protected $primaryKey = 'Applicant_id';
+    protected $primaryKey = 'applicant_id';
 
 	protected $fillable = [
 		'user_id'
@@ -35,7 +35,7 @@ class Applicant extends Model
 
     public function user()
     {
-    	return $this->hasOne('App\Model\User', 'user_id');
+    	return $this->belongsTo('App\Model\User', 'user_id');
     }
 
     public function country()

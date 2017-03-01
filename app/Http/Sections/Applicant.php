@@ -46,8 +46,7 @@ class Applicant extends Section
 		$display->setColumns(
 			\AdminColumn::text('applicant_id', '#')->setWidth('10px'),
 			\AdminColumn::text('user.name', 'ФИО')->setWidth('100px'),
-			\AdminColumn::text('user.email', 'Email')->setWidth('100px'),
-			\AdminColumn::text('user.balance', 'Баланс')->setWidth('50px')
+			\AdminColumn::text('user.email', 'Email')->setWidth('100px')
 	    );
 
 		return $display;

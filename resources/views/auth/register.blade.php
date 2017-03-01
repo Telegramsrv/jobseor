@@ -58,7 +58,7 @@
                     <p>Повторите пароль <span>*</span></p>
                   </div>
                   <div class="col-xs-7">
-                      {!! Form::password('confirm', [ 'class' => 'input_width', 'id' => 'password', 'required']) !!}
+                      {!! Form::password('password_confirmation', [ 'class' => 'input_width', 'id' => 'password', 'required']) !!}
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -77,16 +77,6 @@
                   </div>
                   <div class="col-xs-7">
                          {!! Form::text('name', old('name'), [ 'class' => 'input_width']) !!}
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="phone_number">
-                  <div class="col-xs-5">
-                    <p>Телефон</p>
-                  </div>
-                  <div class="col-xs-7">
-                     {!! Form::text('telephone', old('name'), [ 'class' => 'input_width']) !!}
                   </div>
                 </div>
               </div>
