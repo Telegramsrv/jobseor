@@ -35,6 +35,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereBalance($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereRoleId($value)
  * @property-read \App\Model\Role $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Contacts[] $contacts
  */
 class User extends Authenticatable
 {
@@ -67,5 +68,20 @@ class User extends Authenticatable
     public function role()
     {
     	return $this->belongsTo('App\Model\Role','role_id');
+    }
+
+    public function company()
+    {
+	    return $this->belongsTo('App\Model\Company', 'user_id', 'user_id');
+    }
+
+    public function applicant()
+    {
+	    return $this->belongsTo('App\Model\Applicant', 'user_id', 'user_id');
+    }
+
+	public function contacts()
+	{
+		return $this->hasMany('App\Model\Contacts', 'user_id');
     }
 }

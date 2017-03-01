@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Company whereWebsite($value)
  * @mixin \Eloquent
  * @property-read \App\Model\User $user
+ * @property int $rating
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Company whereRating($value)
+ * @property string $description
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Company whereDescription($value)
  */
 class Company extends Model
 {

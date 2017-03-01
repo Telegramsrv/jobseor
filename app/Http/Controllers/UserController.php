@@ -23,6 +23,21 @@ class UserController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		//TODO User account
+		$this->data['user'] = $request->user();
+
+		if ($request->user()->role_id == 2)
+		{
+			$this->data['company'] = $request->user()->company;
+			dd($this->data);
+			return view('user.company.home', $this->data);
+		}
+
+		if ($request->user()->role_id == 3)
+		{
+			$this->data['applicant'] = $request->user()->applicant;
+			return view('user.applicant.home', $this->data);
+		}
+
+		return redirect('/admin');
 	}
 }

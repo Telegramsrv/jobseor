@@ -10,10 +10,10 @@
                 
                 <div class="col-xs-7" style="width: 100%; text-align: center;">
                   <div class="input">
-                     {!! Form::radio('role_id', '2', false, [ 'class' => 'form-control', 'id' => 'applicant', 'required']) !!} Соискатель
+                     {!! Form::radio('role_id', '3', false, [ 'class' => 'form-control', 'id' => 'applicant', 'required']) !!} Соискатель
                   </div>
                   <div class="input">
-                    {!! Form::radio('role_id', '3', false, [ 'class' => 'form-control', 'id' => 'employer', 'required']) !!} Работодатель
+                    {!! Form::radio('role_id', '2', false, [ 'class' => 'form-control', 'id' => 'employer', 'required']) !!} Работодатель
                   </div>
                   <div class="">
                   </div>

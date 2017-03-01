@@ -24,6 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $applicant_id
  * @property string $description
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Applicant whereDescription($value)
+ * @property-read \App\Model\Country $country
+ * @property int $country_id
+ * @property string $city
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Education[] $education
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Applicant whereCity($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Applicant whereCountryId($value)
  */
 class Applicant extends Model
 {
@@ -42,4 +48,14 @@ class Applicant extends Model
     {
     	return $this->belongsTo('App\Model\Country', 'country_id');
     }
+
+    public function education()
+    {
+    	return $this->hasMany('App\Model\Education', 'education_id');
+    }
+
+	public function experience()
+	{
+		return $this->hasMany('App\Model\Experience', 'user_id', 'user_id');
+	}
 }
