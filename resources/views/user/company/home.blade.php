@@ -12,7 +12,7 @@
 
                 <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
                 <a style="cursor: pointer; padding: 10px;">Мои отклики</a>
-                <a href="" style="padding: 10px;">Мои резюме</a>
+                <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои вакансии</a>
                 <a style="cursor: pointer; padding: 10px;">Настройки</a>
 
             </p>

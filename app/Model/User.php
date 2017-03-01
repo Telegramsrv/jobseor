@@ -36,6 +36,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereRoleId($value)
  * @property-read \App\Model\Role $role
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Contacts[] $contacts
+ * @property-read \App\Model\Applicant $applicant
+ * @property-read \App\Model\Company $company
  */
 class User extends Authenticatable
 {

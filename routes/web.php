@@ -39,4 +39,12 @@ Route::get('/category/{slug}', [
 ]);
 
 
-Route::get('/home', 'UserController@index');
+Route::get('/home', [
+	'as' => 'user.home',
+    'uses' =>   'UserController@index'
+]);
+
+Route::get('/notepad', [
+	'as' => 'user.notepad',
+	'uses' =>   'UserController@notepad'
+]);

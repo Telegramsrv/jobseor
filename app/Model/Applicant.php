@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Education[] $education
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Applicant whereCity($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Applicant whereCountryId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Experience[] $experience
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Summary[] $summaries
  */
 class Applicant extends Model
 {
@@ -57,5 +59,20 @@ class Applicant extends Model
 	public function experience()
 	{
 		return $this->hasMany('App\Model\Experience', 'user_id', 'user_id');
+	}
+
+	public function summaries()
+	{
+		return $this->hasMany('App\Model\Summary', 'user_id', 'user_id');
+	}
+
+	public function experience_year()
+	{
+		$count = 0;
+		foreach ($this->experience as $item)
+		{
+			$count += $item->year_end - $item->year_start;
+		}
+		return $count;
 	}
 }

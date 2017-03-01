@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Company whereRating($value)
  * @property string $description
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Company whereDescription($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Vacancy[] $vacancies
  */
 class Company extends Model
 {
@@ -39,5 +40,10 @@ class Company extends Model
     public function user()
     {
     	return $this->belongsTo('App\Model\User','user_id');
+    }
+
+    public function vacancies()
+    {
+    	return $this->hasMany('App\Model\Vacancy','user_id','user_id');
     }
 }

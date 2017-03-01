@@ -52,6 +52,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereEmploymentId($value)
  * @property-read \App\Model\ExperienceType $experience_type
  * @property-read \App\Model\Subcategory $subcategory
+ * @property-read \App\Model\EducationType $education
  */
 class Vacancy extends Model
 {
@@ -85,5 +86,15 @@ class Vacancy extends Model
 	public function experience_type()
 	{
 		return $this->belongsTo('App\Model\ExperienceType', 'experience_type_id');
+	}
+
+	public function employment()
+	{
+		return $this->belongsTo('App\Model\Employment', 'employment_id');
+	}
+
+	public function education()
+	{
+		return $this->belongsTo('App\Model\EducationType', 'education_type_id');
 	}
 }
