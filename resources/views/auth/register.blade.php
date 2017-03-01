@@ -52,6 +52,22 @@
                   </div>
                 </div>
               </div>
+                <div class="row">
+                <div class="password">
+                  <div class="col-xs-5">
+                    <p>Повторите пароль <span>*</span></p>
+                  </div>
+                  <div class="col-xs-7">
+                      {!! Form::password('confirm', [ 'class' => 'input_width', 'id' => 'password', 'required']) !!}
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="block">
               <div class="row">
