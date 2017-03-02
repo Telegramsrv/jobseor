@@ -84,6 +84,6 @@ class User extends Authenticatable
 
 	public function contacts()
 	{
-		return $this->hasMany('App\Model\Contacts', 'user_id');
+		return $this->hasOne('App\Model\Contacts', 'user_id', 'user_id');
     }
 }

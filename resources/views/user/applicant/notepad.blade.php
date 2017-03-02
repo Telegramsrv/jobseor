@@ -15,7 +15,7 @@
                     <div class="avatarvacanse">
                         <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $summary->title }}">
                     </div>
-                    <h2><a href="/rezume-blank.php">{{ $summary->title }}</a></h2>
+                    <h2><a href="">{{ $summary->title }}</a></h2>
                     <p>{{ $user->name }}</p>
                     <p>Опыт работы : {{ $user->applicant->experience_year() }} год.
                         • {{ str_limit($summary->information, 97) }}…</p>

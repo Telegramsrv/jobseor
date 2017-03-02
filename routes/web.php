@@ -48,3 +48,9 @@ Route::get('/notepad', [
 	'as' => 'user.notepad',
 	'uses' =>   'UserController@notepad'
 ]);
+
+
+Route::get('/settings', [
+	'as' => 'user.edit',
+	'uses' =>   'UserController@edit'
+]);

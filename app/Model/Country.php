@@ -39,4 +39,14 @@ class Country extends Model
     {
     	return $this->whereSlug($slug)->firstOrFail();
     }
+
+    public function getForm()
+    {
+    	$buff = [];
+    	foreach ($this->get() as $country)
+	    {
+	    	$buff[$country->country_id] = $country->name;
+	    }
+	    return $buff;
+    }
 }

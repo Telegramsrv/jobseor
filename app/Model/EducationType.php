@@ -20,4 +20,14 @@ class EducationType extends Model
     protected $primaryKey = 'education_type_id';
 
 	public $timestamps = false;
+
+	public function getForm()
+	{
+		$buff = [];
+		foreach ($this->get() as $education)
+		{
+			$buff[$education->education_type_id] = $education->name;
+		}
+		return $buff;
+	}
 }

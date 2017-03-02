@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Country;
+use App\Model\EducationType;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -58,6 +60,26 @@ class UserController extends Controller
 		{
 			$this->data['summaries'] = $request->user()->applicant->summaries;
 			return view('user.applicant.notepad', $this->data);
+		}
+	}
+
+
+	public function edit(Request $request, Country $country, EducationType $education)
+	{
+		$this->data['user'] = $request->user();
+
+		if ($request->user()->role_id == 2)
+		{
+			$this->data['vacancies'] = $request->user()->company->vacancies;
+			return view('user.company.notepad', $this->data);
+		}
+
+		if ($request->user()->role_id == 3)
+		{
+			$this->data['applicant'] = $request->user()->applicant;
+			$this->data['countries'] = $country->getForm();
+			$this->data['educations'] = $education->getForm();
+			return view('user.applicant.edit', $this->data);
 		}
 	}
 }

@@ -13,7 +13,7 @@
             <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
             <a style="cursor: pointer; padding: 10px;">Мои отклики</a>
             <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои резюме</a>
-            <a style="cursor: pointer; padding: 10px;">Настройки</a>
+            <a href="{{ route('user.edit') }}" style="cursor: pointer; padding: 10px;">Настройки</a>
 
         </p>
     </div>
@@ -28,9 +28,8 @@
 
         <p>Email: {{ $user->email }}</p>
 
-        @foreach($user->contacts as $contact)
-            <p>Телефон: {{ $contact->phone }}</p>
-        @endforeach
+        <p>Телефон: {{ $user->contacts->phone }}</p>
+
 
         <p>Страна: {{ $applicant->country->name }}</p>
         <p>Город: {{ $applicant->city }}</p>
