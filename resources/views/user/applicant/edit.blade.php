@@ -252,7 +252,7 @@
     function editName() {
         var name = $("input[name*='name']").val();
         $.ajax({
-            url: '/settings/name',
+            url: '{{ route("user.edit.name") }}',
             method: "POST",
             data: {_token: '{{ csrf_token() }}', name : name},
             success: function (data) {
@@ -265,7 +265,7 @@
         var new_password = $("input[name*='new_password']").val();
         var password = $("input[name*='password']").val();
         $.ajax({
-            url: '/settings/pwd',
+            url: '{{ route("user.edit.pwd") }}',
             method: "POST",
             data: {_token: '{{ csrf_token() }}', new_password : new_password, password : password},
             success: function (data) {
@@ -278,7 +278,7 @@
         var email = $("input[name*='email']").val();
         var phone = $("input[name*='telephone']").val();
         $.ajax({
-            url: '/settings/contacts',
+            url: '{{ route("user.edit.contacts") }}',
             method: "POST",
             data: {_token: '{{ csrf_token() }}', phone : phone, email : email},
             success: function (data) {
