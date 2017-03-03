@@ -72,3 +72,8 @@ Route::post('/settings/contacts', [
 	'as' => 'user.edit.contacts',
 	'uses' =>   'UserController@editContacts'
 ]);
+
+Route::post('/settings/info', [
+	'as' => 'user.edit.info',
+	'uses' =>   'UserController@editInfo'
+]);

@@ -116,7 +116,7 @@
                     <p>Страна проживания</p>
                 </div>
                 <div class="col-xs-7">
-                    {!! Form::select('country_id', $countries, $user->applicant->country_id, [ 'class' => 'input_width']) !!}
+                    {!! Form::select('country_id', $countries, $user->applicant->country_id, [ 'class' => 'input_width', 'id' => 'select_country']) !!}
                 </div>
             </div>
             <div class="row">
@@ -125,6 +125,7 @@
                 </div>
                 <div class="col-xs-7">
                     {!! Form::text('city', $user->applicant->city, [ 'class' => 'input_width']) !!}
+                    {!! Form::button('Изменить',[ 'class' => 'button-main', 'onclick' => 'editInfo()']) !!}
                 </div>
             </div>
         </div>
@@ -281,6 +282,21 @@
             url: '{{ route("user.edit.contacts") }}',
             method: "POST",
             data: {_token: '{{ csrf_token() }}', phone : phone, email : email},
+            success: function (data) {
+                alert(data);
+            }
+        })
+    }
+
+    function editInfo(){
+        var birthday = $("input[name*='birthday']").val();
+        var country_id = $("#select_country").val();
+        var city = $("input[name*='city']").val();
+
+        $.ajax({
+            url: '{{ route("user.edit.info") }}',
+            method: "POST",
+            data: {_token: '{{ csrf_token() }}', birthday : birthday, country_id : country_id, city : city},
             success: function (data) {
                 alert(data);
             }

@@ -92,7 +92,6 @@ class UserController extends Controller
 
 	/**
 	 * @param Request $request
-	 *
 	 */
 
 	public function editName(Request $request)
@@ -107,8 +106,8 @@ class UserController extends Controller
 
 	/**
 	 * @param Request $request
-	 *
 	 */
+
 	public function editPWD(Request $request)
 	{
 		if ($request->ajax())
@@ -124,6 +123,10 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param Request $request
+	 */
+
 	public function editContacts(Request $request)
 	{
 		if ($request->ajax())
@@ -137,6 +140,25 @@ class UserController extends Controller
 			$request->user()->contacts->phone = $request->phone;
 			$request->user()->contacts->save();
 			echo 'Телефон успешно изменен!';
+		}
+	}
+
+	public function editInfo(Request $request)
+	{
+		if ($request->ajax())
+		{
+			if ($request->user()->applicant->country_id != $request->country_id)    {
+				$request->user()->applicant->country_id = $request->country_id;
+			}
+
+			if ($request->user()->applicant->birthday != $request->birthday)    {
+				$request->user()->applicant->birthday = $request->birthday;
+			}
+
+			if (strcmp($request->user()->applicant->city, $request->city))    {
+				$request->user()->applicant->city = $request->city;
+			}
+			$request->user()->applicant->save();
 		}
 	}
 }
