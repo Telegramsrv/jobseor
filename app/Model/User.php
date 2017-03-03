@@ -86,4 +86,10 @@ class User extends Authenticatable
 	{
 		return $this->hasOne('App\Model\Contacts', 'user_id', 'user_id');
     }
+
+    public function setUserName($name)
+    {
+    	$this->name = $name;
+    	$this->save();
+    }
 }

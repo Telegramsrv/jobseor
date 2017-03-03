@@ -20,8 +20,6 @@
         </div>
     </div>
     <div class="personal">
-        {!! Form::open([ 'method' => 'post']) !!}
-        {{--TODO change system to ajax--}}
         <div class="block">
             <div class="row">
                 <div class="col-xs-5">
@@ -36,7 +34,7 @@
                     </div>
                     <div class="col-xs-7">
                         {!! Form::text('name', $user->name, [ 'class' => 'input_width', 'required']) !!}
-                        <button class="button-main" type="button" name="button">Изменить</button>
+                        {!! Form::button('Изменить',[ 'class' => 'button-main', 'onclick' => 'editName()']) !!}
                     </div>
                 </div>
             </div>
@@ -51,7 +49,7 @@
                         <p>Старый пароль</p>
                     </div>
                     <div class="col-xs-7">
-                        {!! Form::password('oldpassword', [ 'class' => 'input_width']) !!}
+                        {!! Form::password('password', [ 'class' => 'input_width', 'required']) !!}
                     </div>
                 </div>
                 <div class="row">
@@ -59,14 +57,14 @@
                         <p>Новый пароль</p>
                     </div>
                     <div class="col-xs-7">
-                        {!! Form::password('password', [ 'class' => 'input_width']) !!}
+                        {!! Form::password('new_password', [ 'class' => 'input_width', 'required']) !!}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-5"></div>
                     <div class="col-xs-7">
                         <p><input type="checkbox"> Показывать пароль</p>
-                        <button class="button-main">Изменить</button>
+                        {!! Form::button('Изменить',[ 'class' => 'button-main', 'onclick' => 'editPwd()']) !!}
                     </div>
                 </div>
             </div>
@@ -243,5 +241,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function editName() {
+        var name = $("input[name*='name']").val();
+        $.ajax({
+            url: '/settings/name',
+            method: "POST",
+            data: {_token: '{{ csrf_token() }}', name : name},
+            success: function (data) {
+                alert(data);
+            }
+        })
+    }
+
+    function editPwd() {
+        var new_password = $("input[name*='new_password']").val();
+        var password = $("input[name*='password']").val();
+        $.ajax({
+            url: '/settings/pwd',
+            method: "POST",
+            data: {_token: '{{ csrf_token() }}', new_password : new_password, password : password},
+            success: function (data) {
+                alert(data);
+            }
+        })
+    }
+</script>
 
 @endsection

@@ -63,6 +63,13 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param Request       $request
+	 * @param Country       $country
+	 * @param EducationType $education
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 
 	public function edit(Request $request, Country $country, EducationType $education)
 	{
@@ -80,6 +87,38 @@ class UserController extends Controller
 			$this->data['countries'] = $country->getForm();
 			$this->data['educations'] = $education->getForm();
 			return view('user.applicant.edit', $this->data);
+		}
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 */
+
+	public function editName(Request $request)
+	{
+		if ($request->ajax()) {
+			if (isset($request->name)) {
+				$request->user()->setUserName($request->name);
+			}
+		}
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 */
+	public function editPWD(Request $request)
+	{
+		if ($request->ajax()) {
+			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
+				$request->user()->password = \Hash::make($request->new_password);
+				$request->user()->save();
+				echo 'Пароль успешно изменен!';
+			}
+			else {
+				die('Неверный пароль!');
+			}
 		}
 	}
 }

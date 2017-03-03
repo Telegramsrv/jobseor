@@ -54,3 +54,16 @@ Route::get('/settings', [
 	'as' => 'user.edit',
 	'uses' =>   'UserController@edit'
 ]);
+
+
+
+
+Route::post('/settings/name', [
+	'as' => 'user.edit.name',
+	'uses' =>   'UserController@editName'
+]);
+
+Route::post('/settings/pwd', [
+	'as' => 'user.edit.pwd',
+	'uses' =>   'UserController@editPWD'
+]);
