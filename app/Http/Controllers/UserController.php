@@ -97,7 +97,8 @@ class UserController extends Controller
 
 	public function editName(Request $request)
 	{
-		if ($request->ajax()) {
+		if ($request->ajax())
+		{
 			if (isset($request->name)) {
 				$request->user()->setUserName($request->name);
 			}
@@ -110,7 +111,8 @@ class UserController extends Controller
 	 */
 	public function editPWD(Request $request)
 	{
-		if ($request->ajax()) {
+		if ($request->ajax())
+		{
 			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
 				$request->user()->password = \Hash::make($request->new_password);
 				$request->user()->save();
@@ -119,6 +121,22 @@ class UserController extends Controller
 			else {
 				die('Неверный пароль!');
 			}
+		}
+	}
+
+	public function editContacts(Request $request)
+	{
+		if ($request->ajax())
+		{
+			if ($request->user()->email != $request->email)	{
+				$request->user()->email = $request->email;
+				$request->user()->save();
+				echo 'E-mail был успешно изменен!';
+			}
+
+			$request->user()->contacts->phone = $request->phone;
+			$request->user()->contacts->save();
+			echo 'Телефон успешно изменен!';
 		}
 	}
 }

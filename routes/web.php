@@ -67,3 +67,8 @@ Route::post('/settings/pwd', [
 	'as' => 'user.edit.pwd',
 	'uses' =>   'UserController@editPWD'
 ]);
+
+Route::post('/settings/contacts', [
+	'as' => 'user.edit.contacts',
+	'uses' =>   'UserController@editContacts'
+]);

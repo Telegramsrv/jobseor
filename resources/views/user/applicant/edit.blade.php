@@ -83,21 +83,21 @@
                         <small>(телефон указывается в международном формате)</small>
                     </div>
                 </div>
+                {{--<div class="row">--}}
+                    {{--<div class="col-xs-5">--}}
+                        {{--<p>Старый e-mail</p>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-xs-7">--}}
+                        {{--{!! Form::email('email', $user->email, [ 'class' => 'input_width']) !!}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="row">
                     <div class="col-xs-5">
-                        <p>Старый e-mail</p>
+                        <p>E-mail</p>
                     </div>
                     <div class="col-xs-7">
-                        {!! Form::email('oldemail', $user->email, [ 'class' => 'input_width']) !!}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5">
-                        <p>Новый e-mail</p>
-                    </div>
-                    <div class="col-xs-7">
-                        {!! Form::email('email', '', [ 'class' => 'input_width']) !!}
-                        <button class="button-main">Изменить</button>
+                        {!! Form::email('email', $user->email, [ 'class' => 'input_width']) !!}
+                        {!! Form::button('Изменить',[ 'class' => 'button-main', 'onclick' => 'editContacts()']) !!}
                     </div>
                 </div>
             </div>
@@ -268,6 +268,19 @@
             url: '/settings/pwd',
             method: "POST",
             data: {_token: '{{ csrf_token() }}', new_password : new_password, password : password},
+            success: function (data) {
+                alert(data);
+            }
+        })
+    }
+
+    function editContacts() {
+        var email = $("input[name*='email']").val();
+        var phone = $("input[name*='telephone']").val();
+        $.ajax({
+            url: '/settings/contacts',
+            method: "POST",
+            data: {_token: '{{ csrf_token() }}', phone : phone, email : email},
             success: function (data) {
                 alert(data);
             }
