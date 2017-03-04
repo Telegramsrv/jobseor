@@ -23,7 +23,7 @@ class UserController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(Request $request)
+	public function index(Request $request,Country $country,EducationType $education)
 	{
 		$this->data['user'] = $request->user();
 
@@ -36,6 +36,8 @@ class UserController extends Controller
 		if ($request->user()->role_id == 3)
 		{
 			$this->data['applicant'] = $request->user()->applicant;
+			$this->data['countries'] = $country->getForm();
+			$this->data['educations'] = $education->getForm();
 			return view('user.applicant.home', $this->data);
 		}
 		if ($request->user()->role_id == 1)

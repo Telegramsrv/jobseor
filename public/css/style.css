@@ -7,11 +7,18 @@
 }
 .vakanceblock a:hover
 {
-   text-decoration: underline;
+    text-decoration: underline;
 }
 /*------------------------------------*\
 	НАВИГАЦИЯ
 \*------------------------------------*/
+.editpersonal
+{
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+}
+
 .input input
 {
     width: 15px;
@@ -43,8 +50,8 @@
 }
 .mainrow h1
 {
-   font-size: 25px;
-   color: grey;
+    font-size: 25px;
+    color: grey;
 }
 .mainrow .twoblock
 {
@@ -55,9 +62,8 @@
 {
     height: auto;
     float: left;
-    padding: 10px 10px 10px 0px;
     display: inline-block;
-    
+
 }
 .headervakanse img
 {
@@ -68,7 +74,7 @@
 .rezumeblock
 {
     display: inline-block;
-     color: #a2a2a2;
+    color: #a2a2a2;
     background: white;
     width: 100%;
     height: auto;
@@ -122,44 +128,44 @@
     margin-top: 25px;
     width: 32.7%
 }
- .links:hover
-    {
-       background: #7f9abd;
-    }
+.links:hover
+{
+    background: #7f9abd;
+}
 #nav{
     text-decoration: none;
     border-radius: 5px;
     margin-top: 4px;
     z-index: 9999;
     padding: 0px;
-	float:left;
-	width:100%;
-	list-style:none;
-	margin-bottom:10px;
+    float:left;
+    width:100%;
+    list-style:none;
+    margin-bottom:10px;
 }
 #nav li{
     text-decoration: none;
     width: 100%;
-	float:left;
-	margin-right:10px;
-	position:relative;
-	display:block;
+    float:left;
+    margin-right:10px;
+    position:relative;
+    display:block;
 }
 #nav li a{
     text-decoration: none;
-	display:block;
-	padding: 6px 0 7px 0;
-	color:black;
-	background: white;
-	text-decoration:none;
-	border-radius:5px;
+    display:block;
+    padding: 6px 0 7px 0;
+    color:black;
+    background: white;
+    text-decoration:none;
+    border-radius:5px;
 }
 .uldiv a
 {
     margin-top: 2px;
 }
 
-.uldiv 
+.uldiv
 {
     background-color: ghostwhite;
     margin-top: 5px;
@@ -168,8 +174,8 @@
 }
 #nav li a:hover{
     text-decoration: none;
-	color:black;
-	background: #fbfbfb;
+    color:black;
+    background: #fbfbfb;
 }
 
 /*--- ВЫПАДАЮЩИЕ ПУНКТЫ ---*/
@@ -177,44 +183,44 @@
     text-decoration: none;
     padding: 0px;
     z-index: 99999;
-	list-style:none;
-	position:absolute;
-	left:-9999px; /* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
-	opacity:0; /* Устанавливаем начальное состояние прозрачности */
-	-webkit-transition:0.25s linear opacity; /* В Webkit выпадающие пункты будут проявляться */
+    list-style:none;
+    position:absolute;
+    left:-9999px; /* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
+    opacity:0; /* Устанавливаем начальное состояние прозрачности */
+    -webkit-transition:0.25s linear opacity; /* В Webkit выпадающие пункты будут проявляться */
 }
 #nav ul li{
     text-decoration: none;
     width: 100%;
-	padding-top:1px; /* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
-	float:none;
-	background:url(dot.gif);
+    padding-top:1px; /* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
+    float:none;
+    background:url(dot.gif);
 }
 #nav ul a{
     text-decoration: none;
-	white-space:nowrap; /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
-	display:block;
+    white-space:nowrap; /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
+    display:block;
 }
 #nav li:hover ul{ /* Выводим выпадающий пункт при наведении курсора */
     width: 100%;
-	left:0; /* Приносим его обратно на экран, когда нужно */
-	opacity:1; /* Делаем непрозрачным */
+    left:0; /* Приносим его обратно на экран, когда нужно */
+    opacity:1; /* Делаем непрозрачным */
 }
-#nav li:hover a{ 
+#nav li:hover a{
     cursor: pointer;/* Устанавливаем стили для верхнего уровня, когда выводится выпадающий список */
 }
 
-#nav li:hover ul a{ 
+#nav li:hover ul a{
     margin: 5px;
     border-radius: 4px;/* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
-	text-decoration:none;
+    text-decoration:none;
     margin-top: 2px;
-	-webkit-transition:-webkit-transform 0.075s linear;
+    -webkit-transition:-webkit-transform 0.075s linear;
 }
 #nav li:hover ul li a:hover{ /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
     text-decoration: none;
-	-moz-transform:scale(1.05);
-	-webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
 }
 
 
@@ -267,19 +273,19 @@ header {
     text-decoration: none;
 }
 option.imagebacked {
-padding: 2px 0 2px 20px;
-background-repeat: no-repeat;
-background-position: 1px 2px;
-vertical-align: middle;
+    padding: 2px 0 2px 20px;
+    background-repeat: no-repeat;
+    background-position: 1px 2px;
+    vertical-align: middle;
 }
 .float_right {
     float: right
 }
 .imagebacked {
-padding-left; 20px;
-background-repeat: no-repeat;
-background-position: 1px 2px;
-vertical-align: middle;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position: 1px 2px;
+    vertical-align: middle;
 }
 .enter {
     font-size: 16px;
@@ -323,8 +329,8 @@ vertical-align: middle;
 {
     display: inline-block;
     cursor: pointer;
-     background: white;
-      width: 100%;
+    background: white;
+    width: 100%;
     padding: 0px 10px 10px 20px;
     border: 1px solid #d6d6d6;
     box-shadow: 0 4px 11px rgba(0,0,0,0.09);
@@ -358,8 +364,8 @@ vertical-align: middle;
 }
 .sortvakanse p
 {
-  color:#e9e7ff;
-  padding: 0 0 -5px 0 ;
+    color:#e9e7ff;
+    padding: 0 0 -5px 0 ;
 }
 .rowsort
 {
@@ -376,7 +382,7 @@ vertical-align: middle;
 }
 
 .enter .header-block {
-/*    display: block;*/
+    /*    display: block;*/
     margin-top: 10px
 }
 
@@ -479,7 +485,7 @@ vertical-align: middle;
 }
 #breadcumps a
 {
-   color: ghostwhite;
+    color: ghostwhite;
 }
 .job {
     text-align: center;
@@ -974,7 +980,7 @@ footer span {
 }
 
 #preview {
- margin-top: 50px;
+    margin-top: 50px;
 }
 
 .personal {
@@ -1530,17 +1536,17 @@ footer span {
     text-align: center;
     color: white;
     cursor: pointer;
-    
+
 }
 
 .region_for-mobile ul {
     display: none;
     padding-left: 15px;
     background: #577090;
- 
+
 }
 
-.region_for-mobile ul li 
+.region_for-mobile ul li
 {
     list-style: none;
     font-size: 16px;
@@ -1755,7 +1761,7 @@ footer span {
 @media screen and (max-width: 990px)
 {
     .region_for-mobile {
-    display: block;
+        display: block;
     }
     .region
     {
@@ -1776,13 +1782,13 @@ footer span {
     {
         width: 80% !important;
     }
-     .uldiv
+    .uldiv
     {
         margin-left: 7px !important;
     }
 }
 @media screen and (max-width: 767px) {
-    .head-country img 
+    .head-country img
     {
         display: none;
     }
@@ -1793,7 +1799,7 @@ footer span {
     }
     #breadcumps
     {
-      font-size: 14px;
+        font-size: 14px;
     }
     #pers
     {
@@ -1801,11 +1807,11 @@ footer span {
     }
     .uldiv
     {
-            padding-left: 3px;
+        padding-left: 3px;
     }
     .col-xs-6
     {
-        
+
     }
     .word-line h2::after {
         display: none
@@ -1904,7 +1910,7 @@ footer span {
 }
 @media screen and (max-width: 320px)
 {
-    .main_form .block .input 
+    .main_form .block .input
     {
         margin-right: 0px;
         margin-bottom: 5px;
@@ -1914,8 +1920,8 @@ footer span {
         width: 100%;
     }
     .wrapper {
-    margin-top: 30px;
-}
+        margin-top: 30px;
+    }
     .float_right
     {
         float: left;
@@ -1923,8 +1929,8 @@ footer span {
     }
     .logotype
     {
-       margin-left: 460%;
-        
+        margin-left: 460%;
+
     }
     .enter a
     {
@@ -1971,14 +1977,103 @@ footer span {
         width: 100%
     }
 }
+@media screen and (min-width: 425px)
+{
 
+    .editblock1
+    {
+        padding-bottom: 10px;
+        margin-bottom: 3px;
+        padding-left: 15px;
+        border-radius: 5px;
+    }
+    .editblock1 input
+    {
+        margin-left: 10px;
+        margin-left: 15px;
+        padding: 5px 10px;
+    }
+    .edsub button, [type="submit"]
+    {
+        margin-left: 10px ;
+        margin-top: 8px;
+        border: 0;
+        padding: 7px 7px;
+        background: #7692b6;
+        color: #fff;
+        border-radius: 7px;
+        text-decoration: none;
+        padding: 5px 16px;
+    }
+}
 @media screen and (max-width: 425px) {
     .my_money {
         float: none;
         width: 100%
     }
+    .editpersonal
+    {
+        text-align: center;
+    }
+    .editblock1
+    {
+        display: inline-block;
+        background: #f7f7f7;
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 5px;
 
-    .headervakanse 
+    }
+    .editblock1 input
+    {
+        width: 90%;
+        margin-top: 10px;
+        padding: 5px 10px 5px 10px;
+    }
+    .editblock1 edsub
+    {
+        text-align: center;
+    }
+    .editblock1 [type="submit"]
+    {
+        display: inline-block;
+        text-align: center;
+        border: 0;
+        padding: 7px 7px;
+        background: #7692b6;
+        color: #fff;
+        border-radius: 7px;
+        text-decoration: none;
+        padding: 5px 16px;
+    }
+    .editblock1 button
+    {
+        display: inline-block;
+        text-align: center;
+        border: 0;
+        padding: 7px 7px;
+        background: #7692b6;
+        color: #fff;
+        border-radius: 7px;
+        text-decoration: none;
+        padding: 5px 16px;
+        width: 90%;
+        margin-top: 10px;
+    }
+    #rezumecenter
+    {
+        text-align: center;
+    }
+    .avatarvacanse
+    {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .rezumeblock .avatarvacanse img
+    {
+        margin-right: 0px;
+    }
+    .headervakanse
     {
         display: inline-block;
     }
@@ -2007,7 +2102,7 @@ footer span {
         width: 100%;
     }
     .job_name {
-    border-bottom: 2px solid #b2d9de;}
+        border-bottom: 2px solid #b2d9de;}
 }
 
 @media screen and (max-width: 651px) {
@@ -2042,11 +2137,11 @@ footer span {
     {
         height: 200px;
     }
-    
+
 }
-@media screen and (max-width: 2000px) and (min-width: 992px) 
+@media screen and (max-width: 2000px) and (min-width: 992px)
 {
- .enter
+    .enter
     {
         font-size: 14px;
     }
@@ -2057,13 +2152,13 @@ footer span {
     }
     .menu-control_center .menu_element
     {
-            margin-right: 0;
-    display: block;
+        margin-right: 0;
+        display: block;
         margin: 10px 0px;
         background: whitesmoke;
         padding: 5px 0px;
         border-radius: 3px;
-        
+
     }
 }
 
