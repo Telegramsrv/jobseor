@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Country;
 use App\Model\EducationType;
+use App\Model\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -149,6 +150,24 @@ class UserController extends Controller
 	{
 		if ($request->ajax())
 		{
+			if (strcmp($request->user()->name, $request->name)) {
+				$request->user()->name = $request->name;
+			}
+
+			if (strcmp($request->user()->email,$request->email)) {
+				$invalidEmail = User::whereEmail($request->email)->count();
+				if (!$invalidEmail){
+					$request->user()->email = $request->email;
+				}
+				else {
+					echo 'Failed email';
+				}
+			}
+
+			if (strcmp($request->user()->contacts->phone, $request->phone)) {
+				$request->user()->contacts->phone = $request->phone;
+			}
+
 			if ($request->user()->applicant->country_id != $request->country_id)    {
 				$request->user()->applicant->country_id = $request->country_id;
 			}
@@ -160,7 +179,10 @@ class UserController extends Controller
 			if (strcmp($request->user()->applicant->city, $request->city))    {
 				$request->user()->applicant->city = $request->city;
 			}
+
+			$request->user()->save();
 			$request->user()->applicant->save();
+			$request->user()->contacts->save();
 		}
 	}
 }

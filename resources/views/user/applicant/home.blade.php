@@ -161,7 +161,7 @@
         }
 
         function updateInfo(button) {
-            var div = $(button).parent().parent().css('background-color','red');
+            var div = $(button).parent().parent();
 
             var name = div.find("input[name*='name']").val();
             var email = div.find("input[name*='email']").val();
@@ -171,14 +171,14 @@
             var birthday = div.find("input[name*='birthday']").val();
 
 
-            {{--$.ajax({--}}
-                {{--url: '{{ route("user.edit.info") }}',--}}
-                {{--method: "POST",--}}
-                {{--data: { _token: '{{ csrf_token() }}', birthday : birthday, country_id : country_id, city : city},--}}
-                {{--success: function (data) {--}}
-                    {{--alert(data);--}}
-                {{--}--}}
-            {{--})--}}
+            $.ajax({
+                url: '{{ route("user.edit.info") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', name: name, email: email, phone: phone, country_id: country_id, city: city, birthday: birthday},
+                success: function (data) {
+                    alert(data);
+                }
+            })
         }
     </script>
 @endsection
