@@ -68,9 +68,19 @@ Route::post('/settings/pwd', [
 	'uses' =>   'UserController@editPWD'
 ]);
 
-Route::post('/settings/contacts', [
-	'as' => 'user.edit.contacts',
-	'uses' =>   'UserController@editContacts'
+Route::post('/settings/education', [
+	'as' => 'user.edit.education',
+	'uses' =>   'UserController@editEducation'
+]);
+
+Route::post('/settings/education/new', [
+	'as' => 'user.new.education',
+	'uses' =>   'UserController@newEducation'
+]);
+
+Route::post('/settings/education/add', [
+	'as' => 'user.add.education',
+	'uses' =>   'UserController@addEducation'
 ]);
 
 Route::post('/settings/info', [

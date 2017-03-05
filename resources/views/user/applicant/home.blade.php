@@ -60,10 +60,14 @@
         </div>
 
         <div class="editblock1">
-            <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
+            <p class="editpersonal">
+                <a onclick="addEducation(this);">Добавить</a>
+                <a onclick="enableEdit(this);">Редактировать</a>
+            </p>
             @foreach( $applicant->education as $item)
                 <div class="clone2">
                     <h3>Образование:</h3>
+                        {!! Form::hidden('education_id', $item->education_id) !!}
                     <p>
                         Учебное заведение: <span class="edittext"> {{ $item->name }}</span>
                         {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden']) !!}
@@ -79,18 +83,17 @@
                     </p>
                     <p>
                         Тип: <span class="edittext">{{ $item->type->name }}</span>
-                        {!! Form::select('education_type_id', $educations, $item->education_type_id, [ 'class' => 'input_width hidden']) !!}
+                        {!! Form::select('education_type_id', $educations, $item->education_type_id, [ 'class' => 'input_width hidden', 'id' => 'select_education']) !!}
                     </p>
 
                 </div>
                 <p class="edsub">
-                    {!! Form::button('Сохранить', [ 'class' => 'input_width hidden']) !!}
+                    {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateEducation(this);']) !!}
                     {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
                 </p>
-
+            @endforeach
         </div>
         <div class="editblock1">
-            @endforeach
             <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
             @foreach( $applicant->experience as $item)
                 <h3>Опыт работы:</h3>
@@ -177,6 +180,39 @@
                 data: { _token: '{{ csrf_token() }}', name: name, email: email, phone: phone, country_id: country_id, city: city, birthday: birthday},
                 success: function (data) {
                     alert(data);
+                }
+            })
+        }
+
+        function updateEducation(button) {
+            var div = $(button).parent().parent();
+
+            var education_id = div.find("input[name*='education_id']").val();
+            var name = div.find("input[name*='name']").val();
+            var year_start = div.find("input[name*='year_start']").val();
+            var year_end = div.find("input[name*='year_end']").val();
+            var specialize = div.find("input[name*='specialize']").val();
+            var education_type_id = div.find("#select_education").val();
+
+            $.ajax({
+                url: '{{ route("user.edit.education") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', education_id: education_id, name: name, year_start: year_start, year_end: year_end, specialize: specialize, education_type_id: education_type_id},
+                success: function (data) {
+                    alert(data);
+                }
+            })
+        }
+
+        function addEducation(button) {
+            var div = $(button).parent().parent();
+
+            $.ajax({
+                url: '{{ route("user.new.education") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}'},
+                success: function (data) {
+                    $(div).after(data);
                 }
             })
         }

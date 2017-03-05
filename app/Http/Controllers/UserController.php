@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Country;
+use App\Model\Education;
 use App\Model\EducationType;
 use App\Model\User;
 use Illuminate\Http\Request;
@@ -130,19 +131,37 @@ class UserController extends Controller
 	 * @param Request $request
 	 */
 
-	public function editContacts(Request $request)
+	public function editEducation(Request $request)
 	{
 		if ($request->ajax())
 		{
-			if ($request->user()->email != $request->email)	{
-				$request->user()->email = $request->email;
-				$request->user()->save();
-				echo 'E-mail был успешно изменен!';
+			$education = Education::whereEducationId($request->education_id)->firstOrFail();
+
+			if ($education->user_id != $request->user()->user_id){
+				return 'error';
 			}
 
-			$request->user()->contacts->phone = $request->phone;
-			$request->user()->contacts->save();
-			echo 'Телефон успешно изменен!';
+			if (strcmp($education->name, $request->name)) {
+				$education->name = $request->name;
+			}
+
+			if ($education->year_start != $request->year_start) {
+				$education->year_start = $request->year_start;
+			}
+
+			if ($education->year_end != $request->year_end) {
+				$education->year_end = $request->year_end;
+			}
+
+			if (strcmp($education->specialize, $request->specialize)) {
+				$education->specialize = $request->specialize;
+			}
+
+			if ($education->education_type_id != $request->education_type_id) {
+				$education->education_type_id = $request->education_type_id;
+			}
+
+			$education->save();
 		}
 	}
 
@@ -185,4 +204,17 @@ class UserController extends Controller
 			$request->user()->contacts->save();
 		}
 	}
+
+	public function newEducation(Request $request,EducationType $education)
+	{
+		if ($request->ajax()) {
+			$this->data['educations'] = $education->getForm();
+			echo view('user.applicant.neweducation', $this->data);
+		}
+	}
+
+//	public function addEducation(Request $request,EducationType $education)
+//	{
+//
+//	}
 }
