@@ -28,7 +28,7 @@ class EducationController extends Controller
 			$education->specialize = $request->specialize;
 			$education->education_type_id = $request->education_type_id;
 			$education->save();
-			echo "Success save";
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
 
@@ -36,11 +36,11 @@ class EducationController extends Controller
 	{
 		if ($request->ajax())
 		{
-
 			$education = Education::whereEducationId($request->education_id)->firstOrFail();
 
 			if ($education->user_id != $request->user()->user_id){
-				return 'error';
+				echo json_encode([ 'class' => 'danger', 'message' => 'Ошибка!Пожалуйста повторите попытку!']);
+				return '0';
 			}
 
 			if (strcmp($education->name, $request->name)) {
@@ -64,7 +64,7 @@ class EducationController extends Controller
 			}
 
 			$education->save();
-			echo json_encode([ 'class' => 'alert alert-success', 'message' => 'Изменения успешно сохранены!']);
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
 
@@ -75,9 +75,10 @@ class EducationController extends Controller
 			$education = Education::whereEducationId($request->education_id)->firstOrFail();
 
 			if ($education->user_id == $request->user()->user_id){
-				return 'error';
+				echo json_encode([ 'class' => 'danger', 'message' => 'Ошибка!Пожалуйста повторите попытку!']);
 			}
 			$education->delete();
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
 }

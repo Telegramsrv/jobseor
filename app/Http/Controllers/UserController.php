@@ -108,7 +108,7 @@ class UserController extends Controller
 					$request->user()->email = $request->email;
 				}
 				else {
-					echo 'Failed email';
+					echo json_encode([ 'class' => 'danger', 'message' => 'Ошибка!Данный email уже используеться!']);
 				}
 			}
 
@@ -131,6 +131,7 @@ class UserController extends Controller
 			$request->user()->save();
 			$request->user()->applicant->save();
 			$request->user()->contacts->save();
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
 }

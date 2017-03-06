@@ -115,10 +115,9 @@
                     {!! Form::button('Сохранить', [ 'class' => 'input_width hidden']) !!}
                     {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
                 </p>
-
+            @endforeach
         </div>
         <div class="editblock1">
-            @endforeach
             <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
             <h3>О себе: </h3>
             <p>
@@ -152,9 +151,8 @@
 
         function showNotificantion(response) {
             var status = JSON.parse(response);
-            $('.headervakanse').append('<div class="alert alert-success" role="alert"><strong>Изменения успешно сохранены!</strong></div>');
-
-            alert(status['class']);
+            var msg = '<div class="alert alert-' + status["class"] + '" role="alert"><strong>' + status["message"] + '</strong></div>';
+            $('.headervakanse#balance').after(msg);
         }
 
 
@@ -188,7 +186,8 @@
                 method: "POST",
                 data: { _token: '{{ csrf_token() }}', name: name, email: email, phone: phone, country_id: country_id, city: city, birthday: birthday},
                 success: function (data) {
-                    alert(data);
+                    showNotificantion(data);
+                    disableEdit(button);
                 }
             })
         }
@@ -209,7 +208,7 @@
                 data: { _token: '{{ csrf_token() }}', education_id: education_id, name: name, year_start: year_start, year_end: year_end, specialize: specialize, education_type_id: education_type_id},
                 success: function (data) {
                     showNotificantion(data);
-//                    alert(data);
+                    disableEdit(button);
                 }
             })
         }
@@ -233,7 +232,7 @@
                 method: "POST",
                 data: { _token: '{{ csrf_token() }}', education_id: id},
                 success: function (data) {
-                    alert(data);//TODO message or window reload
+                    location.reload();
                 }
             })
         }
