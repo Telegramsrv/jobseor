@@ -7,6 +7,28 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+	public function newExperience(Request $request)
+	{
+		if ($request->ajax()) {
+			echo view('user.applicant.newexperience');
+		}
+	}
+
+	public function addExperience(Request $request)
+	{
+		if ($request->ajax())
+		{
+			$experience = new Experience();
+			$experience->user_id = $request->user()->user_id;
+			$experience->name = $request->name;
+			$experience->year_start = $request->year_start;
+			$experience->year_end = $request->year_end;
+			$experience->position = $request->position;
+			$experience->save();
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
+		}
+	}
+
     public function editExperience(Request $request)
     {
     	if ($request->ajax())
@@ -38,4 +60,18 @@ class ExperienceController extends Controller
 		    echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 	    }
     }
+
+	public function removeExperience(Request $request)
+	{
+		if ($request->ajax())
+		{
+			$experience = Experience::whereExperienceId($request->experience_id)->firstOrFail();
+
+			if ($experience->user_id == $request->user()->user_id){
+				echo json_encode([ 'class' => 'danger', 'message' => 'Ошибка!Пожалуйста повторите попытку!']);
+			}
+			$experience->delete();
+			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
+		}
+	}
 }

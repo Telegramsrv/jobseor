@@ -76,9 +76,24 @@ Route::post('/settings/info', [
 
 //EXPERIENCE
 
+Route::post('/settings/experience/new', [
+	'as' => 'experience.new',
+	'uses' =>   'ExperienceController@newExperience'
+]);
+
+Route::post('/settings/experience/add', [
+	'as' => 'experience.add',
+	'uses' =>   'ExperienceController@addExperience'
+]);
+
 Route::post('/settings/experience', [
 	'as' => 'experience.edit',
 	'uses' =>   'ExperienceController@editExperience'
+]);
+
+Route::post('/settings/experience/remove', [
+	'as' => 'experience.remove',
+	'uses' =>   'ExperienceController@removeExperience'
 ]);
 
 // EDUCATION

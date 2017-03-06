@@ -95,7 +95,10 @@
             @endforeach
         </div>
         <div class="editblock1">
-            <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
+            <p class="editpersonal">
+                <a onclick="addExperience(this);">Добавить</a> /
+                <a onclick="enableEdit(this);">Редактировать</a>
+            </p>
             @foreach( $applicant->experience as $item)
                 <div class="clone3">
                     <h3>Опыт работы:</h3>
@@ -117,6 +120,7 @@
                 <p class="edsub">
                     {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateExperience(this);']) !!}
                     {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
+                    {!! Form::button('Удалить', [ 'class' => 'input_width btn-link hidden', 'onclick' => "removeExperience($item->experience_id);"]) !!}
                 </p>
             @endforeach
         </div>
@@ -260,6 +264,30 @@
                 success: function (data) {
                     showNotificantion(data);
                     disableEdit(button);
+                }
+            })
+        }
+
+        function addExperience(button) {
+            var div = $(button).parent().parent();
+
+            $.ajax({
+                url: '{{ route("experience.new") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}'},
+                success: function (data) {
+                    $(div).after(data);
+                }
+            })
+        }
+
+        function removeExperience(id) {
+            $.ajax({
+                url: '{{ route("experience.remove") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', experience_id: id},
+                success: function (data) {
+                    location.reload();
                 }
             })
         }

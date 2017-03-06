@@ -47,6 +47,7 @@
             success: function (data) {
                 showNotificantion(data);
                 disableEdit(button);
+                location.reload();
             }
         })
     }
