@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-md-2 col-xs-2" id="logo">
             <a href="http://jobseor.com">
-              <img title="Поиск вакансий в Европе" src="image/jobseor.png" alt="Логотип компании"  class="logotype" />
+              <img title="Поиск вакансий в Европе" src="/image/jobseor.png" alt="Логотип компании"  class="logotype" />
             </a>
         </div>
         <div class="col-md-4">
@@ -67,7 +67,7 @@
 <footer>
           <div class="footer_logo">
             <a href="">
-              <img title="Поиск вакансий, доска вакансий" src="image/jobseor-company.png" alt="Доска поиска вакансий" />
+              <img title="Поиск вакансий, доска вакансий" src="/image/jobseor-company.png" alt="Доска поиска вакансий" />
             </a>
           </div>
     <div class="footer_right">

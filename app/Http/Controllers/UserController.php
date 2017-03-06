@@ -170,4 +170,23 @@ class UserController extends Controller
 			}
 		}
 	}
+
+	public function getUser($id, Request $request)
+	{
+		$user = User::whereUserId($id)->firstOrFail();
+		if ( $user->user_id == $request->user()->user_id || $user->role_id == 1){
+			return redirect(route('user.home'));
+		}
+		if ( $user->role_id == 2)   {
+			$this->data['user'] = $user;
+			return view();
+		}
+		if ( $user->role_id == 3)   {
+			$this->data['user'] = $user;
+			$this->data['applicant'] = $user->applicant;
+			return view('user.applicant.index',$this->data);
+		}
+
+		dd($user);
+	}
 }

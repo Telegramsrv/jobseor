@@ -38,7 +38,15 @@ Route::get('/category/{slug}', [
 	'uses' => 'PageController@getCategory'
 ]);
 
+//
 
+Route::get('/user/{id}', [
+	'as' => 'user.index',
+	'uses' => 'UserController@getUser'
+]);
+
+
+//USER
 
 Route::get('/home', [
 	'as' => 'user.home',
@@ -55,8 +63,6 @@ Route::get('/settings', [
 	'as' => 'user.edit',
 	'uses' =>   'UserController@edit'
 ]);
-
-//USER
 
 Route::post('/settings/pwd', [
 	'as' => 'user.edit.pwd',
