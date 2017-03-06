@@ -94,77 +94,6 @@ class UserController extends Controller
 		}
 	}
 
-	/**
-	 * @param Request $request
-	 */
-
-	public function editName(Request $request)
-	{
-		if ($request->ajax())
-		{
-			if (isset($request->name)) {
-				$request->user()->setUserName($request->name);
-			}
-		}
-	}
-
-	/**
-	 * @param Request $request
-	 */
-
-	public function editPWD(Request $request)
-	{
-		if ($request->ajax())
-		{
-			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
-				$request->user()->password = \Hash::make($request->new_password);
-				$request->user()->save();
-				echo 'Пароль успешно изменен!';
-			}
-			else {
-				die('Неверный пароль!');
-			}
-		}
-	}
-
-	/**
-	 * @param Request $request
-	 */
-
-	public function editEducation(Request $request)
-	{
-		if ($request->ajax())
-		{
-			$education = Education::whereEducationId($request->education_id)->firstOrFail();
-
-			if ($education->user_id != $request->user()->user_id){
-				return 'error';
-			}
-
-			if (strcmp($education->name, $request->name)) {
-				$education->name = $request->name;
-			}
-
-			if ($education->year_start != $request->year_start) {
-				$education->year_start = $request->year_start;
-			}
-
-			if ($education->year_end != $request->year_end) {
-				$education->year_end = $request->year_end;
-			}
-
-			if (strcmp($education->specialize, $request->specialize)) {
-				$education->specialize = $request->specialize;
-			}
-
-			if ($education->education_type_id != $request->education_type_id) {
-				$education->education_type_id = $request->education_type_id;
-			}
-
-			$education->save();
-		}
-	}
-
 	public function editInfo(Request $request)
 	{
 		if ($request->ajax())
@@ -204,17 +133,4 @@ class UserController extends Controller
 			$request->user()->contacts->save();
 		}
 	}
-
-	public function newEducation(Request $request,EducationType $education)
-	{
-		if ($request->ajax()) {
-			$this->data['educations'] = $education->getForm();
-			echo view('user.applicant.neweducation', $this->data);
-		}
-	}
-
-//	public function addEducation(Request $request,EducationType $education)
-//	{
-//
-//	}
 }

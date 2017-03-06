@@ -3,16 +3,16 @@
             <h3>Добавить образование:</h3>
             <p>
                 Учебное заведение:
-                {!! Form::text('name', '', [ 'class' => 'input_width']) !!}
+                {!! Form::text('name', '', [ 'class' => 'input_width', 'required']) !!}
             </p>
             <p>
                 Годы обучения
-                {!! Form::number('year_start', '', [ 'class' => 'input_width']) !!}
-                {!! Form::number('year_end', '', [ 'class' => 'input_width']) !!}
+                {!! Form::number('year_start', '', [ 'class' => 'input_width', 'required']) !!}
+                {!! Form::number('year_end', '', [ 'class' => 'input_width', 'required']) !!}
             </p>
             <p>
                 Специальность:
-                {!! Form::text('specialize', '', [ 'class' => 'input_width']) !!}
+                {!! Form::text('specialize', '', [ 'class' => 'input_width', 'required']) !!}
             </p>
             <p>
                 Тип:
@@ -22,11 +22,11 @@
         </div>
         <p class="edsub">
             {!! Form::button('Сохранить', [ 'class' => 'input_width', 'onclick' => 'addEducation(this);']) !!}
-            {!! Form::button('Удалить', [ 'class' => 'input_width btn-link', 'onclick' => 'deleteNew(this);']) !!}
+            {!! Form::button('Удалить', [ 'class' => 'input_width btn-link', 'onclick' => 'closeAddEducation(this);']) !!}
         </p>
 </div>
 <script>
-    function deleteNew(button) {
+    function closeAddEducation(button) {
         var div = $(button).parent().parent();
         div.remove();
     }
@@ -41,7 +41,7 @@
         var education_type_id = div.find("#select_education").val();
 
         $.ajax({
-            url: '{{ route("user.add.education") }}',
+            url: '{{ route("education.add") }}',
             method: "POST",
             data: { _token: '{{ csrf_token() }}', name: name, year_start: year_start, year_end: year_end, specialize: specialize, education_type_id: education_type_id},
             success: function (data) {

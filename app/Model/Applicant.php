@@ -53,7 +53,7 @@ class Applicant extends Model
 
     public function education()
     {
-    	return $this->hasMany('App\Model\Education', 'education_id');
+    	return $this->hasMany('App\Model\Education', 'user_id', 'user_id');
     }
 
 	public function experience()

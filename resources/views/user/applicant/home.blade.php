@@ -25,20 +25,20 @@
             <p class="editpersonal"><a onclick="enableEdit(this);" >Редактировать</a></p>
                 <div class="avatarvacanse">
                         <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}" >
+                    {!! Form::file('image', [ 'class' => 'input_width hidden']) !!}
                 </div>
-                <p id="downloadphoto" style="display: none; text-align: center;"><a href="">Загрузить фото</a></p>
 
             <h1>
                 <span class="div.second edittext">{{ $user->name }}</span>
-                {!! Form::text('name', $user->name, [ 'class' => 'input_width hidden']) !!}
+                {!! Form::text('name', $user->name, [ 'class' => 'input_width hidden', 'required']) !!}
             </h1>
             <p>
                 Email: <span class="edittext">{{ $user->email }}</span>
-                {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden']) !!}
+                {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden', 'required']) !!}
             </p>
             <p>
                 Телефон:  <span class="edittext">{{ $user->contacts->phone }}</span>
-                {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden']) !!}
+                {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden', 'required']) !!}
             </p>
             <p>
                 Страна: <span class="edittext">{{ $applicant->country->name }}</span>
@@ -46,11 +46,11 @@
             </p>
             <p>
                 Город: <span class="edittext">{{ $applicant->city }}</span>
-                {!! Form::text('city', $user->applicant->city, [ 'class' => 'input_width hidden']) !!}
+                {!! Form::text('city', $user->applicant->city, [ 'class' => 'input_width hidden', 'required']) !!}
             </p>
             <p>
                 Дата рождения: <span class="edittext">{{ $applicant->birthday }}</span>
-                {!! Form::date('birthday', $user->applicant->birthday, ['class' => 'input_width hidden']) !!}
+                {!! Form::date('birthday', $user->applicant->birthday, ['class' => 'input_width hidden', 'required']) !!}
             </p>
 
             <p class="edsub">
@@ -61,7 +61,7 @@
 
         <div class="editblock1">
             <p class="editpersonal">
-                <a onclick="addEducation(this);">Добавить</a>
+                <a onclick="addEducation(this);">Добавить</a> /
                 <a onclick="enableEdit(this);">Редактировать</a>
             </p>
             @foreach( $applicant->education as $item)
@@ -70,16 +70,16 @@
                         {!! Form::hidden('education_id', $item->education_id) !!}
                     <p>
                         Учебное заведение: <span class="edittext"> {{ $item->name }}</span>
-                        {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden']) !!}
+                        {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden', 'required']) !!}
                     </p>
                     <p>
                         Годы обучения <span class="edittext">с {{ $item->year_start}} по {{ $item->year_end }}</span>
-                        {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden']) !!}
-                        {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden']) !!}
+                        {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden', 'required']) !!}
+                        {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden', 'required']) !!}
                     </p>
                     <p>
                         Специальность: <span class="edittext">{{ $item->specialize }}</span>
-                        {!! Form::text('specialize', $item->specialize, [ 'class' => 'input_width hidden']) !!}
+                        {!! Form::text('specialize', $item->specialize, [ 'class' => 'input_width hidden', 'required']) !!}
                     </p>
                     <p>
                         Тип: <span class="edittext">{{ $item->type->name }}</span>
@@ -90,6 +90,7 @@
                 <p class="edsub">
                     {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateEducation(this);']) !!}
                     {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
+                    {!! Form::button('Удалить', [ 'class' => 'input_width btn-link hidden', 'onclick' => "removeEducation($item->education_id);"]) !!}
                 </p>
             @endforeach
         </div>
@@ -99,16 +100,16 @@
                 <h3>Опыт работы:</h3>
                 <p>
                     Компания: <span class="edittext"> {{ $item->name }}</span>
-                    {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden']) !!}
+                    {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p>
                     Период работы <span class="edittext"> с {{ $item->year_start}} по {{ $item->year_end }}</span>
-                    {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden']) !!}
-                    {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden']) !!}
+                    {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden', 'required']) !!}
+                    {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p>
                     Должность: <span class="edittext"> {{ $item->position }}</span>
-                    {!! Form::text('position', $item->position, [ 'class' => 'input_width hidden']) !!}
+                    {!! Form::text('position', $item->position, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p class="edsub">
                     {!! Form::button('Сохранить', [ 'class' => 'input_width hidden']) !!}
@@ -149,6 +150,14 @@
             }
         });
 
+        function showNotificantion(response) {
+            var status = JSON.parse(response);
+            $('.headervakanse').append('<div class="alert alert-success" role="alert"><strong>Изменения успешно сохранены!</strong></div>');
+
+            alert(status['class']);
+        }
+
+
         function enableEdit(button) {
             var div = $(button).parent().parent();
 
@@ -185,7 +194,7 @@
         }
 
         function updateEducation(button) {
-            var div = $(button).parent().parent();
+            var div = $(button).parent().prev();
 
             var education_id = div.find("input[name*='education_id']").val();
             var name = div.find("input[name*='name']").val();
@@ -195,11 +204,12 @@
             var education_type_id = div.find("#select_education").val();
 
             $.ajax({
-                url: '{{ route("user.edit.education") }}',
+                url: '{{ route("education.edit") }}',
                 method: "POST",
                 data: { _token: '{{ csrf_token() }}', education_id: education_id, name: name, year_start: year_start, year_end: year_end, specialize: specialize, education_type_id: education_type_id},
                 success: function (data) {
-                    alert(data);
+                    showNotificantion(data);
+//                    alert(data);
                 }
             })
         }
@@ -208,11 +218,22 @@
             var div = $(button).parent().parent();
 
             $.ajax({
-                url: '{{ route("user.new.education") }}',
+                url: '{{ route("education.new") }}',
                 method: "POST",
                 data: { _token: '{{ csrf_token() }}'},
                 success: function (data) {
                     $(div).after(data);
+                }
+            })
+        }
+
+        function removeEducation(id) {
+            $.ajax({
+                url: '{{ route("education.remove") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', education_id: id},
+                success: function (data) {
+                    alert(data);//TODO message or window reload
                 }
             })
         }

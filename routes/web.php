@@ -69,18 +69,23 @@ Route::post('/settings/pwd', [
 ]);
 
 Route::post('/settings/education', [
-	'as' => 'user.edit.education',
-	'uses' =>   'UserController@editEducation'
+	'as' => 'education.edit',
+	'uses' =>   'EducationController@editEducation'
 ]);
 
 Route::post('/settings/education/new', [
-	'as' => 'user.new.education',
-	'uses' =>   'UserController@newEducation'
+	'as' => 'education.new',
+	'uses' =>   'EducationController@newEducation'
+]);
+
+Route::post('/settings/education/remove', [
+	'as' => 'education.remove',
+	'uses' =>   'EducationController@removeEducation'
 ]);
 
 Route::post('/settings/education/add', [
-	'as' => 'user.add.education',
-	'uses' =>   'UserController@addEducation'
+	'as' => 'education.add',
+	'uses' =>   'EducationController@addEducation'
 ]);
 
 Route::post('/settings/info', [
