@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Company;
 use App\Model\Country;
 use App\Model\Education;
 use App\Model\EducationType;
@@ -32,6 +33,7 @@ class UserController extends Controller
 		if ($request->user()->role_id == 2)
 		{
 			$this->data['company'] = $request->user()->company;
+			$this->data['agency'] = [ '0' => 'Прямой работодатель', '1' => 'Кадровое агенство'];
 			return view('user.company.home', $this->data);
 		}
 
@@ -77,6 +79,7 @@ class UserController extends Controller
 
 	public function edit(Request $request, Country $country, EducationType $education)
 	{
+		dd('TODO');
 		$this->data['user'] = $request->user();
 
 		if ($request->user()->role_id == 2)
@@ -98,40 +101,73 @@ class UserController extends Controller
 	{
 		if ($request->ajax())
 		{
-			if (strcmp($request->user()->name, $request->name)) {
-				$request->user()->name = $request->name;
-			}
-
-			if (strcmp($request->user()->email,$request->email)) {
-				$invalidEmail = User::whereEmail($request->email)->count();
-				if (!$invalidEmail){
-					$request->user()->email = $request->email;
+			if ( $request->user()->role_id == 3) {
+				if (strcmp($request->user()->name, $request->name)) {
+					$request->user()->name = $request->name;
 				}
-				else {
-					echo json_encode([ 'class' => 'danger', 'message' => 'Ошибка!Данный email уже используеться!']);
+
+				if (strcmp($request->user()->email, $request->email)) {
+					$invalidEmail = User::whereEmail($request->email)->count();
+					if (!$invalidEmail) {
+						$request->user()->email = $request->email;
+					}
+					else {
+						echo json_encode(['class' => 'danger', 'message' => 'Ошибка!Данный email уже используеться!']);
+					}
 				}
-			}
 
-			if (strcmp($request->user()->contacts->phone, $request->phone)) {
-				$request->user()->contacts->phone = $request->phone;
-			}
+				if (strcmp($request->user()->contacts->phone, $request->phone)) {
+					$request->user()->contacts->phone = $request->phone;
+				}
 
-			if ($request->user()->applicant->country_id != $request->country_id)    {
-				$request->user()->applicant->country_id = $request->country_id;
-			}
+				if ($request->user()->applicant->country_id != $request->country_id) {
+					$request->user()->applicant->country_id = $request->country_id;
+				}
 
-			if ($request->user()->applicant->birthday != $request->birthday)    {
-				$request->user()->applicant->birthday = $request->birthday;
-			}
+				if ($request->user()->applicant->birthday != $request->birthday) {
+					$request->user()->applicant->birthday = $request->birthday;
+				}
 
-			if (strcmp($request->user()->applicant->city, $request->city))    {
-				$request->user()->applicant->city = $request->city;
-			}
+				if (strcmp($request->user()->applicant->city, $request->city)) {
+					$request->user()->applicant->city = $request->city;
+				}
 
-			$request->user()->save();
-			$request->user()->applicant->save();
-			$request->user()->contacts->save();
-			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
+				$request->user()->save();
+				$request->user()->applicant->save();
+				$request->user()->contacts->save();
+				echo json_encode(['class' => 'success', 'message' => 'Изменения успешно сохранены!']);
+			}
+			if ( $request->user()->role_id == 2) {
+				if (strcmp($request->user()->name, $request->name)) {
+					$request->user()->name = $request->name;
+				}
+
+				if (strcmp($request->user()->email, $request->email)) {
+					$invalidEmail = User::whereEmail($request->email)->count();
+					if (!$invalidEmail) {
+						$request->user()->email = $request->email;
+					}
+					else {
+						echo json_encode(['class' => 'danger', 'message' => 'Ошибка!Данный email уже используеться!']);
+					}
+				}
+
+				if (strcmp($request->user()->company->website, $request->website)) {
+					$request->user()->company->website = $request->website;
+				}
+				if (strcmp($request->user()->company->description, $request->description)) {
+					$request->user()->company->description = $request->description;
+				}
+
+				if ($request->user()->company->agency != $request->agency){
+					$request->user()->company->agency = $request->agency;
+				}
+
+				$request->user()->save();
+				$request->user()->company->save();
+
+				echo json_encode(['class' => 'success', 'message' => 'Изменения успешно сохранены!']);
+			}
 		}
 	}
 }
