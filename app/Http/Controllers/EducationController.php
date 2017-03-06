@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
+	/**
+	 * @param Request       $request
+	 * @param EducationType $education
+	 */
 	public function newEducation(Request $request,EducationType $education)
 	{
 		if ($request->ajax()) {
@@ -15,6 +19,10 @@ class EducationController extends Controller
 			echo view('user.applicant.neweducation', $this->data);
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 */
 
 	public function addEducation(Request $request)
 	{
@@ -31,6 +39,12 @@ class EducationController extends Controller
 			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return string
+	 */
 
 	public function editEducation(Request $request)
 	{
@@ -67,6 +81,10 @@ class EducationController extends Controller
 			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 */
 
 	public function removeEducation(Request $request)
 	{

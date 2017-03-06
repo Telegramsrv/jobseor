@@ -39,6 +39,7 @@ Route::get('/category/{slug}', [
 ]);
 
 
+
 Route::get('/home', [
 	'as' => 'user.home',
     'uses' =>   'UserController@index'
@@ -57,7 +58,6 @@ Route::get('/settings', [
 
 
 
-
 Route::post('/settings/name', [
 	'as' => 'user.edit.name',
 	'uses' =>   'UserController@editName'
@@ -68,6 +68,20 @@ Route::post('/settings/pwd', [
 	'uses' =>   'UserController@editPWD'
 ]);
 
+Route::post('/settings/info', [
+	'as' => 'user.edit.info',
+	'uses' =>   'UserController@editInfo'
+]);
+
+
+//EXPERIENCE
+
+Route::post('/settings/experience', [
+	'as' => 'experience.edit',
+	'uses' =>   'ExperienceController@editExperience'
+]);
+
+// EDUCATION
 Route::post('/settings/education', [
 	'as' => 'education.edit',
 	'uses' =>   'EducationController@editEducation'
@@ -86,9 +100,4 @@ Route::post('/settings/education/remove', [
 Route::post('/settings/education/add', [
 	'as' => 'education.add',
 	'uses' =>   'EducationController@addEducation'
-]);
-
-Route::post('/settings/info', [
-	'as' => 'user.edit.info',
-	'uses' =>   'UserController@editInfo'
 ]);

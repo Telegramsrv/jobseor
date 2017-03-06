@@ -41,11 +41,12 @@
         var education_type_id = div.find("#select_education").val();
 
         $.ajax({
-            url: '{{ route("education.add") }}',
+            url: '{{ route("experience.edit") }}',
             method: "POST",
             data: { _token: '{{ csrf_token() }}', name: name, year_start: year_start, year_end: year_end, specialize: specialize, education_type_id: education_type_id},
             success: function (data) {
-                alert(data);
+                showNotificantion(data);
+                disableEdit(button);
             }
         })
     }

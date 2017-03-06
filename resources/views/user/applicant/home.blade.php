@@ -97,22 +97,25 @@
         <div class="editblock1">
             <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
             @foreach( $applicant->experience as $item)
-                <h3>Опыт работы:</h3>
-                <p>
-                    Компания: <span class="edittext"> {{ $item->name }}</span>
-                    {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden', 'required']) !!}
-                </p>
-                <p>
-                    Период работы <span class="edittext"> с {{ $item->year_start}} по {{ $item->year_end }}</span>
-                    {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden', 'required']) !!}
-                    {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden', 'required']) !!}
-                </p>
-                <p>
-                    Должность: <span class="edittext"> {{ $item->position }}</span>
-                    {!! Form::text('position', $item->position, [ 'class' => 'input_width hidden', 'required']) !!}
-                </p>
+                <div class="clone3">
+                    <h3>Опыт работы:</h3>
+                    {!! Form::hidden('experience_id', $item->experience_id) !!}
+                    <p>
+                        Компания: <span class="edittext"> {{ $item->name }}</span>
+                        {!! Form::text('name', $item->name, [ 'class' => 'input_width hidden', 'required']) !!}
+                    </p>
+                    <p>
+                        Период работы <span class="edittext"> с {{ $item->year_start}} по {{ $item->year_end }}</span>
+                        {!! Form::number('year_start', $item->year_start, [ 'class' => 'input_width hidden', 'required']) !!}
+                        {!! Form::number('year_end', $item->year_end, [ 'class' => 'input_width hidden', 'required']) !!}
+                    </p>
+                    <p>
+                        Должность: <span class="edittext"> {{ $item->position }}</span>
+                        {!! Form::text('position', $item->position, [ 'class' => 'input_width hidden', 'required']) !!}
+                    </p>
+                </div>
                 <p class="edsub">
-                    {!! Form::button('Сохранить', [ 'class' => 'input_width hidden']) !!}
+                    {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateExperience(this);']) !!}
                     {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
                 </p>
             @endforeach
@@ -153,6 +156,8 @@
             var status = JSON.parse(response);
             var msg = '<div class="alert alert-' + status["class"] + '" role="alert"><strong>' + status["message"] + '</strong></div>';
             $('.headervakanse#balance').after(msg);
+
+            $(window).scrollTop($('.alert').offset().top);//speed?
         }
 
 
@@ -192,6 +197,7 @@
             })
         }
 
+//        EDUCATION
         function updateEducation(button) {
             var div = $(button).parent().prev();
 
@@ -233,6 +239,27 @@
                 data: { _token: '{{ csrf_token() }}', education_id: id},
                 success: function (data) {
                     location.reload();
+                }
+            })
+        }
+
+//        EXPERIENCE
+        function updateExperience(button) {
+            var div = $(button).parent().prev();
+
+            var experience_id = div.find("input[name*='experience_id']").val();
+            var name = div.find("input[name*='name']").val();
+            var year_start = div.find("input[name*='year_start']").val();
+            var year_end = div.find("input[name*='year_end']").val();
+            var position = div.find("input[name*='position']").val();
+
+            $.ajax({
+                url: '{{ route("experience.edit") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', experience_id: experience_id, name: name, year_start: year_start, year_end: year_end, position: position},
+                success: function (data) {
+                    showNotificantion(data);
+                    disableEdit(button);
                 }
             })
         }
