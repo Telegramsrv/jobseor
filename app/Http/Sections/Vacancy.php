@@ -11,7 +11,7 @@ use App\Model\Currency;
 use App\Model\EducationType;
 use App\Model\Employment;
 use App\Model\ExperienceType;
-use App\Model\Subcategory;
+use App\Model\Profession;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -55,7 +55,7 @@ class Vacancy extends Section
 		    \AdminColumn::text('user.email', 'Email')->setWidth('100px'),
 		    \AdminColumn::text('title', 'Название')->setWidth('250px'),
 		    \AdminColumn::text('category.name', 'Категория')->setWidth('100px'),
-		    \AdminColumn::text('subcategory.name', 'Подкатегория')->setWidth('100px'),
+		    \AdminColumn::text('profession.name', 'Подкатегория')->setWidth('100px'),
 		    \AdminColumn::text('country.name', 'Страна')->setWidth('100px'),
 		    \AdminColumn::text('city', 'Город')->setWidth('100px')
 //		    \AdminColumn::text('city', '')->setWidth('5px')//TODO VIP
@@ -77,7 +77,7 @@ class Vacancy extends Section
 			    AdminFormElement::text('user.email', 'Email')->setReadOnly(true),
 			    AdminFormElement::text('title', 'Название')->required(),
 			    AdminFormElement::select('category_id', 'Категория', Category::class)->setDisplay('name')->required(),
-			    AdminFormElement::select('subcategory_id', 'Подкатегория', Subcategory::class)->setDisplay('name')->required(),
+			    AdminFormElement::select('profession_id', 'Подкатегория', Profession::class)->setDisplay('name')->required(),
 			    AdminFormElement::select('country_id', 'Страна', Country::class)->setDisplay('name')->required(),
 			    AdminFormElement::text('city', 'Город')->required(),
 			    AdminFormElement::select('education_type_id', 'Образование', EducationType::class)->setDisplay('name')->required(),

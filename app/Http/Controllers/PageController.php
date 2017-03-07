@@ -16,7 +16,7 @@ class PageController extends Controller
 
     public function getCategory($slug,Category $category)
     {
-        $this->data['subcategories'] = $category->getSubcategoryByCategorySlug($slug);
+        $this->data['professions'] = $category->getProfessionByCategorySlug($slug);
         $this->data['category'] = $category->getCategoryBySlug($slug);
         return view('category',$this->data);
     }

@@ -13,11 +13,11 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Subcategory
  *
- * @property \App\Model\Subcategory $model
+ * @property \App\Model\Profession $model
  *
  * @see http://sleepingowladmin.ru/docs/model_configuration_section
  */
-class Subcategory extends Section
+class Profession extends Section
 {
 	/**
 	 * @see http://sleepingowladmin.ru/docs/model_configuration#ограничение-прав-доступа
@@ -44,7 +44,7 @@ class Subcategory extends Section
 		$display = AdminDisplay::datatables()->with('category')
 		                       ->setHtmlAttribute('class', 'table-primary');
 		$display->setColumns(
-			\AdminColumn::text('subcategory_id', '#')->setWidth('30px'),
+			\AdminColumn::text('profession_id', '#')->setWidth('30px'),
 			\AdminColumn::text('name', 'Название')->setWidth('250px'),
 			\AdminColumn::text('slug', 'Slug')->setWidth('250px'),
 			\AdminColumn::text('category.name', 'Категория')->setWidth('250px'),
@@ -70,7 +70,7 @@ class Subcategory extends Section
 				AdminFormElement::select('category_id', 'Категория', Category::class)->setDisplay('name')->required(),
 				AdminFormElement::image('image', 'Картинка')->setUploadPath(
 					function (\Illuminate\Http\UploadedFile $file) {
-						return 'image/subcategory';
+						return 'image/profession';
 					}
 				)
 				                ->setUploadSettings(

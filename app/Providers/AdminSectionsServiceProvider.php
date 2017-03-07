@@ -12,7 +12,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
      */
     protected $sections = [
         \App\Model\Category::class => 'App\Http\Sections\Category',
-        \App\Model\Subcategory::class => 'App\Http\Sections\Subcategory',
+        \App\Model\Profession::class => 'App\Http\Sections\Profession',
         \App\Model\Country::class => 'App\Http\Sections\Country',
         \App\Model\Region::class => 'App\Http\Sections\Region',
         \App\Model\Company::class => 'App\Http\Sections\Company',

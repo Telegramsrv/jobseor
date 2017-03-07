@@ -65,12 +65,7 @@ class Applicant extends Section
 				AdminFormElement::date('birthday', 'День рождения'),
 				AdminFormElement::select('country_id', 'Старна', Country::class)->setDisplay('name'),
 				AdminFormElement::text('city', 'Город'),
-				AdminFormElement::wysiwyg('description','Дополнительная информация'),
-				AdminFormElement::file('summary', 'Резюме')->setUploadPath(
-					function (\Illuminate\Http\UploadedFile $file) {
-						return 'uploads/summary';
-					}
-				)
+				AdminFormElement::wysiwyg('description','Дополнительная информация')
 			]
 		);
 	}

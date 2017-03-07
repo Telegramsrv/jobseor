@@ -40,7 +40,7 @@ return [
 	        (new Page(\App\Model\Category::class))
 		        ->setPriority(0)
 	            ->setTitle('Категории'),
-	        (new Page(\App\Model\Subcategory::class))
+	        (new Page(\App\Model\Profession::class))
 		        ->setPriority(50)
 	            ->setTitle('Подкатегории'),
         ]

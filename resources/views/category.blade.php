@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h3>{{ $category->name }}</h3>
-                @foreach( $subcategories as $item)
+                @foreach( $professions as $item)
                     <div class="md-2">
                         <a href="#">
                             <img src="/{{ $item->image }}" alt="{{ $item->name }}">

@@ -17,7 +17,6 @@ class CreateApplicantsTable extends Migration
             $table->increments('applicant_id');
             $table->integer('user_id');
             $table->date('birthday')->nullable();
-            $table->string('summary')->nullable();
             $table->longText('description')->nullable();
             $table->integer('country_id')->nullable();
             $table->string('city')->nullable();

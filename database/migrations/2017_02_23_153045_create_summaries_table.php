@@ -16,6 +16,7 @@ class CreateSummariesTable extends Migration
         Schema::create('summaries', function (Blueprint $table) {
             $table->increments('summary_id');
             $table->integer('user_id');
+            $table->integer('category_id');
             $table->string('title');
             $table->integer('salary');
             $table->integer('currency_id');

@@ -26,9 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereWeight($value)
  * @mixin \Eloquent
  */
-class Subcategory extends Model
+class Profession extends Model
 {
-	protected $primaryKey = 'subcategory_id';
+	protected $primaryKey = 'profession_id';
 
     public function category()
     {

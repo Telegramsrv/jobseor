@@ -53,6 +53,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\ExperienceType $experience_type
  * @property-read \App\Model\Subcategory $subcategory
  * @property-read \App\Model\EducationType $education
+ * @property-read \App\Model\Profession $profession
  */
 class Vacancy extends Model
 {
@@ -68,9 +69,9 @@ class Vacancy extends Model
 		return $this->belongsTo('App\Model\Category', 'category_id');
 	}
 
-	public function subcategory()
+	public function profession()
 	{
-		return $this->belongsTo('App\Model\Subcategory', 'subcategory_id');
+		return $this->belongsTo('App\Model\Profession', 'profession_id');
 	}
 
 	public function country()

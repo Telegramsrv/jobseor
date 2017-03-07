@@ -18,7 +18,7 @@ class CreateVacanciesTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->integer('category_id');
-            $table->integer('subcategory_id');
+            $table->integer('profession_id');
             $table->integer('country_id');
             $table->string('city');
             $table->integer('education_type_id');

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $special
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subcategory[] $subcategories
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Profession[] $profession
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Category whereCategoryId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Category whereImage($value)
@@ -25,14 +25,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Category whereWeight($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Profession[] $professions
  */
 class Category extends Model
 {
 	protected $primaryKey = 'category_id';
 
-    public function subcategories()
+    public function professions()
     {
-    	return $this->hasMany('App\Model\Subcategory','category_id');
+    	return $this->hasMany('App\Model\Profession','profession_id');
     }
 
     public function getSpecialistsCategory()
@@ -45,9 +46,9 @@ class Category extends Model
     	return $this->where('special',0)->get();
     }
 
-    public function getSubcategoryByCategorySlug($slug)
+    public function getProfessionByCategorySlug($slug)
     {
-    	return $this->whereSlug($slug)->firstOrFail()->subcategories()->get();
+    	return $this->whereSlug($slug)->firstOrFail()->professions()->get();
     }
 
     public function getCategoryBySlug($slug)
