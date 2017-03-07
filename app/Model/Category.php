@@ -55,4 +55,14 @@ class Category extends Model
     {
     	return $this->whereSlug($slug)->firstOrFail();
     }
+
+    public function getForm()
+    {
+	    $buff = [];
+	    foreach ($this->get() as $category)
+	    {
+		    $buff[$category->category_id] = $category->name;
+	    }
+	    return $buff;
+    }
 }

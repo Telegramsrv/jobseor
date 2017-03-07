@@ -29,7 +29,7 @@ class Profession extends Section
 	/**
 	 * @var string
 	 */
-	protected $title;
+	protected $title = 'Профессии';
 
 	/**
 	 * @var string
@@ -47,9 +47,10 @@ class Profession extends Section
 			\AdminColumn::text('profession_id', '#')->setWidth('30px'),
 			\AdminColumn::text('name', 'Название')->setWidth('250px'),
 			\AdminColumn::text('slug', 'Slug')->setWidth('250px'),
-			\AdminColumn::text('category.name', 'Категория')->setWidth('250px'),
+			\AdminColumn::text('category.name', 'Категория')->setWidth('200px'),
 			\AdminColumn::text('weight', 'Вес')->setWidth('30px'),
-			\AdminColumn::image('image', 'Картинка')->setWidth('100px')
+			\AdminColumn::image('image', 'Картинка')->setWidth('100px'),
+			\AdminColumnEditable::checkbox('free', 'Бесплатная')->setWidth('10px')
 		);
 
 		return $display;
@@ -68,6 +69,7 @@ class Profession extends Section
 				AdminFormElement::text('slug', 'Slug')->required(),
 				AdminFormElement::number('weight', 'Вес')->required(),
 				AdminFormElement::select('category_id', 'Категория', Category::class)->setDisplay('name')->required(),
+				AdminFormElement::checkbox('free','Бесплатная'),
 				AdminFormElement::image('image', 'Картинка')->setUploadPath(
 					function (\Illuminate\Http\UploadedFile $file) {
 						return 'image/profession';

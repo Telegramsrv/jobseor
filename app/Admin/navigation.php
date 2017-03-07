@@ -35,14 +35,14 @@ return [
     ],
 
     [
-    	'title' => 'Категории и подкатегории',
+    	'title' => 'Категории и профессии',
         'pages' => [
 	        (new Page(\App\Model\Category::class))
 		        ->setPriority(0)
 	            ->setTitle('Категории'),
 	        (new Page(\App\Model\Profession::class))
 		        ->setPriority(50)
-	            ->setTitle('Подкатегории'),
+	            ->setTitle('Профессии'),
         ]
     ],
 

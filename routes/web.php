@@ -52,9 +52,19 @@ Route::get('/user/{id}/notepad', [
 
 // SUMMARY
 
-ROute::get('/summary/add', [
+Route::get('/summary/add', [
 	'as' => 'summary.add',
 	'uses' => 'SummaryController@addNew'
+]);
+
+Route::post('/summary/add', [
+	'as' => 'summary.add.post',
+	'uses' => 'SummaryController@createNew'
+]);
+
+Route::post('/summary/preview', [
+	'as' => 'summary.preview',
+	'uses' => 'SummaryController@getPreview'
 ]);
 
 //USER

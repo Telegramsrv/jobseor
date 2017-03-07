@@ -25,7 +25,7 @@
                 <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
                 <div class="avatarvacanse">
                     <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}">
-                    {!! Form::file('image', [ 'class' => 'input_width hidden']) !!}
+{{--                    {!! Form::file('image', [ 'class' => 'input_width hidden']) !!}--}}
                 </div>
 
                 <h1>
@@ -37,16 +37,16 @@
                     {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p>
-                    @if($user->contacts)
-                    Телефон: <span class="edittext">{{ $user->contacts->phone }}</span>
-                        {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden', 'required']) !!}
-                    @endif
+                    Телефон:
+                        <span class="edittext">{{ $user->contacts->phone }}</span>
+                    {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p>
+                    Страна:
                     @if($applicant->country)
-                    Страна: <span class="edittext">{{ $applicant->country->name }}</span>
-                    {!! Form::select('country_id', $countries, $user->applicant->country_id, [ 'class' => 'input_width hidden', 'id' => 'select_country']) !!}
+                        <span class="edittext">{{ $applicant->country->name }}</span>
                     @endif
+                    {!! Form::select('country_id', $countries, $user->applicant->country_id, [ 'class' => 'input_width hidden', 'id' => 'select_country']) !!}
                 </p>
                 <p>
                     Город: <span class="edittext">{{ $applicant->city }}</span>

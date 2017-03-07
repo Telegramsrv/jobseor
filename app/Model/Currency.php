@@ -18,4 +18,14 @@ class Currency extends Model
 	protected $primaryKey = 'currency_id';
 
 	public $timestamps = false;
+
+	public function getForm()
+	{
+		$buff = [];
+		foreach ($this->get() as $currency)
+		{
+			$buff[$currency->currency_id] = $currency->name;
+		}
+		return $buff;
+	}
 }
