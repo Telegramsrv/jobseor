@@ -50,6 +50,12 @@ Route::get('/user/{id}/notepad', [
 	'uses' => 'UserController@getUserNotepad'
 ]);
 
+// SUMMARY
+
+ROute::get('/summary/add', [
+	'as' => 'summary.add',
+	'uses' => 'SummaryController@addNew'
+]);
 
 //USER
 

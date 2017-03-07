@@ -9,12 +9,10 @@
     <div class="container">
         <div class="headervakanse" style="min-height: 50px;">
             <p style="float: right; ">
-
                 <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
                 <a style="cursor: pointer; padding: 10px;">Мои отклики</a>
                 <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои резюме</a>
                 <a href="{{ route('user.edit') }}" style="cursor: pointer; padding: 10px;">Настройки</a>
-
             </p>
         </div>
         <div class="headervakanse" id="balance">

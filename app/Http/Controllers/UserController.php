@@ -99,6 +99,10 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param Request $request
+	 */
+
 	public function editInfo(Request $request)
 	{
 		if ($request->ajax()) {
@@ -172,6 +176,14 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+	 *
+	 */
+
 	public function getUser($id, Request $request)
 	{
 		$user = User::whereUserId($id)->firstOrFail();
@@ -189,6 +201,13 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+	 */
+
 	public function getUserNotepad($id, Request $request)
 	{
 		$user = User::whereUserId($id)->firstOrFail();
@@ -205,7 +224,7 @@ class UserController extends Controller
 		if ($user->role_id == 3) {
 			$this->data['summaries'] = $user->applicant->summaries;
 
-			return view('user.applicant.notepad', $this->data);
+			return view('user.applicant.index_notepad', $this->data);
 		}
 	}
 }

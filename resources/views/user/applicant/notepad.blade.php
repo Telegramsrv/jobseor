@@ -7,6 +7,7 @@
     </div>
     <div class="container">
         <div class="row" style="margin-left: 0; margin-right: 0;">
+            <a href="{{ route('summary.add') }}" style="padding: 10px;">Добавить резюме</a>
             <div class="headervakanse">
                 Всего: {{$summaries->count()}} резюме.
             </div>
@@ -18,7 +19,7 @@
                     <h2><a href="">{{ $summary->title }}</a></h2>
                     <p>{{ $user->name }}</p>
                     <p>Опыт работы : {{ $user->applicant->experience_year() }} год.
-                        • {{ str_limit($summary->information, 97) }}…</p>
+                        • {{ str_limit($summary->information, 97) }}… • Зарплата от {{ $summary->salary }} {{ $summary->currency->name }} </p>
                 </div>
             @endforeach
             <div class="col-md-12">
