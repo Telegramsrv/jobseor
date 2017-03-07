@@ -45,6 +45,11 @@ Route::get('/user/{id}', [
 	'uses' => 'UserController@getUser'
 ]);
 
+Route::get('/user/{id}/notepad', [
+	'as' => 'user.index.notepad',
+	'uses' => 'UserController@getUserNotepad'
+]);
+
 
 //USER
 
