@@ -37,12 +37,16 @@
                     {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden', 'required']) !!}
                 </p>
                 <p>
+                    @if($user->contacts)
                     Телефон: <span class="edittext">{{ $user->contacts->phone }}</span>
-                    {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden', 'required']) !!}
+                        {!! Form::text('phone', $user->contacts->phone, [ 'class' => 'input_width hidden', 'required']) !!}
+                    @endif
                 </p>
                 <p>
+                    @if($applicant->country)
                     Страна: <span class="edittext">{{ $applicant->country->name }}</span>
                     {!! Form::select('country_id', $countries, $user->applicant->country_id, [ 'class' => 'input_width hidden', 'id' => 'select_country']) !!}
+                    @endif
                 </p>
                 <p>
                     Город: <span class="edittext">{{ $applicant->city }}</span>
