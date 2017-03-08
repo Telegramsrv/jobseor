@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Category;
 use App\Model\Currency;
 use App\Model\Summary;
+use App\Model\UserWatchedSummary;
 use Illuminate\Http\Request;
 
 class SummaryController extends Controller
@@ -162,7 +163,15 @@ class SummaryController extends Controller
 
 		$this->data['summary'] = $summary;
 		$this->data['user'] = $summary->user;
-		//TODO add userWatchSummary
+
+		if ($request->user()->user_id != $summary->user_id) {
+			$summary_view = UserWatchedSummary::whereUserId($request->user()->user_id)
+				->firstOrCreate([
+					'user_id' => $request->user()->user_id,
+					'summary_id' => $summary->summary_id
+				]);
+			$summary_view->save();
+		}
 		return view('summary.index', $this->data);
 	}
 }

@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserWatchedSummary extends Model
 {
+	protected $fillable = [
+		'user_id', 'summary_id'
+	];
+
     public function user()
     {
     	return $this->belongsTo('App\Model\User', 'user_id');
