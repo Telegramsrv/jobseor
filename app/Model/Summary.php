@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereUserId($value)
  * @mixin \Eloquent
+ * @property int $category_id
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCategoryId($value)
  */
 class Summary extends Model
 {

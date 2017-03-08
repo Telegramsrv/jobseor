@@ -54,6 +54,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\Subcategory $subcategory
  * @property-read \App\Model\EducationType $education
  * @property-read \App\Model\Profession $profession
+ * @property int $profession_id
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereProfessionId($value)
  */
 class Vacancy extends Model
 {

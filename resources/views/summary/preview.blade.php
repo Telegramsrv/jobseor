@@ -12,7 +12,9 @@
                             <h2><strong>Основная информация:</strong></h2>
                             <p>Страна: {{ $user->applicant->country->name }}</p>
                             <p>Город: {{ $user->applicant->city }}</p>
-                            <p>Образование: {{ $user->applicant->education->first()->type->name }}</p>
+                            @foreach( $user->applicant->education as $item)
+                                <p>Образование: {{ $item->type->name }}, {{ $item->name }}, {{ $item->year_start }}-{{ $item->year_end }} год, {{ $item->specialize }}.</p>
+                            @endforeach
                             <p>Год рождения: {{ $user->applicant->birthday }}</p>
                             <p>Желаемая заработная плата: {{ $salary }} {{ $currency->name }}</p>
                             <h3>Опыт работы:</h3>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Category;
 use App\Model\Currency;
+use App\Model\Summary;
 use Illuminate\Http\Request;
 
 class SummaryController extends Controller
@@ -13,6 +14,14 @@ class SummaryController extends Controller
 		$this->middleware('auth');
 	}
 
+	/**
+	 * @param Request  $request
+	 * @param Category $category
+	 * @param Currency $currency
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
     public function addNew(Request $request, Category $category, Currency $currency)
     {
     	$this->data['categories'] = $category->getForm();
@@ -20,11 +29,31 @@ class SummaryController extends Controller
 		return view('user.applicant.addsummary', $this->data);
     }
 
-    public function createNew(Request $request)
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+	public function createNew(Request $request)
     {
-    	dd($request);
+		$summary = new Summary();
+		if ( isset($request->category_id) && isset($request->title) && isset($request->salary) && isset($request->currency_id) && isset($request->information)) {
+			$summary->user_id = $request->user()->user_id;
+			$summary->category_id = $request->category_id;
+			$summary->title = $request->title;
+			$summary->salary = $request->salary;
+			$summary->currency_id = $request->currency_id;
+			$summary->information = $request->information;
+			$summary->save();
 
+			return redirect(route('user.notepad'));
+		}
+		else return redirect(route('summary.add'));
     }
+
+	/**
+	 * @param Request $request
+	 */
 
     public function getPreview(Request $request)
     {

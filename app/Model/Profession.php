@@ -25,6 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereWeight($value)
  * @mixin \Eloquent
+ * @property int $profession_id
+ * @property bool $free
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereFree($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereProfessionId($value)
  */
 class Profession extends Model
 {
