@@ -148,4 +148,21 @@ class SummaryController extends Controller
 
 		return redirect(route('user.notepad'));
 	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function view($id, Request $request)
+	{
+		$summary = Summary::whereSummaryId($id)->firstOrFail();
+
+		$this->data['summary'] = $summary;
+		$this->data['user'] = $summary->user;
+		//TODO add userWatchSummary
+		return view('summary.index', $this->data);
+	}
 }

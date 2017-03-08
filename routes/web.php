@@ -81,6 +81,11 @@ Route::post('/summary/{id}/delete', [
 	'as' => 'summary.remove',
 	'uses' => 'SummaryController@remove'
 ]);
+
+Route::get('/summary/{id}', [
+	'as' => 'summary.view',
+	'uses' => 'SummaryController@view'
+]);
 //USER
 
 Route::get('/home', [

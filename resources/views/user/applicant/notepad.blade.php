@@ -17,7 +17,7 @@
                     <div class="avatarvacanse">
                         <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $summary->title }}">
                     </div>
-                    <h2><a href="">{{ $summary->title }}</a></h2>
+                    <h2><a href=" {{ route('summary.view', [ 'id' => $summary->summary_id]) }}">{{ $summary->title }}</a></h2>
                     <p>{{ $user->name }}</p>
                     <p>Опыт работы : {{ $user->applicant->experience_year() }} год.
                         • {{ str_limit($summary->information, 97) }}… • Зарплата от {{ $summary->salary }} {{ $summary->currency->name }} </p>
@@ -30,8 +30,6 @@
                     </div>
                 </div>
             @endforeach
-            <div class="col-md-12">
-            </div>
         </div>
     </div>
 @endsection
