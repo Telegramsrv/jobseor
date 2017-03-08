@@ -9,7 +9,12 @@
     <div class="add_vac">
         <div class="container">
             <div class="main_form new">
-                {!! Form::open(['route' => 'summary.add.post', 'method' => 'post']) !!}
+                @if(empty($summary->title))
+                    {!! Form::open(['route' => 'summary.add.post', 'method' => 'post']) !!}
+                    @else
+                    {!! Form::open(['route' => 'summary.edit.post', 'method' => 'post']) !!}
+                    {!! Form::hidden('summary_id', $summary->summary_id) !!}
+                @endif
                 <div class="block">
                     <div class="info_vac">
                         <div class="row">
@@ -29,7 +34,7 @@
                             </div>
                             <div class="col-xs-7">
                                 <div class="town">
-                                    {!! Form::text('title','', [ 'class' => 'input_width', 'required']) !!}
+                                    {!! Form::text('title', $summary->title , [ 'class' => 'input_width', 'required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -41,7 +46,7 @@
                             </div>
                             <div class="col-xs-7">
                                 <div class="town">
-                                    {!! Form::select('category_id', $categories, '', [ 'class' => 'input_width', 'id' => 'select_category', 'required']) !!}
+                                    {!! Form::select('category_id', $categories, $summary->category_id, [ 'class' => 'input_width', 'id' => 'select_category', 'required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -53,8 +58,8 @@
                             </div>
                             <div class="col-xs-7">
                                 <div>
-                                    {!! Form::number('salary', '',  [ 'class' => 'input_width']) !!}
-                                    {!! Form::select('currency_id', $currencies, '', [ 'class' => 'input_width', 'id' => 'select_currency']) !!}
+                                    {!! Form::number('salary', $summary->salary,  [ 'class' => 'input_width']) !!}
+                                    {!! Form::select('currency_id', $currencies, $summary->currency_id, [ 'class' => 'input_width', 'id' => 'select_currency']) !!}
                                 </div>
                             </div>
                         </div>
@@ -66,7 +71,7 @@
                             </div>
 
                             <div class="col-xs-7">
-                                {!! Form::textarea('information', '', [ 'cols' => '70', 'rows' => '8']) !!}
+                                {!! Form::textarea('information', $summary->information, [ 'cols' => '70', 'rows' => '8']) !!}
                             </div>
                         </div>
                     </div>
@@ -78,7 +83,11 @@
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="load_img ">
-                                {!! Form::submit('Добавить резюме', [ 'class' => 'button_width', 'onclick' => 'addsummary();']) !!}
+                                @if(empty($summary->title))
+                                    {!! Form::submit('Добавить резюме', [ 'class' => 'button_width']) !!}
+                                    @else
+                                    {!! Form::submit('Редактировать резюме', [ 'class' => 'button_width']) !!}
+                                @endif
                             </div>
                         </div>
                     </div>

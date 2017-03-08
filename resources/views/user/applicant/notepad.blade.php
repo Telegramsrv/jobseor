@@ -13,6 +13,7 @@
             </div>
             @foreach($summaries as $summary)
                 <div class="vakanceblock">
+                    <a href="{{ route('summary.edit', ['id' => $summary->summary_id]) }}"> Редактировать</a>
                     <div class="avatarvacanse">
                         <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $summary->title }}">
                     </div>

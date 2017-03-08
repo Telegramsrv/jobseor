@@ -62,9 +62,19 @@ Route::post('/summary/add', [
 	'uses' => 'SummaryController@createNew'
 ]);
 
+Route::post('/summary/edit', [
+	'as' => 'summary.edit.post',
+	'uses' => 'SummaryController@editPost'
+]);
+
 Route::post('/summary/preview', [
 	'as' => 'summary.preview',
 	'uses' => 'SummaryController@getPreview'
+]);
+
+Route::get('/summary/{id}/edit', [
+	'as' => 'summary.edit',
+	'uses' => 'SummaryController@edit'
 ]);
 
 //USER
