@@ -77,6 +77,10 @@ Route::get('/summary/{id}/edit', [
 	'uses' => 'SummaryController@edit'
 ]);
 
+Route::post('/summary/{id}/delete', [
+	'as' => 'summary.remove',
+	'uses' => 'SummaryController@remove'
+]);
 //USER
 
 Route::get('/home', [

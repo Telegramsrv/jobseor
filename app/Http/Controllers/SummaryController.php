@@ -130,4 +130,22 @@ class SummaryController extends Controller
 
 		return redirect(route('user.notepad'));
 	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+
+	public function remove($id, Request $request)
+	{
+		$summary = Summary::whereSummaryId($id)->firstOrFail();
+		if ($summary->user_id != $request->user()->user_id) {
+			dd(504);//TODO add error page
+		}
+		$summary->delete();
+
+		return redirect(route('user.notepad'));
+	}
 }

@@ -13,7 +13,7 @@
             </div>
             @foreach($summaries as $summary)
                 <div class="vakanceblock">
-                    <a href="{{ route('summary.edit', ['id' => $summary->summary_id]) }}"> Редактировать</a>
+                    <div class="col-md-10">
                     <div class="avatarvacanse">
                         <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $summary->title }}">
                     </div>
@@ -21,6 +21,13 @@
                     <p>{{ $user->name }}</p>
                     <p>Опыт работы : {{ $user->applicant->experience_year() }} год.
                         • {{ str_limit($summary->information, 97) }}… • Зарплата от {{ $summary->salary }} {{ $summary->currency->name }} </p>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="{{ route('summary.edit', ['id' => $summary->summary_id]) }}"> Редактировать</a>
+                        {!! Form::open([ 'route' => [ 'summary.remove', $summary->summary_id], 'method' => 'POST']) !!}
+                        {!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             @endforeach
             <div class="col-md-12">
