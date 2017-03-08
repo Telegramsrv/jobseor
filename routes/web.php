@@ -50,6 +50,26 @@ Route::get('/user/{id}/notepad', [
 	'uses' => 'UserController@getUserNotepad'
 ]);
 
+// VACANCY
+
+Route::get('/vacancy/add', [
+	'as' => 'vacancy.add',
+	'uses' => 'VacancyController@addNew'
+]);
+
+Route::post('/vacancy/add', [
+	'as' => 'vacancy.add.post',
+	'uses' => 'VacancyController@createNew'
+]);
+
+Route::post('/vacancy/profession', [
+	'as' => 'vacancy.profession',
+	'uses' => 'VacancyController@getProfession'
+]);
+
+
+
+
 // SUMMARY
 
 Route::get('/summary/add', [

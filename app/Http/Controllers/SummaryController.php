@@ -160,10 +160,8 @@ class SummaryController extends Controller
 	public function view($id, Request $request)
 	{
 		$summary = Summary::whereSummaryId($id)->firstOrFail();
-
 		$this->data['summary'] = $summary;
 		$this->data['user'] = $summary->user;
-
 		if ($request->user()->user_id != $summary->user_id) {
 			$summary_view = UserWatchedSummary::whereUserId($request->user()->user_id)
 				->firstOrCreate([

@@ -1,0 +1,1 @@
+{!! Form::select('profession_id', $professions) !!}

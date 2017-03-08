@@ -20,4 +20,14 @@ class ExperienceType extends Model
     protected $primaryKey = 'experience_type_id';
 
     public $timestamps = false;
+
+	public function getForm()
+	{
+		$buff = [];
+		foreach ($this->get() as $item)
+		{
+			$buff[$item->experience_type_id] = $item->name;
+		}
+		return $buff;
+	}
 }

@@ -7,6 +7,7 @@
     </div>
     <div class="container">
         <div class="row" style="margin-left: 0; margin-right: 0;">
+            <a href="{{ route('vacancy.add') }}" style="padding: 10px;">Добавить вакагсию</a>
             <div class="headervakanse">
                 Всего: {{$vacancies->count()}} вакансий.
             </div>

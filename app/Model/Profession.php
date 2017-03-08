@@ -38,4 +38,14 @@ class Profession extends Model
     {
     	return $this->belongsTo('App\Model\Category', 'category_id');
     }
+
+	public function getForm($category_id)
+	{
+		$buff = [];
+		foreach ($this->whereCategoryId($category_id)->get() as $profession)
+		{
+			$buff[$profession->profession_id] = $profession->name;
+		}
+		return $buff;
+	}
 }

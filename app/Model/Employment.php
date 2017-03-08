@@ -20,4 +20,14 @@ class Employment extends Model
     protected $primaryKey = 'employment_id';
 
     public $timestamps = false;
+
+    public function getForm()
+    {
+	    $buff = [];
+	    foreach ($this->get() as $item)
+	    {
+		    $buff[$item->employment_id] = $item->name;
+	    }
+	    return $buff;
+    }
 }
