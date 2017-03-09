@@ -67,6 +67,11 @@ Route::post('/vacancy/profession', [
 	'uses' => 'VacancyController@getProfession'
 ]);
 
+Route::post('/vacancy/preview', [
+	'as' => 'vacancy.preview',
+	'uses' => 'VacancyController@preview'
+]);
+
 
 
 

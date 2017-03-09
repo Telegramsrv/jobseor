@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="select_category select_vac_country">
-                                        {!! Form::select('country_id', $countries, $vacancy->country_id) !!}
+                                        {!! Form::select('country_id', $countries, $vacancy->country_id, [ 'id' => 'select_country']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                     <p>Образование<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('education_type_id', $education_types, $vacancy->education_type_id, [ 'class' => 'border_illusion']) !!}
+                                    {!! Form::select('education_type_id', $education_types, $vacancy->education_type_id, [ 'class' => 'border_illusion', 'id' => 'select_education']) !!}
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                     <p>Занятость<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('employment_id', $employments, $vacancy->employment_id, [ 'class' => 'border_illusion']) !!}
+                                    {!! Form::select('employment_id', $employments, $vacancy->employment_id, [ 'class' => 'border_illusion', 'id' => 'select_employment']) !!}
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                     <div>
                                         {!! Form::number('salary', $vacancy->salary, [ 'class' => 'border_illusion']) !!}
 
-                                        {!! Form::select('currency_id', $currencies, $vacancy->currency_id,  [ 'class' => 'border_illusion']) !!}
+                                        {!! Form::select('currency_id', $currencies, $vacancy->currency_id,  [ 'class' => 'border_illusion', 'id' => 'select_currency']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                     <p>Опыт работы<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('experience_type_id', $experience_types, $vacancy->experience_type_id, [ 'class' => 'border_illusion']) !!}
+                                    {!! Form::select('experience_type_id', $experience_types, $vacancy->experience_type_id, [ 'class' => 'border_illusion', 'id' => 'select_experience']) !!}
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,45 @@
 
         function preview()
         {
-            //TODO
+            $('.preview').remove();
+            var title = $("input[name*='title']").val();
+            var salary = $("input[name*='salary']").val();
+            var category_id = $("#select_category").val();
+            var profession_id = $("#select_profession").val();
+            var country_id = $("#select_country").val();
+            var city = $("input[name*='city']").val();
+            var education_type_id = $("#select_education").val();
+            var employment_id = $("#select_employment").val();
+            var currency_id = $("#select_currency").val();
+            var experience_type_id = $("#select_experience").val();
+            var age_min = $("input[name*='age_min']").val();
+            var age_max = $("input[name*='age_max']").val();
+            var description = $("textarea").val();
+
+            $.ajax({
+                url: '{{ route("vacancy.preview") }}',
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    title: title,
+                    salary: salary,
+                    category_id: category_id,
+                    profession_id: profession_id,
+                    country_id: country_id,
+                    city: city,
+                    education_type_id: education_type_id,
+                    employment_id: employment_id,
+                    currency_id: currency_id,
+                    exepience_type_id: experience_type_id,
+                    age_min: age_min,
+                    age_max: age_max,
+                    description: description
+                },
+                success: function (data) {
+                    $('.add_vac').after(data);
+                    $(window).scrollTop($('.preview').offset().top);//speed?
+                }
+            });
         }
 
     </script>

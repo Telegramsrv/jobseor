@@ -1,1 +1,1 @@
-{!! Form::select('profession_id', $professions) !!}
+{!! Form::select('profession_id', $professions, '', [ 'class' => 'border_illusion', 'id' => 'select_profession']) !!}
