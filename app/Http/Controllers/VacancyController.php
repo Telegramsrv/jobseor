@@ -31,8 +31,15 @@ class VacancyController extends Controller
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 
-	public function addNew(Request $request, Category $category, Country $country, EducationType $educationType, Employment $employment, Currency $currency, ExperienceType $experienceType)
-	{
+	public function addNew(
+		Request $request,
+		Category $category,
+		Country $country,
+		EducationType $educationType,
+		Employment $employment,
+		Currency $currency,
+		ExperienceType $experienceType
+	) {
 		$this->data['vacancy'] = new Vacancy();
 		$this->data['categories'] = $category->getForm();
 		$this->data['countries'] = $country->getForm();
@@ -40,6 +47,7 @@ class VacancyController extends Controller
 		$this->data['employments'] = $employment->getForm();
 		$this->data['currencies'] = $currency->getForm();
 		$this->data['experience_types'] = $experienceType->getForm();
+
 		return view('user.company.addvacancy', $this->data);
 	}
 
@@ -48,7 +56,7 @@ class VacancyController extends Controller
 	 * @param Profession $profession
 	 */
 
-	public function getProfession(Request $request,Profession $profession)
+	public function getProfession(Request $request, Profession $profession)
 	{
 		if ($request->ajax()) {
 			$this->data['professions'] = $profession->getForm($request->category_id);
@@ -59,24 +67,40 @@ class VacancyController extends Controller
 
 	/**
 	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 
 	public function createNew(Request $request)
 	{
+		$vacancy = new Vacancy();
 
+		$request['user_id'] = $request->user()->user_id;
+		foreach ($vacancy->getFillable() as $array_key) {
+			if (!array_key_exists($array_key, $request->toArray())) {
+				dd(504);//TODO error page
+			}
+		}
+
+		Vacancy::create($request->toArray());
+		
+		return redirect(route('user.notepad'));
 	}
 
 	public function preview(Request $request)
 	{
-		if ($request->ajax())
-		{
+		if ($request->ajax()) {
 			$this->data['vacancy'] = $request;
 			$this->data['country'] = Country::whereCountryId($request->country_id)->firstOrFail()->name;
 			$this->data['category'] = Category::whereCategoryId($request->category_id)->firstOrFail()->name;
 			$this->data['profession'] = Profession::whereProfessionId($request->profession_id)->firstOrFail()->name;
 			$this->data['currency'] = Currency::whereCurrencyId($request->currency_id)->firstOrFail()->name;
-			$this->data['experience_type'] = ExperienceType::whereExperienceTypeId($request->exepience_type_id)->firstOrFail()->name;
-			$this->data['education_type'] = EducationType::whereEducationTypeId($request->education_type_id)->firstOrFail()->name;
+			$this->data['experience_type'] = ExperienceType::whereExperienceTypeId(
+				$request->exepience_type_id
+			)->firstOrFail()->name;
+			$this->data['education_type'] = EducationType::whereEducationTypeId(
+				$request->education_type_id
+			)->firstOrFail()->name;
 			$this->data['employment'] = Employment::whereEmploymentId($request->employment_id)->firstOrFail()->name;
 			$this->data['user'] = $request->user();
 

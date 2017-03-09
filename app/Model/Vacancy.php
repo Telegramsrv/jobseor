@@ -61,6 +61,11 @@ class Vacancy extends Model
 {
 	protected $primaryKey = 'vacancy_id';
 
+	protected $fillable = [
+		'user_id', 'title', 'category_id', 'profession_id', 'country_id', 'city', 'education_type_id', 'employment_id',
+	    'salary', 'currency_id', 'experience_type_id', 'age_min', 'age_max', 'description'
+	];
+
 	public function user()
 	{
 		return $this->belongsTo('App\Model\User', 'user_id');
