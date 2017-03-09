@@ -83,9 +83,13 @@ class VacancyController extends Controller
 		}
 
 		Vacancy::create($request->toArray());
-		
+
 		return redirect(route('user.notepad'));
 	}
+
+	/**
+	 * @param Request $request
+	 */
 
 	public function preview(Request $request)
 	{
@@ -106,5 +110,70 @@ class VacancyController extends Controller
 
 			echo view('vacancy.preview', $this->data);
 		}
+	}
+
+	/**
+	 * @param                $id
+	 * @param Request        $request
+	 * @param Category       $category
+	 * @param Country        $country
+	 * @param EducationType  $educationType
+	 * @param Employment     $employment
+	 * @param Currency       $currency
+	 * @param ExperienceType $experienceType
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function edit(
+		$id,
+		Request $request,
+		Category $category,
+		Country $country,
+		EducationType $educationType,
+		Employment $employment,
+		Currency $currency,
+		ExperienceType $experienceType
+	) {
+		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
+		if ($vacancy->user_id != $request->user()->user_id) {
+			dd(504);//TODO add error page
+		}
+		$this->data['vacancy'] = $vacancy;
+
+		$this->data['categories'] = $category->getForm();
+		$this->data['countries'] = $country->getForm();
+		$this->data['education_types'] = $educationType->getForm();
+		$this->data['employments'] = $employment->getForm();
+		$this->data['currencies'] = $currency->getForm();
+		$this->data['experience_types'] = $experienceType->getForm();
+
+		return view('user.company.addvacancy', $this->data);
+	}
+
+	/**
+	 * @param Request $request
+	 * @param Vacancy $vacancy
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+
+	public function editPost( Request $request, Vacancy $vacancy)
+	{
+		$request['user_id'] = $request->user()->user_id;
+
+		foreach ( $vacancy->getFillable() as $array_key){
+			if ( !array_key_exists($array_key, $request->toArray())){
+				return redirect(route('user.notepad'));//TODO error page
+			}
+		}
+		$oldvacancy = Vacancy::whereVacancyId($request->vacancy_id)->firstOrFail();
+		if ($oldvacancy->user_id != $request->user()->user_id) {
+			dd(504);//TODO add error page
+		}
+		$oldvacancy->update($request->toArray());
+		$oldvacancy->save();
+
+		return redirect(route('user.notepad'));
 	}
 }

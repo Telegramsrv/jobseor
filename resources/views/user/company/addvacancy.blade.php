@@ -16,7 +16,12 @@
                 </div>
             </div>
             <div class="main_form new">
-                {!! Form::open([ 'route' => 'vacancy.add.post', 'method' => 'POST']) !!}
+                @if (empty($vacancy->title))
+                    {!! Form::open([ 'route' => 'vacancy.add.post', 'method' => 'POST']) !!}
+                @else
+                    {!! Form::open([ 'route' => 'vacancy.edit.post', 'method' => 'POST']) !!}
+                    {!! Form::hidden('vacancy_id', $vacancy->vacancy_id) !!}
+                @endif
                 <form id="form_for_all">
                     <div class="block">
                         <div class="info_vac">
@@ -204,7 +209,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
-                                {!! Form::submit('Добавить вакансию', [ 'class' => 'button_width']) !!}
+                                @if (empty($vacancy->title))
+                                    {!! Form::submit('Добавить вакансию', [ 'class' => 'button_width']) !!}
+                                    @else
+                                    {!! Form::submit('Изменить', [ 'class' => 'button_width']) !!}
+                                @endif
                                     {{--<button class="button_width" type="submit" onclick="window.location.href='/pay.php'"   form="form_for_all">Добавить вакансию</button>--}}
                             </div>
                         </div>

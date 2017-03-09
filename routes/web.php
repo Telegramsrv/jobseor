@@ -72,8 +72,15 @@ Route::post('/vacancy/preview', [
 	'uses' => 'VacancyController@preview'
 ]);
 
+Route::get('/vacancy/{id}/edit', [
+	'as' => 'vacancy.edit',
+	'uses' => 'VacancyController@edit'
+]);
 
-
+Route::post('/vacancy/edit', [
+	'as' => 'vacancy.edit.post',
+	'uses' => 'VacancyController@editPost'
+]);
 
 // SUMMARY
 

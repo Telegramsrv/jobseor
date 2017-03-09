@@ -12,15 +12,24 @@
                 Всего: {{$vacancies->count()}} вакансий.
             </div>
             @foreach($vacancies as $vacancy)
-            <div class="vakanceblock">
-                <div class="avatarvacanse">
-                    <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $vacancy->title }}">
+                <div class="vakanceblock">
+                    <div class="avatarvacanse">
+                        <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $vacancy->title }}">
+                    </div>
+                    <div class="col-md-10">
+                        <h2><a href="/rezume-blank.php">{{ $vacancy->title }}</a></h2>
+                        <p>{{ $user->name }}</p>
+                        <p>{{ $vacancy->employment->name }} занятость. Опыт работы
+                            : {{ $vacancy->experience_type->name }}. {{ $vacancy->education->name }} образование.
+                            • {{ str_limit($vacancy->description, 97) }}…</p>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="{{ route('vacancy.edit', ['id' => $vacancy->vacancy_id]) }}"> Редактировать</a>
+                        {{--{!! Form::open([ 'route' => [ 'vacancy.remove', $summary->summary_id], 'method' => 'POST']) !!}--}}
+                        {{--{!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}--}}
+                        {{--{!! Form::close() !!}--}}
+                    </div>
                 </div>
-                <h2><a href="/rezume-blank.php">{{ $vacancy->title }}</a></h2>
-                <p>{{ $user->name }}</p>
-                <p>{{ $vacancy->employment->name }} занятость. Опыт работы : {{ $vacancy->experience_type->name }}. {{ $vacancy->education->name }} образование.
-                    • {{ str_limit($vacancy->description, 97) }}…</p>
-            </div>
             @endforeach
             <div class="col-md-12">
             </div>
