@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserWatchedVacancy extends Model
 {
+	protected $fillable = [
+		'user_id', 'vacancy_id'
+	];
+
     public function user()
     {
     	return $this->belongsTo('App\Model\User', 'user_id');

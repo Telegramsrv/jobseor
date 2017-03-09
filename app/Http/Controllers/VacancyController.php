@@ -9,6 +9,7 @@ use App\Model\EducationType;
 use App\Model\Employment;
 use App\Model\ExperienceType;
 use App\Model\Profession;
+use App\Model\UserWatchedVacancy;
 use App\Model\Vacancy;
 use Illuminate\Http\Request;
 
@@ -158,12 +159,12 @@ class VacancyController extends Controller
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 
-	public function editPost( Request $request, Vacancy $vacancy)
+	public function editPost(Request $request, Vacancy $vacancy)
 	{
 		$request['user_id'] = $request->user()->user_id;
 
-		foreach ( $vacancy->getFillable() as $array_key){
-			if ( !array_key_exists($array_key, $request->toArray())){
+		foreach ($vacancy->getFillable() as $array_key) {
+			if (!array_key_exists($array_key, $request->toArray())) {
 				return redirect(route('user.notepad'));//TODO error page
 			}
 		}
@@ -175,5 +176,24 @@ class VacancyController extends Controller
 		$oldvacancy->save();
 
 		return redirect(route('user.notepad'));
+	}
+
+	public function view($id, Request $request)
+	{
+		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
+		$this->data['vacancy'] = $vacancy;
+		$this->data['user'] = $vacancy->user;
+		if ($request->user()->user_id != $vacancy->user_id) {
+			$vacancy_view = UserWatchedVacancy::whereUserId($request->user()->user_id)
+			                                  ->firstOrCreate(
+				                                  [
+					                                  'user_id'    => $request->user()->user_id,
+					                                  'vacancy_id' => $vacancy->vacancy_id
+				                                  ]
+			                                  );
+			$vacancy_view->save();
+		}
+
+		return view('vacancy.index', $this->data);
 	}
 }

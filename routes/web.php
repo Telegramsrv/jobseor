@@ -82,6 +82,10 @@ Route::post('/vacancy/edit', [
 	'uses' => 'VacancyController@editPost'
 ]);
 
+Route::get('/vacancy/{id}', [
+	'as' => 'vacancy.view',
+	'uses' => 'VacancyController@view'
+]);
 // SUMMARY
 
 Route::get('/summary/add', [

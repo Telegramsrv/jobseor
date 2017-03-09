@@ -48,9 +48,6 @@
                                     <p>Спецыальность {{ $profession }}</p>
                                 </div>
                                 <div class="info_o">
-                                    <p>Спецыальность {{ $profession }}</p>
-                                </div>
-                                <div class="info_o">
                                     <p>Зарплата от {{ $vacancy->salary }} {{ $currency }}</p>
                                 </div>
                                 <div class="info_o">

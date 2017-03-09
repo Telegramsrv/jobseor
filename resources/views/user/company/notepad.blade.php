@@ -17,7 +17,7 @@
                         <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $vacancy->title }}">
                     </div>
                     <div class="col-md-10">
-                        <h2><a href="/rezume-blank.php">{{ $vacancy->title }}</a></h2>
+                        <h2><a href="{{ route('vacancy.view', [ 'id' => $vacancy->vacancy_id]) }}">{{ $vacancy->title }}</a></h2>
                         <p>{{ $user->name }}</p>
                         <p>{{ $vacancy->employment->name }} занятость. Опыт работы
                             : {{ $vacancy->experience_type->name }}. {{ $vacancy->education->name }} образование.
