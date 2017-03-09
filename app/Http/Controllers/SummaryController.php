@@ -40,25 +40,16 @@ class SummaryController extends Controller
 	public function createNew(Request $request)
 	{
 		$summary = new Summary();
-		if (isset($request->category_id) && isset($request->title) && isset($request->salary) && isset($request->currency_id) && isset($request->information)) {
-			$summary->user_id = $request->user()->user_id;
-			$summary->title = $request->title;
-			$summary->salary = $request->salary;
-			if (Category::whereCategoryId($request->category_id)->count()) {
-				$summary->category_id = $request->category_id;
+		$request['user_id'] = $request->user()->user_id;
+		foreach ( $summary->getFillable() as $array_key){
+			if ( !array_key_exists($array_key, $request->toArray())){
+				return redirect(route('summary.add'));//TODO error page
 			}
-
-			if (Currency::whereCurrencyId($request->currency_id)->count()) {
-				$summary->currency_id = $request->currency_id;
-			}
-			$summary->information = $request->information;
-			$summary->save();
-
-			return redirect(route('user.notepad'));
 		}
-		else {
-			return redirect(route('summary.add'));
-		}
+
+		Summary::create($request->toArray());
+
+		return redirect(route('user.notepad'));
 	}
 
 	/**

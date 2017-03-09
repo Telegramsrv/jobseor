@@ -33,6 +33,10 @@ class Summary extends Model
 {
     protected $primaryKey = 'summary_id';
 
+    protected $fillable = [
+        'user_id', 'category_id', 'title', 'salary', 'currency_id', 'information'
+    ];
+
     public function user()
     {
     	return $this->belongsTo('App\Model\User','user_id');
