@@ -37,9 +37,8 @@ class SummaryController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function createNew(Request $request)
+	public function createNew(Request $request, Summary $summary)
 	{
-		$summary = new Summary();
 		$request['user_id'] = $request->user()->user_id;
 		foreach ( $summary->getFillable() as $array_key){
 			if ( !array_key_exists($array_key, $request->toArray())){
@@ -97,28 +96,21 @@ class SummaryController extends Controller
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 
-	public function editPost(Request $request)
+	public function editPost(Request $request, Summary $summary)
 	{
-		$summary = Summary::whereSummaryId($request->summary_id)->firstOrFail();
-		if ($summary->user_id != $request->user()->user_id) {
+		$request['user_id'] = $request->user()->user_id;
+
+		foreach ( $summary->getFillable() as $array_key){
+			if ( !array_key_exists($array_key, $request->toArray())){
+				return redirect(route('user.notepad'));//TODO error page
+			}
+		}
+		$oldsummary = Summary::whereSummaryId($request->summary_id)->firstOrFail();
+		if ($oldsummary->user_id != $request->user()->user_id) {
 			dd(504);//TODO add error page
 		}
-		if (isset($request->category_id) && isset($request->title) && isset($request->salary) && isset($request->currency_id) && isset($request->information)) {
-			$summary->title = $request->title;
-
-			$summary->information = $request->information;
-
-			if (Category::whereCategoryId($request->category_id)->count()) {
-				$summary->category_id = $request->category_id;
-			}
-
-			if (Currency::whereCurrencyId($request->currency_id)->count()) {
-				$summary->currency_id = $request->currency_id;
-			}
-
-			$summary->salary = $request->salary;
-			$summary->save();
-		}
+		$oldsummary->update($request->toArray());
+		$oldsummary->save();
 
 		return redirect(route('user.notepad'));
 	}
