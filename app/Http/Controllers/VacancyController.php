@@ -178,6 +178,13 @@ class VacancyController extends Controller
 		return redirect(route('user.notepad'));
 	}
 
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
 	public function view($id, Request $request)
 	{
 		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
@@ -195,5 +202,16 @@ class VacancyController extends Controller
 		}
 
 		return view('vacancy.index', $this->data);
+	}
+
+	public function remove($id, Request $request)
+	{
+		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
+		if ($vacancy->user_id != $request->user()->user_id) {
+			dd(504);//TODO add error page
+		}
+		$vacancy->delete();
+
+		return redirect(route('user.notepad'));
 	}
 }

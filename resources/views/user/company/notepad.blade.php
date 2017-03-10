@@ -25,9 +25,9 @@
                     </div>
                     <div class="col-md-2 pull-right">
                         <a href="{{ route('vacancy.edit', ['id' => $vacancy->vacancy_id]) }}"> Редактировать</a>
-                        {{--{!! Form::open([ 'route' => [ 'vacancy.remove', $summary->summary_id], 'method' => 'POST']) !!}--}}
-                        {{--{!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}--}}
-                        {{--{!! Form::close() !!}--}}
+                        {!! Form::open([ 'route' => [ 'vacancy.remove', $vacancy->vacancy_id], 'method' => 'POST']) !!}
+                        {!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             @endforeach

@@ -86,6 +86,11 @@ Route::get('/vacancy/{id}', [
 	'as' => 'vacancy.view',
 	'uses' => 'VacancyController@view'
 ]);
+
+Route::post('/vacancy/{id}/delete', [
+	'as' => 'vacancy.remove',
+	'uses' => 'VacancyController@remove'
+]);
 // SUMMARY
 
 Route::get('/summary/add', [
