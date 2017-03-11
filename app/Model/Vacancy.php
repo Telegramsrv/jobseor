@@ -105,4 +105,9 @@ class Vacancy extends Model
 	{
 		return $this->belongsTo('App\Model\EducationType', 'education_type_id');
 	}
+
+	public function viewers()
+	{
+		return $this->hasMany('App\Model\UserWatchedVacancy', 'vacancy_id', 'vacancy_id');
+	}
 }

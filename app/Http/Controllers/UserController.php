@@ -239,6 +239,7 @@ class UserController extends Controller
 		$this->data['user'] = $request->user();
 		if ($request->user()->role_id == 2) {
 			$this->data['vacancies'] = $request->user()->company->vacancies;
+
 			return view('vacancy.viewers', $this->data);
 		}
 
