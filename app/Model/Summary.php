@@ -46,4 +46,9 @@ class Summary extends Model
     {
     	return $this->belongsTo('App\Model\Currency','currency_id');
     }
+
+	public function viewers()
+	{
+		return $this->hasMany('App\Model\UserWatchedSummary', 'summary_id', 'summary_id');
+	}
 }

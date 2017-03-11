@@ -227,4 +227,25 @@ class UserController extends Controller
 			return view('user.applicant.index_notepad', $this->data);
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function viewers(Request $request)
+	{
+		$this->data['user'] = $request->user();
+		if ($request->user()->role_id == 2) {
+			$this->data['vacancies'] = $request->user()->company->vacancies;
+			return view('vacancy.viewers', $this->data);
+		}
+
+		if ($request->user()->role_id == 3) {
+			$this->data['summaries'] = $request->user()->applicant->summaries;
+
+			return view('summary.viewers', $this->data);
+		}
+	}
 }

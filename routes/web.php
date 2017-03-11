@@ -139,6 +139,10 @@ Route::get('/notepad', [
 	'uses' =>   'UserController@notepad'
 ]);
 
+Route::get('/notepad/viewers', [
+	'as' => 'user.notepad.viewers',
+	'uses' =>   'UserController@viewers'
+]);
 
 Route::get('/settings', [
 	'as' => 'user.edit',
