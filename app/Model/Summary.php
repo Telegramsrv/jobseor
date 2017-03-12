@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $category_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCategoryId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedSummary[] $viewers
  */
 class Summary extends Model
 {

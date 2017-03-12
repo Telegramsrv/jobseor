@@ -51,11 +51,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\ExperienceType $experiencetype
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereEmploymentId($value)
  * @property-read \App\Model\ExperienceType $experience_type
- * @property-read \App\Model\Subcategory $subcategory
  * @property-read \App\Model\EducationType $education
  * @property-read \App\Model\Profession $profession
  * @property int $profession_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereProfessionId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedVacancy[] $viewers
  */
 class Vacancy extends Model
 {

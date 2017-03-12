@@ -190,7 +190,7 @@ class VacancyController extends Controller
 		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
 		$this->data['vacancy'] = $vacancy;
 		$this->data['user'] = $vacancy->user;
-		if ($request->user()->user_id != $vacancy->user_id) {
+		if ($request->user()->user_id != $vacancy->user_id && $request->user()->role_id != 1) {
 			$vacancy_view = UserWatchedVacancy::whereUserId($request->user()->user_id)
 			                                  ->firstOrCreate(
 				                                  [

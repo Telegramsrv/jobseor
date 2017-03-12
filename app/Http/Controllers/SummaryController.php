@@ -40,8 +40,8 @@ class SummaryController extends Controller
 	public function createNew(Request $request, Summary $summary)
 	{
 		$request['user_id'] = $request->user()->user_id;
-		foreach ( $summary->getFillable() as $array_key){
-			if ( !array_key_exists($array_key, $request->toArray())){
+		foreach ($summary->getFillable() as $array_key) {
+			if (!array_key_exists($array_key, $request->toArray())) {
 				return redirect(route('summary.add'));//TODO error page
 			}
 		}
@@ -100,8 +100,8 @@ class SummaryController extends Controller
 	{
 		$request['user_id'] = $request->user()->user_id;
 
-		foreach ( $summary->getFillable() as $array_key){
-			if ( !array_key_exists($array_key, $request->toArray())){
+		foreach ($summary->getFillable() as $array_key) {
+			if (!array_key_exists($array_key, $request->toArray())) {
 				return redirect(route('user.notepad'));//TODO error page
 			}
 		}
@@ -145,14 +145,17 @@ class SummaryController extends Controller
 		$summary = Summary::whereSummaryId($id)->firstOrFail();
 		$this->data['summary'] = $summary;
 		$this->data['user'] = $summary->user;
-		if ($request->user()->user_id != $summary->user_id) {
+		if ($request->user()->user_id != $summary->user_id && $request->user()->role_id != 1) {
 			$summary_view = UserWatchedSummary::whereUserId($request->user()->user_id)
-				->firstOrCreate([
-					'user_id' => $request->user()->user_id,
-					'summary_id' => $summary->summary_id
-				]);
+			                                  ->firstOrCreate(
+				                                  [
+					                                  'user_id'    => $request->user()->user_id,
+					                                  'summary_id' => $summary->summary_id
+				                                  ]
+			                                  );
 			$summary_view->save();
 		}
+
 		return view('summary.index', $this->data);
 	}
 }
