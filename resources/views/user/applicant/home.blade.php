@@ -11,6 +11,8 @@
             <p style="float: right; ">
                 <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
                 <a style="cursor: pointer; padding: 10px;">Мои отклики</a>
+                <a href="{{ route('user.notepad.history') }}" style="cursor: pointer; padding: 10px;">История</a>
+                <a href="{{ route('user.notepad.viewers') }}" style="cursor: pointer; padding: 10px;">Просмотры резюме</a>
                 <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои резюме</a>
                 <a href="{{ route('user.edit') }}" style="cursor: pointer; padding: 10px;">Настройки</a>
             </p>

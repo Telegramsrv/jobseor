@@ -144,6 +144,12 @@ Route::get('/notepad/viewers', [
 	'uses' =>   'UserController@viewers'
 ]);
 
+Route::get('/notepad/history', [
+	'as' => 'user.notepad.history',
+	'uses' =>   'UserController@history'
+]);
+
+
 Route::get('/settings', [
 	'as' => 'user.edit',
 	'uses' =>   'UserController@edit'

@@ -9,7 +9,7 @@
                     <div class="info_employer">
                         <div class="clearfix">
                             @foreach($vacancies as $vacancy)
-                                @foreach($vacancy->viewers as $view)
+                                @foreach($vacancy->viewers()->orderBy('updated_at','desc')->get() as $view)
                                     <div class="row container">
                                         <div class="col-md-8 pull-left">
                                             <h4><a href="{{ route('user.index', ['id' => $view->user_id]) }}"> {{ $view->user->name }}</a></h4>

@@ -7,6 +7,8 @@ use App\Model\Country;
 use App\Model\Education;
 use App\Model\EducationType;
 use App\Model\User;
+use App\Model\UserWatchedSummary;
+use App\Model\UserWatchedVacancy;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -247,6 +249,27 @@ class UserController extends Controller
 			$this->data['summaries'] = $request->user()->applicant->summaries;
 
 			return view('summary.viewers', $this->data);
+		}
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function history(Request $request)
+	{
+		if ($request->user()->role_id == 2) {
+			$this->data['history'] = UserWatchedSummary::whereUserId($request->user()->user_id)->get();
+
+			return view('summary.history', $this->data);
+		}
+
+		if ($request->user()->role_id == 3) {
+			$this->data['history'] = UserWatchedVacancy::whereUserId($request->user()->user_id)->get();
+
+			return view('vacancy.history', $this->data);
 		}
 	}
 }
