@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.12 on 2017-03-13.
+ * Generated for Laravel 5.4.15 on 2017-03-13.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -9792,6 +9792,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Set the given disk instance.
+         *
+         * @param string $name
+         * @param mixed $disk
+         * @return void 
+         * @static 
+         */
+        public static function set($name, $disk)
+        {
+            \Illuminate\Filesystem\FilesystemManager::set($name, $disk);
+        }
+        
+        /**
          * Get the default driver name.
          *
          * @return string 
@@ -9824,6 +9837,30 @@ namespace Illuminate\Support\Facades {
         public static function extend($driver, $callback)
         {
             return \Illuminate\Filesystem\FilesystemManager::extend($driver, $callback);
+        }
+        
+        /**
+         * Assert that the given file exists.
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */
+        public static function assertExists($path)
+        {
+            \Illuminate\Filesystem\FilesystemAdapter::assertExists($path);
+        }
+        
+        /**
+         * Assert that the given file does not exist.
+         *
+         * @param string $path
+         * @return void 
+         * @static 
+         */
+        public static function assertMissing($path)
+        {
+            \Illuminate\Filesystem\FilesystemAdapter::assertMissing($path);
         }
         
         /**
@@ -13462,13 +13499,14 @@ namespace KodiCMS\Assets\Facades {
          *
          * @param bool $value
          * @param callable $callback
+         * @param callable $default
          * @return mixed 
          * @static 
          */
-        public static function when($value, $callback)
+        public static function when($value, $callback, $default = null)
         {
             //Method inherited from \Illuminate\Support\Collection            
-            return \KodiCMS\Assets\PackageManager::when($value, $callback);
+            return \KodiCMS\Assets\PackageManager::when($value, $callback, $default);
         }
         
         /**
@@ -13527,6 +13565,35 @@ namespace KodiCMS\Assets\Facades {
         {
             //Method inherited from \Illuminate\Support\Collection            
             return \KodiCMS\Assets\PackageManager::whereInStrict($key, $values);
+        }
+        
+        /**
+         * Filter items by the given key value pair.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @param bool $strict
+         * @return static 
+         * @static 
+         */
+        public static function whereNotIn($key, $values, $strict = false)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+            return \KodiCMS\Assets\PackageManager::whereNotIn($key, $values, $strict);
+        }
+        
+        /**
+         * Filter items by the given key value pair using strict comparison.
+         *
+         * @param string $key
+         * @param mixed $values
+         * @return static 
+         * @static 
+         */
+        public static function whereNotInStrict($key, $values)
+        {
+            //Method inherited from \Illuminate\Support\Collection            
+            return \KodiCMS\Assets\PackageManager::whereNotInStrict($key, $values);
         }
         
         /**
@@ -14903,9 +14970,53 @@ namespace SleepingOwl\Admin\Facades {
             return \SleepingOwl\Admin\Admin::view($content, $title);
         }
         
+        /**
+         * Получение массива глобальных переменных для JavaScript.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function scriptVariables()
+        {
+            return \SleepingOwl\Admin\Admin::scriptVariables();
+        }
+        
     }         
 
     class Template {
+        
+        /**
+         * Получение названия текущего шаблона.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function name()
+        {
+            return \SleepingOwl\Admin\Templates\TemplateDefault::name();
+        }
+        
+        /**
+         * Версия темы.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function version()
+        {
+            return \SleepingOwl\Admin\Templates\TemplateDefault::version();
+        }
+        
+        /**
+         * URL проекта.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function homepage()
+        {
+            return \SleepingOwl\Admin\Templates\TemplateDefault::homepage();
+        }
         
         /**
          * 
@@ -14920,39 +15031,6 @@ namespace SleepingOwl\Admin\Facades {
         /**
          * 
          *
-         * @return \SleepingOwl\Admin\Templates\Manager 
-         * @static 
-         */
-        public static function breadcrumbs()
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::breadcrumbs();
-        }
-        
-        /**
-         * 
-         *
-         * @return \SleepingOwl\Admin\Templates\MetaInterface 
-         * @static 
-         */
-        public static function meta()
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::meta();
-        }
-        
-        /**
-         * 
-         *
-         * @return \SleepingOwl\Admin\Templates\NavigationInterface 
-         * @static 
-         */
-        public static function navigation()
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::navigation();
-        }
-        
-        /**
-         * 
-         *
          * @return string 
          * @static 
          */
@@ -14962,53 +15040,14 @@ namespace SleepingOwl\Admin\Facades {
         }
         
         /**
-         * 
-         *
-         * @param string $view
-         * @return string 
-         * @static 
-         */
-        public static function getViewPath($view)
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::getViewPath($view);
-        }
-        
-        /**
-         * 
-         *
-         * @param string|\Illuminate\View\View $view
-         * @param array $data
-         * @param array $mergeData
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View 
-         * @static 
-         */
-        public static function view($view, $data = array(), $mergeData = array())
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::view($view, $data, $mergeData);
-        }
-        
-        /**
-         * 
+         * Получение относительного пути хранения asset файлов.
          *
          * @return string 
          * @static 
          */
-        public static function getTitle()
+        public static function assetDir()
         {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::getTitle();
-        }
-        
-        /**
-         * 
-         *
-         * @param string $title
-         * @param string $separator
-         * @return string 
-         * @static 
-         */
-        public static function makeTitle($title, $separator = '|')
-        {
-            return \SleepingOwl\Admin\Templates\TemplateDefault::makeTitle($title, $separator);
+            return \SleepingOwl\Admin\Templates\TemplateDefault::assetDir();
         }
         
         /**
@@ -15034,6 +15073,121 @@ namespace SleepingOwl\Admin\Facades {
         }
         
         /**
+         * Название с указанием версии.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function longName()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::longName();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Templates\Breadcrumbs 
+         * @static 
+         */
+        public static function breadcrumbs()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::breadcrumbs();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Templates\MetaInterface 
+         * @static 
+         */
+        public static function meta()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::meta();
+        }
+        
+        /**
+         * 
+         *
+         * @return \SleepingOwl\Admin\Templates\NavigationInterface 
+         * @static 
+         */
+        public static function navigation()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::navigation();
+        }
+        
+        /**
+         * Генерация относительно пути до asset файлов для текущей темы.
+         *
+         * @param string $path относительный путь до файла, например `js/app.js`
+         * @return string 
+         * @static 
+         */
+        public static function assetPath($path = null)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::assetPath($path);
+        }
+        
+        /**
+         * 
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getTitle()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::getTitle();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @param string $separator
+         * @return string 
+         * @static 
+         */
+        public static function makeTitle($title, $separator = '|')
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::makeTitle($title, $separator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $view
+         * @return string 
+         * @static 
+         */
+        public static function getViewPath($view)
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::getViewPath($view);
+        }
+        
+        /**
+         * 
+         *
+         * @param string|\Illuminate\View\View $view
+         * @param array $data
+         * @param array $mergeData
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View 
+         * @static 
+         */
+        public static function view($view, $data = array(), $mergeData = array())
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::view($view, $data, $mergeData);
+        }
+        
+        /**
          * 
          *
          * @param string $key
@@ -15042,6 +15196,7 @@ namespace SleepingOwl\Admin\Facades {
          */
         public static function renderBreadcrumbs($key)
         {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
             return \SleepingOwl\Admin\Templates\TemplateDefault::renderBreadcrumbs($key);
         }
         
@@ -15053,6 +15208,7 @@ namespace SleepingOwl\Admin\Facades {
          */
         public static function renderNavigation()
         {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
             return \SleepingOwl\Admin\Templates\TemplateDefault::renderNavigation();
         }
         
@@ -15065,7 +15221,19 @@ namespace SleepingOwl\Admin\Facades {
          */
         public static function renderMeta($title)
         {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
             return \SleepingOwl\Admin\Templates\TemplateDefault::renderMeta($title);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function toArray()
+        {
+            //Method inherited from \SleepingOwl\Admin\Templates\Template            
+            return \SleepingOwl\Admin\Templates\TemplateDefault::toArray();
         }
         
     }         

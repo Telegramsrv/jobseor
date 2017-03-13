@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-02-28.
+    * Generated on 2017-03-13.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -28,6 +28,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -50,7 +51,6 @@ namespace PHPSTORM_META {
             'KodiComponents\Navigation\Contracts\BadgeInterface' instanceof \SleepingOwl\Admin\Navigation\Badge,
             'sleeping_owl.navigation' instanceof \SleepingOwl\Admin\Navigation,
             'sleeping_owl.widgets' instanceof \SleepingOwl\Admin\Widgets\WidgetsRegistry,
-            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'sleeping_owl.message' instanceof \SleepingOwl\Admin\Widgets\Messages\MessageStack,
@@ -61,6 +61,7 @@ namespace PHPSTORM_META {
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'html' instanceof \Collective\Html\HtmlBuilder,
             'form' instanceof \Collective\Html\FormBuilder,
+            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -164,6 +165,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -186,7 +188,6 @@ namespace PHPSTORM_META {
             'KodiComponents\Navigation\Contracts\BadgeInterface' instanceof \SleepingOwl\Admin\Navigation\Badge,
             'sleeping_owl.navigation' instanceof \SleepingOwl\Admin\Navigation,
             'sleeping_owl.widgets' instanceof \SleepingOwl\Admin\Widgets\WidgetsRegistry,
-            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'sleeping_owl.message' instanceof \SleepingOwl\Admin\Widgets\Messages\MessageStack,
@@ -197,6 +198,7 @@ namespace PHPSTORM_META {
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'html' instanceof \Collective\Html\HtmlBuilder,
             'form' instanceof \Collective\Html\FormBuilder,
+            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -300,6 +302,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -322,7 +325,6 @@ namespace PHPSTORM_META {
             'KodiComponents\Navigation\Contracts\BadgeInterface' instanceof \SleepingOwl\Admin\Navigation\Badge,
             'sleeping_owl.navigation' instanceof \SleepingOwl\Admin\Navigation,
             'sleeping_owl.widgets' instanceof \SleepingOwl\Admin\Widgets\WidgetsRegistry,
-            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'sleeping_owl.message' instanceof \SleepingOwl\Admin\Widgets\Messages\MessageStack,
@@ -333,6 +335,7 @@ namespace PHPSTORM_META {
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'html' instanceof \Collective\Html\HtmlBuilder,
             'form' instanceof \Collective\Html\FormBuilder,
+            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -436,6 +439,7 @@ namespace PHPSTORM_META {
             'db' instanceof \Illuminate\Database\DatabaseManager,
             'db.connection' instanceof \Illuminate\Database\MySqlConnection,
             'Illuminate\Contracts\Queue\EntityResolver' instanceof \Illuminate\Database\Eloquent\QueueEntityResolver,
+            'encrypter' instanceof \Illuminate\Encryption\Encrypter,
             'files' instanceof \Illuminate\Filesystem\Filesystem,
             'filesystem' instanceof \Illuminate\Filesystem\FilesystemManager,
             'filesystem.disk' instanceof \Illuminate\Filesystem\FilesystemAdapter,
@@ -458,7 +462,6 @@ namespace PHPSTORM_META {
             'KodiComponents\Navigation\Contracts\BadgeInterface' instanceof \SleepingOwl\Admin\Navigation\Badge,
             'sleeping_owl.navigation' instanceof \SleepingOwl\Admin\Navigation,
             'sleeping_owl.widgets' instanceof \SleepingOwl\Admin\Widgets\WidgetsRegistry,
-            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'sleeping_owl.message' instanceof \SleepingOwl\Admin\Widgets\Messages\MessageStack,
@@ -469,6 +472,7 @@ namespace PHPSTORM_META {
             'memcached.connector' instanceof \Illuminate\Cache\MemcachedConnector,
             'html' instanceof \Collective\Html\HtmlBuilder,
             'form' instanceof \Collective\Html\FormBuilder,
+            'sleeping_owl.breadcrumbs' instanceof \SleepingOwl\Admin\Templates\Breadcrumbs,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Contracts\Broadcasting\Broadcaster' instanceof \Illuminate\Broadcasting\Broadcasters\LogBroadcaster,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
