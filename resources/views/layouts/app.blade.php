@@ -63,7 +63,6 @@
     </div>
   </header>
         @yield('content')
-    </div>
 <footer>
           <div class="footer_logo">
             <a href="">

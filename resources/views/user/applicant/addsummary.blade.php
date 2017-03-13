@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
-    <div class="full-width_blue-background">
-        <div class="container" id="breadcumps">
-            <a href="http://jobseor.com/">Главная</a> -&gt; Добавить резюме
-        </div>
-    </div>
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Добавить резюме
+@endsection
+
+@section('home_content')
     <div class="add_vac">
         <div class="container">
             <div class="main_form new">

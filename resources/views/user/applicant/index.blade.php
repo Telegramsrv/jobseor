@@ -1,5 +1,10 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.home')
+
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Страница пользователя
+@endsection
+
+@section('home_content')
     <div class="container">
         <h3>Страница соискателя</h3>
     <div id="rezumecenter" class="rezumeblock">

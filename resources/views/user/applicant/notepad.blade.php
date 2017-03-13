@@ -1,11 +1,10 @@
-@extends('layouts.app')
-@section('content')
-    <div class="full-width_blue-background">
-        <div class="container" id="breadcumps">
-            <a href="/">Главная</a> -&gt; Мои резюме
-        </div>
-    </div>
-    <div class="container">
+@extends('layouts.home')
+
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Мои резюме
+@endsection
+
+@section('home_content')
         <div class="row" style="margin-left: 0; margin-right: 0;">
             <a href="{{ route('summary.add') }}" style="padding: 10px;">Добавить резюме</a>
             <div class="headervakanse">
@@ -31,5 +30,4 @@
                 </div>
             @endforeach
         </div>
-    </div>
 @endsection
