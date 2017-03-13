@@ -1,74 +1,61 @@
-@extends('layouts.app')
-@section('content')
-    <div class="full-width_blue-background">
-        <div class="container" id="breadcumps">
-            <a href="/">Главная</a> -&gt; Личный кабинет
-        </div>
+@extends('layouts.home')
+
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Личный кабинет
+@endsection
+
+@section('home_content')
+    <div class="headervakanse" id="balance">
+        <p style="font-size: 19px;">Баланс: <span style="color: orange;">{{ $user->balance }}</span> Seorik
+            <button class="button-main">Пополнить</button>
+        </p>
     </div>
-
-    <div class="container">
-        <div class="headervakanse" style="min-height: 50px;">
-            <p style="float: right; ">
-
-                <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
-                <a style="cursor: pointer; padding: 10px;">Мои отклики</a>
-                <a href="{{ route('user.notepad.history') }}" style="cursor: pointer; padding: 10px;">История</a>
-                <a href="{{ route('user.notepad.viewers') }}" style="cursor: pointer; padding: 10px;">Просмотры ваканий</a>
-                <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои вакансии</a>
-                <a style="cursor: pointer; padding: 10px;">Настройки</a>
-
-            </p>
+    <div class="rezumeblock">
+        <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
+        <div class="avatarvacanse">
+            <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}">
         </div>
-        <div class="headervakanse" id="balance">
-            <p style="font-size: 19px;">Баланс: <span style="color: orange;">{{ $user->balance }}</span> Seorik <button  class="button-main">Пополнить</button></p>
-        </div>
-        <div class="rezumeblock">
-            <p class="editpersonal"><a onclick="enableEdit(this);" >Редактировать</a></p>
-            <div class="avatarvacanse">
-                <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}">
-            </div>
-            <h1>
-                <span class="edittext">{{ $user->name }}</span>
-                {!! Form::text('name', $user->name, [ 'class' => 'input_width hidden', 'required']) !!}
-            </h1>
+        <h1>
+            <span class="edittext">{{ $user->name }}</span>
+            {!! Form::text('name', $user->name, [ 'class' => 'input_width hidden', 'required']) !!}
+        </h1>
 
-            <p>Тип:
-                <span class="edittext">
+        <p>Тип:
+            <span class="edittext">
                     @if ($company->agency)
-                        Кадровое агенство
-                        @else
-                        Прямой работодатель
-                    @endif
+                    Кадровое агенство
+                @else
+                    Прямой работодатель
+                @endif
                 </span>
-                {!! Form::select('agency', $agency, $company->agency, [ 'class' => 'input_width hidden']) !!}
-            </p>
+            {!! Form::select('agency', $agency, $company->agency, [ 'class' => 'input_width hidden']) !!}
+        </p>
 
 
-            <p>Email:
-                <span class="edittext">{{ $user->email }}</span>
-                {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden', 'required']) !!}
-            </p>
+        <p>Email:
+            <span class="edittext">{{ $user->email }}</span>
+            {!! Form::email('email', $user->email, [ 'class' => 'input_width hidden', 'required']) !!}
+        </p>
 
-            <p>Веб-сайт:
-                <span class="edittext"><a href="{{ $company->website }}"> {{ $company->website }}</a></span>
-                {!! Form::text('website', $company->website, [ 'class' => 'input_width hidden', 'required']) !!}
-            </p>
+        <p>Веб-сайт:
+            <span class="edittext"><a href="{{ $company->website }}"> {{ $company->website }}</a></span>
+            {!! Form::text('website', $company->website, [ 'class' => 'input_width hidden', 'required']) !!}
+        </p>
 
-            <h3>О компании: </h3>
-            <p>
-                <span class="edittext">{!! $company->description !!}</span>
-                {!! Form::textarea('description', $company->description, [ 'class' => 'input_width hidden', 'required']) !!}
-            </p>
-            <p class="edsub">
-                {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateInfo(this);']) !!}
-                {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
-            </p>
-        </div>
-        <div class="two-big_button">
-            <div class="row">
-                <div class="col-sm-5 col-xs-12">
-                    <button class="button-main">Удалить аккаунт</button>
-                </div>
+        <h3>О компании: </h3>
+        <p>
+            <span class="edittext">{!! $company->description !!}</span>
+            {!! Form::textarea('description', $company->description, [ 'class' => 'input_width hidden', 'required']) !!}
+        </p>
+        <p class="edsub">
+            {!! Form::button('Сохранить', [ 'class' => 'input_width hidden', 'onclick' => 'updateInfo(this);']) !!}
+            {!! Form::button('Не сохранять', [ 'class' => 'input_width btn-link hidden', 'onclick' => 'disableEdit(this);']) !!}
+        </p>
+    </div>
+    <div class="two-big_button">
+        <div class="row">
+            <div class="col-sm-5 col-xs-12">
+                <button class="button-main">Удалить аккаунт</button>
             </div>
         </div>
     </div>
@@ -106,7 +93,13 @@
             $.ajax({
                 url: '{{ route("user.edit.info") }}',
                 method: "POST",
-                data: { _token: '{{ csrf_token() }}', name: name, email: email, website: website, description: description},
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    name: name,
+                    email: email,
+                    website: website,
+                    description: description
+                },
                 success: function (data) {
                     showNotificantion(data);
                     disableEdit(button);

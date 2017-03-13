@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
-    <div class="full-width_blue-background">
-        <div class="container" id="breadcumps">
-            <a href="/">Главная</a> -&gt; Добавить вакансию
-        </div>
-    </div>
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Добавить вакансию
+@endsection
+
+@section('home_content')
     <div class="add_vac">
         <div class="container">
             <div class="row new">
