@@ -202,3 +202,15 @@ Route::post('/settings/education/add', [
 	'as' => 'education.add',
 	'uses' =>   'EducationController@addEducation'
 ]);
+
+// AVAILABLE CONTACT
+
+Route::post('/contact/index', [
+	'as' => 'contact.index',
+	'uses' =>   'AvailableContactController@index'
+]);
+
+Route::post('/contact/open', [
+	'as' => 'contact.open',
+	'uses' =>   'AvailableContactController@open'
+]);

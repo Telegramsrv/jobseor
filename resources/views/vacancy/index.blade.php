@@ -65,13 +65,10 @@
                                     <div class="info_o">
                                         <p>Возраст от {{ $vacancy->age_min }} до {{ $vacancy->age_max }}</p>
                                     </div>
-                                    <a href="">
-                                        <div class="writte_to_employer">
-                                            Написать автору
-                                            <img title="Сообщение" src="img/w512h3361380476923mail.png" alt="writte_to_employer">
-                                        </div>
+                                    <hr/>
+                                    <div class="info_o contacts">
 
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -87,4 +84,27 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '{{ route("contact.index") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    $('.contacts').append(data);
+                }
+            })
+        });
+
+        function getContact() {
+            $.ajax({
+                url: '{{ route("contact.open") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    alert(data);
+                }
+            })
+        }
+    </script>
 @endsection
