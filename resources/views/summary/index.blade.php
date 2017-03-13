@@ -25,8 +25,8 @@
                                     <p>{{ $item->name }}, {{ $item->year_start }}-{{ $item->year_end}} год, {{ $item->position }}.</p>
                                 @endforeach
                                 <h3>Контактная информация:</h3>
-                                <p>Телефон: {{ $user->contacts->phone }}</p>
-                                <p>Email: {{ $user->email }}</p>
+                                <div class="info_o contacts">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -39,4 +39,28 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '{{ route("contact.index") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    $('.contacts').append(data);
+                }
+            })
+        });
+
+        function getContact() {
+            $.ajax({
+                url: '{{ route("contact.open") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    $('.contacts').empty();
+                    $('.contacts').appendChild(data);
+                }
+            })
+        }
+    </script>
 @endsection
