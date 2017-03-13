@@ -28,10 +28,6 @@
                                 </div>
                                 <div class="how_find_employer">
                                     <h5><strong>Связаться с автором обьявления:</strong></h5>
-                                    {{--<div class="info_o">--}}
-                                    {{--<p id="writte_tel">+38063777743</p>--}}
-                                    {{--<img src="/img/phone.png" title="Телефон" alt="phone">--}}
-                                    {{--</div>--}}
                                     <div class="info_o">
                                         <p id="writte_pip">{{ $user->name }}</p>
                                         <img src="/img/man.png" title="Логотип человек" alt="phone">
@@ -67,7 +63,6 @@
                                     </div>
                                     <hr/>
                                     <div class="info_o contacts">
-
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +97,8 @@
                 method: "POST",
                 data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
                 success: function (data) {
-                    alert(data);
+                    $('.contacts').empty();
+                    $('.contacts').appendChild(data);
                 }
             })
         }

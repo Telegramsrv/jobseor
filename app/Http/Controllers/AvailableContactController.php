@@ -37,4 +37,32 @@ class AvailableContactController extends Controller
 			}
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 */
+
+	public function open(Request $request)
+	{
+		if ($request->ajax()) {
+			if ($request->user()->balance >= 5)//TODO change value
+			{
+				$this->data['user'] = User::whereUserId($request->user_id)->firstOrFail();
+
+				$availableContact = new AvailableContact();
+				$availableContact->owner_id = $request->user()->user_id;
+				$availableContact->user_id = $request->user_id;
+				$availableContact->save();
+
+				$user = $request->user();
+				$user->balance -= 5;
+				$user->save();
+
+				echo view('contact.get', $this->data);
+			}
+			else {
+				echo 'Пополните баланс';//TODO open payment page
+			}
+		}
+	}
 }
