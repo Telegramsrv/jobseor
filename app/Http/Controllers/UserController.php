@@ -75,29 +75,33 @@ class UserController extends Controller
 
 	/**
 	 * @param Request       $request
-	 * @param Country       $country
-	 * @param EducationType $education
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 
-	public function edit(Request $request, Country $country, EducationType $education)
+	public function edit(Request $request)
 	{
-		dd('TODO');
 		$this->data['user'] = $request->user();
 
-		if ($request->user()->role_id == 2) {
-			$this->data['vacancies'] = $request->user()->company->vacancies;
+		return view('user.edit', $this->data);
+	}
 
-			return view('user.company.notepad', $this->data);
-		}
+	/**
+	 * @param Request $request
+	 */
 
-		if ($request->user()->role_id == 3) {
-			$this->data['applicant'] = $request->user()->applicant;
-			$this->data['countries'] = $country->getForm();
-			$this->data['educations'] = $education->getForm();
-
-			return view('user.applicant.edit', $this->data);
+	public function editPWD(Request $request)
+	{
+		if ($request->ajax())
+		{
+			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
+				$request->user()->password = \Hash::make($request->new_password);
+				$request->user()->save();
+				return redirect(route('user.edit'));
+			}
+			else {
+				die('Неверный пароль!');
+			}
 		}
 	}
 

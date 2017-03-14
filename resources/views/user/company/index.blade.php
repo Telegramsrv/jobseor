@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('breadcrumbs')
-    <a href="/">Главная</a> -&gt; Страница соискателя
+    <a href="/">Главная</a> -&gt; Страница пользователя
 @endsection
 
 @section('home_content')
