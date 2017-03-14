@@ -92,4 +92,14 @@ class User extends Authenticatable
     	$this->name = $name;
     	$this->save();
     }
+
+    public function sentmessage()
+    {
+		return $this->hasMany('App\Model\Message', 'user_id', 'sender_id');
+    }
+
+    public function recivemessage()
+    {
+	    return $this->hasMany('App\Model\Message', 'user_id', 'recipient_id');
+    }
 }
