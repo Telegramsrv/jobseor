@@ -16,9 +16,8 @@
                 <h1>
                     <span class="div.second">{{ $user->name }}</span>
                 </h1>
-                <p>
-                    Email: {{ $user->email }}
-                </p>
+                <div class="info_o contacts">
+                </div>
                 <p>
                     Тип:
                     @if ($company->agency)
@@ -40,4 +39,28 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '{{ route("contact.index") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    $('.contacts').append(data);
+                }
+            })
+        });
+
+        function getContact() {
+            $.ajax({
+                url: '{{ route("contact.open") }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
+                success: function (data) {
+                    $('.contacts').empty();
+                    $('.contacts').appendChild(data);
+                }
+            })
+        }
+    </script>
 @endsection

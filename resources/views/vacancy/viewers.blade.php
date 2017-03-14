@@ -1,6 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Кто смотрел мои вакансии
+@endsection
+
+@section('home_content')
     <div class="container preview">
         <div class="block">
             <h3>Кто смотрел мои вакансии</h3>

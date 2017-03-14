@@ -1,7 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
-    <div class="container preview">
+@section('breadcrumbs')
+    <a href="/">Главная</a> -&gt; Просмотр вакансии
+@endsection
+
+@section('home_content')
+    <div class="container">
         <div id="preview" class="preview">
             <div class="block">
                 <div class="row">
