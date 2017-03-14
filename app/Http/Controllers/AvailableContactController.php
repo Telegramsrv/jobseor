@@ -22,8 +22,8 @@ class AvailableContactController extends Controller
 		if ($request->ajax()) {
 			if ($request->user_id != $request->user()->user_id) {
 
-				$availableContact = AvailableContact::whereUserId($request->user_id)
-				                                    ->orWhere('user_id', $request->user()->user_id)
+				$availableContact = AvailableContact::whereUserId($request->user_id)->whereOwnerId($request->user()->user_id)
+				                                    ->orWhere('user_id', $request->user()->user_id)->whereOwnerId($request->user_id)
 				                                    ->get();//TODO Add date
 
 				$this->data['user'] = User::whereUserId($request->user_id)->firstOrFail();
