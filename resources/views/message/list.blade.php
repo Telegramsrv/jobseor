@@ -22,9 +22,14 @@
 
             </div>
         @endforeach
-        {!! Form::open([ 'route' => [ 'message.send', '3'] , 'method' => 'post']) !!}
-            {!! Form::textarea('message', '', [ 'class' => 'input_width', 'required']) !!}
-            {!! Form::submit('Отправить', [ 'class' => 'button-main']) !!}
+
+        @if ($user->user_id == $message->sender->user_id)
+            {!! Form::open([ 'route' => [ 'message.send', 'id' => $message->recipient->user_id] , 'method' => 'post']) !!}
+        @else
+            {!! Form::open([ 'route' => [ 'message.send', 'id' => $message->sender->user_id] , 'method' => 'post']) !!}
+        @endif
+        {!! Form::textarea('message', '', [ 'class' => 'input_width', 'required']) !!}
+        {!! Form::submit('Отправить', [ 'class' => 'button-main']) !!}
         {!! Form::close() !!}
     </div>
 @endsection
