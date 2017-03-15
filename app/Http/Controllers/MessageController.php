@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Message;
+use App\Model\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -43,5 +44,23 @@ class MessageController extends Controller
 		$this->data['messages'] = $message->getDialog($request->user()->user_id, $id);
 		$this->data['user'] = $request->user();
 		return view('message.list', $this->data);
+	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+
+	public function send($id, Request $request)
+	{
+		$recipient = User::whereUserId($id)->firstOrFail();
+		$message = new Message();
+		$message->sender_id = $request->user()->user_id;
+		$message->recipient_id = $recipient->user_id;
+		$message->message = $request->message;
+		$message->save();
+		return redirect(route('message.user', [ 'id' => $id]));
 	}
 }

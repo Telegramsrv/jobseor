@@ -74,7 +74,7 @@ class Message extends Model
 			->whereRecipientId($to_user_id)
 			->orWhere('sender_id', $to_user_id)
 			->whereRecipientId($user_id)
-			->orderBy('updated_at', 'desc')
+			->orderBy('updated_at', 'asc')
 			->get();
 	}
 }
