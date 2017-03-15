@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\AvailableContact;
 use App\Model\Message;
 use App\Model\User;
 use Illuminate\Http\Request;
@@ -39,11 +40,16 @@ class MessageController extends Controller
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 
-	public function view($id, Request $request, Message $message)
+	public function view($id, Request $request, Message $message, AvailableContact $availableContact)
 	{
-		$this->data['messages'] = $message->getDialog($request->user()->user_id, $id);
-		$this->data['user'] = $request->user();
-		return view('message.list', $this->data);
+		if (!$availableContact->isAvailable($id, $request->user()->user_id)) {
+			die('Пополните баланс');
+		}
+		else {
+			$this->data['messages'] = $message->getDialog($request->user()->user_id, $id);
+			$this->data['user'] = $request->user();
+			return view('message.list', $this->data);
+		}
 	}
 
 	/**

@@ -32,4 +32,18 @@ class AvailableContact extends Model
     {
     	return $this->belongsTo('App\Model\User', 'user_id');
     }
+
+    public function isAvailable($first_user,$second_user)
+    {
+	    $availableContact = AvailableContact::whereUserId($first_user)->whereOwnerId($second_user)
+	                                        ->orWhere('user_id', $second_user)->whereOwnerId($first_user)
+	                                        ->get();//TODO Add date
+
+	    if ($availableContact->isEmpty()) {
+		    return false;
+	    }
+	    else {
+	        return true;
+	    }
+    }
 }
