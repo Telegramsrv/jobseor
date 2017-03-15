@@ -67,4 +67,14 @@ class Message extends Model
 
 		return $dialogs;
 	}
+
+	public function getDialog($user_id, $to_user_id)
+	{
+		return $this->whereSenderId($user_id)
+			->whereRecipientId($to_user_id)
+			->orWhere('sender_id', $to_user_id)
+			->whereRecipientId($user_id)
+			->orderBy('updated_at', 'desc')
+			->get();
+	}
 }

@@ -233,3 +233,8 @@ Route::get('/message/{id}', [
 	'as' => 'message.user',
 	'uses' => 'MessageController@view'
 ]);
+
+Route::post('/message/{id}', [
+	'as' => 'message.send',
+	'uses' => 'MessageController@send'
+]);

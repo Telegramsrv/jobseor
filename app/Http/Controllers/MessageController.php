@@ -29,4 +29,19 @@ class MessageController extends Controller
 		$this->data['user'] = $request->user();
 		return view('message.dialogs', $this->data);
 	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 * @param Message $message
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function view($id, Request $request, Message $message)
+	{
+		$this->data['messages'] = $message->getDialog($request->user()->user_id, $id);
+		$this->data['user'] = $request->user();
+		return view('message.list', $this->data);
+	}
 }
