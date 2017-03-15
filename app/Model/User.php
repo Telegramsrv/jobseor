@@ -38,6 +38,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Contacts[] $contacts
  * @property-read \App\Model\Applicant $applicant
  * @property-read \App\Model\Company $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $recivemessage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $sentmessage
  */
 class User extends Authenticatable
 {

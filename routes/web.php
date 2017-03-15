@@ -127,6 +127,7 @@ Route::get('/summary/{id}', [
 	'as' => 'summary.view',
 	'uses' => 'SummaryController@view'
 ]);
+
 //USER
 
 Route::get('/home', [
@@ -148,7 +149,6 @@ Route::get('/notepad/history', [
 	'as' => 'user.notepad.history',
 	'uses' =>   'UserController@history'
 ]);
-
 
 Route::get('/settings', [
 	'as' => 'user.edit',
@@ -219,4 +219,17 @@ Route::post('/contact/index', [
 Route::post('/contact/open', [
 	'as' => 'contact.open',
 	'uses' =>   'AvailableContactController@open'
+]);
+
+
+// MESSAGE
+
+Route::get('/message', [
+	'as' => 'message.list',
+	'uses' => 'MessageController@index'
+]);
+
+Route::get('/summary/{id}', [
+	'as' => 'summary.view',
+	'uses' => 'SummaryController@view'
 ]);
