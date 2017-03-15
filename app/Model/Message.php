@@ -38,17 +38,32 @@ class Message extends Model
 
 	public function getDialogs($user_id)
 	{
-		$send = $this->whereIn('sender_id', $this->whereRecipientId($user_id)->get(['sender_id'])->unique())
-		             ->orderBy('updated_at', 'desc')
-		             ->get()
-		             ->unique('sender_id');
-
-		$recv = $this->whereIn('recipient_id', $this->whereSenderId($user_id)->get(['recipient_id'])->unique())
+		$send = $this->whereSenderId($user_id)
+		             ->distinct()
 		             ->orderBy('updated_at', 'desc')
 		             ->get()
 		             ->unique('recipient_id');
 
-		$dialogs = $recv->merge($send)->sortByDesc('updated_at');
+		$recv = $this->whereRecipientId($user_id)
+		             ->distinct()
+		             ->orderBy('updated_at', 'desc')
+		             ->get()
+		             ->unique('sender_id');
+
+		$dialogs = new Collection($send);
+
+		foreach ($recv as $item) {
+			if (!$dialogs->contains('recipient_id', $item->sender_id)) {
+				$dialogs->push($item);
+			}
+			else {
+				$buff = $dialogs->where('recipient_id', $item->sender_id)->first();
+				if ($buff->updated_at < $item->updated_at) {
+					$buff->delete();
+					$dialogs->push($item);
+				}
+			}
+		}
 
 		return $dialogs;
 	}
