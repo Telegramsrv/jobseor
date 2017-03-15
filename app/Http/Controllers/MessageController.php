@@ -16,8 +16,17 @@ class MessageController extends Controller
 		$this->middleware('auth');
 	}
 
+	/**
+	 * @param Request $request
+	 * @param Message $message
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
 	public function index(Request $request, Message $message)
 	{
-		$message->getDialogs($request->user()->user_id);
+		$this->data['dialogs'] = $message->getDialogs($request->user()->user_id);
+		$this->data['user'] = $request->user();
+		return view('message.dialogs', $this->data);
 	}
 }

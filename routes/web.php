@@ -229,7 +229,7 @@ Route::get('/message', [
 	'uses' => 'MessageController@index'
 ]);
 
-Route::get('/summary/{id}', [
-	'as' => 'summary.view',
-	'uses' => 'SummaryController@view'
+Route::get('/message/{id}', [
+	'as' => 'message.user',
+	'uses' => 'MessageController@view'
 ]);
