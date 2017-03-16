@@ -221,7 +221,6 @@ Route::post('/contact/open', [
 	'uses' =>   'AvailableContactController@open'
 ]);
 
-
 // MESSAGE
 
 Route::get('/message', [
@@ -237,4 +236,21 @@ Route::get('/message/{id}', [
 Route::post('/message/{id}', [
 	'as' => 'message.send',
 	'uses' => 'MessageController@send'
+]);
+
+// FILTER PAGE Vacancy
+
+Route::get('/vacancy', [
+	'as' => 'vacancy.index',
+	'uses' => 'VacancyFilterController@index'
+]);
+
+Route::post('/vacancy', [
+	'as' => 'vacancy.filter',
+	'uses' => 'VacancyFilterController@get'
+]);
+
+Route::post('/vacancy/profession', [
+	'as' => 'vacancy.filter.profession',
+	'uses' => 'VacancyFilterController@getProfession'
 ]);

@@ -9,8 +9,7 @@
     <div class="container">
         <div class="headervakanse" style="min-height: 50px;">
             <p style="float: right; ">
-                <a href="{{ route('user.home') }}" style="cursor: pointer; padding: 10px;">Моя учётная запись</a>
-                <a style="cursor: pointer; padding: 10px;">Мои предложения</a>
+                <a href="{{ route('user.home') }}" style="cursor: pointer; padding: 10px;">Моя страница</a>
                 <a href="{{ route('message.list') }}" style="cursor: pointer; padding: 10px;">Мои диалоги</a>
                 <a href="{{ route('user.notepad.history') }}" style="cursor: pointer; padding: 10px;">История</a>
                 <a href="{{ route('user.notepad.viewers') }}" style="cursor: pointer; padding: 10px;">Просмотры резюме</a>

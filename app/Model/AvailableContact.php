@@ -37,7 +37,7 @@ class AvailableContact extends Model
 	{
 		$availableContact = AvailableContact::whereUserId($first_user)->whereOwnerId($second_user)
 		                                    ->orWhere('user_id', $second_user)->whereOwnerId($first_user)
-			> whereDate('created_at', '>', date('Y-m-d H:m:s', time() - 24 * 60 * 60))
+			->whereDate('created_at', '>', date('Y-m-d H:m:s', time() - 24 * 60 * 60))
 				->get();
 		if ($availableContact->isEmpty()) {
 			return false;
