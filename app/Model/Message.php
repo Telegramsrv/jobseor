@@ -23,6 +23,8 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Message whereSenderId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Message whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property bool $read
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Message whereRead($value)
  */
 class Message extends Model
 {
@@ -76,5 +78,10 @@ class Message extends Model
 			->whereRecipientId($user_id)
 			->orderBy('updated_at', 'asc')
 			->get();
+	}
+
+	public function readMessage($sender_id, $recipient_id)
+	{
+		return $this->whereSenderId($sender_id)->whereRecipientId($recipient_id)->whereRead(0)->update([ 'read' => 1]);
 	}
 }

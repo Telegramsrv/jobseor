@@ -46,6 +46,7 @@ class MessageController extends Controller
 			die('Пополните баланс');
 		}
 		else {
+			$message->readMessage($id, $request->user()->user_id);
 			$this->data['messages'] = $message->getDialog($request->user()->user_id, $id);
 			$this->data['user'] = $request->user();
 			return view('message.list', $this->data);

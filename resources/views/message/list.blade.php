@@ -16,18 +16,20 @@
                 </a>
 
                 <div class="col-md-10">
-                    <p class="pull-left">{{ $message->message }}</p>
-                    <small class="pull-right">{{ $message->updated_at }}</small>
+                    @if($message->read)
+                        <p>{{ $message->message }}
+                            <small>{{ $message->created_at }}</small>
+                        </p>
+                    @else
+                        <p style="background-color: #acadab">{{ $message->message }}
+                            <small>{{ $message->created_at }}</small>
+                        </p>
+                    @endif
                 </div>
 
             </div>
         @endforeach
-
-        @if ($user->user_id == $message->sender->user_id)
-            {!! Form::open([ 'route' => [ 'message.send', 'id' => $message->recipient->user_id] , 'method' => 'post']) !!}
-        @else
-            {!! Form::open([ 'route' => [ 'message.send', 'id' => $message->sender->user_id] , 'method' => 'post']) !!}
-        @endif
+        {!! Form::open([ 'method' => 'post']) !!}
         {!! Form::textarea('message', '', [ 'class' => 'input_width', 'required']) !!}
         {!! Form::submit('Отправить', [ 'class' => 'button-main']) !!}
         {!! Form::close() !!}

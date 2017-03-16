@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->integer('sender_id');
             $table->integer('recipient_id');
             $table->longText('message');
+            $table->boolean('read')->default(0);
             $table->timestamps();
         });
     }
