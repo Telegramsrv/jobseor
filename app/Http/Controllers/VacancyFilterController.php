@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 
 class VacancyFilterController extends Controller
 {
+	/**
+	 * @param Request        $request
+	 * @param Category       $category
+	 * @param Profession     $profession
+	 * @param Country        $country
+	 * @param Employment     $employment
+	 * @param ExperienceType $experienceType
+	 * @param EducationType  $educationType
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function index(
 		Request $request,
 		Category $category,
@@ -44,6 +55,11 @@ class VacancyFilterController extends Controller
 		return view('filterpage.vacancyindex', $this->data);
 	}
 
+	/**
+	 * @param Request $request
+	 * @param Vacancy $vacancy
+	 */
+
 	public function get(Request $request, Vacancy $vacancy)
 	{
 		if ($request->ajax()) {
@@ -71,6 +87,11 @@ class VacancyFilterController extends Controller
 			echo view('filterpage.vacancylist', [ 'vacancies' => $vacancy]);
 		}
 	}
+
+	/**
+	 * @param Request    $request
+	 * @param Profession $profession
+	 */
 
 	public function getProfession(Request $request, Profession $profession)
 	{
