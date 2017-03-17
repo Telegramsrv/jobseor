@@ -56,6 +56,16 @@ class Applicant extends Model
     	return $this->hasMany('App\Model\Education', 'user_id', 'user_id');
     }
 
+    public function maxeducation()
+    {
+    	$maxeducation = $this->education()->first();
+    	foreach ( $this->education as $education){
+    		if ($education->education_type_id > $maxeducation->education_type_id)
+    			$maxeducation = $education;
+	    }
+	    return $maxeducation;
+    }
+
 	public function experience()
 	{
 		return $this->hasMany('App\Model\Experience', 'user_id', 'user_id');

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" style="margin-left: 0; margin-right: 0;">
         <div class="headervakanse">
-            Найдено: {{ $vacancies->count() }} резюме.
+            Найдено: {{ $vacancies->count() }} вакансий.
         </div>
 
         @foreach($vacancies as $vacancy)

@@ -254,3 +254,15 @@ Route::post('/vacancy/profession', [
 	'as' => 'vacancy.filter.profession',
 	'uses' => 'VacancyFilterController@getProfession'
 ]);
+
+// FILTER PAGE Summary
+
+Route::get('/summary', [
+	'as' => 'summary.index',
+	'uses' => 'SummaryFilterController@index'
+]);
+
+Route::post('/summary', [
+	'as' => 'summary.filter',
+	'uses' => 'SummaryFilterController@get'
+]);
