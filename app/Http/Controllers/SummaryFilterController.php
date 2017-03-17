@@ -12,6 +12,17 @@ use Illuminate\Http\Request;
 
 class SummaryFilterController extends Controller
 {
+	/**
+	 * @param Request        $request
+	 * @param Category       $category
+	 * @param Country        $country
+	 * @param Employment     $employment
+	 * @param EducationType  $educationType
+	 * @param ExperienceType $experienceType
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
 	public function index(
 		Request $request,
 		Category $category,
@@ -30,11 +41,56 @@ class SummaryFilterController extends Controller
 		$this->data['employments']['-1'] = 'Любая';
 
 		$this->data['education_types'] = $educationType->getForm();
-		$this->data['education_types']['-1'] = 'Любое';
 
 		$this->data['experience_types'] = $experienceType->getForm();
 		$this->data['experience_types']['-1'] = 'Любой';
 
 		return view('filterpage.summaryindex', $this->data);
+	}
+
+	/**
+	 * @param Request        $request
+	 * @param Summary        $summary
+	 * @param ExperienceType $experienceType
+	 */
+
+	public function get(Request $request, Summary $summary,ExperienceType $experienceType)
+	{
+		if ($request->ajax()) {
+			if ($request->category_id != -1) {
+				$summary = $summary->whereCategoryId($request->category_id);
+			}
+			$summary = $summary->get();
+			if ($request->country_id != -1) {
+				$summary = $summary->filter(
+					function ($item) use ($request) {
+						return $item->user->applicant->country->country_id == $request->country_id;
+					}
+				);
+			}
+//			if ($request->employment_id != -1) {
+//				$summary = $summary->filter(
+//					function ($item) use ($request) {
+//						return $item->user->applicant->country->country_id == $request->country_id;
+//					}
+//				);
+//			}
+			if ($request->education_type_id != 5) {
+				$summary = $summary->filter(
+					function ($item) use ($request) {
+						return $item->user->applicant->maxeducation()->education_type_id == $request->education_type_id;
+					}
+				);
+			}
+			if ($request->experience_type_id != -1) {
+				$summary = $summary->filter(
+					function ($item) use ($request,$experienceType) {
+						return $item->user->applicant->experience_year() >= $experienceType->whereExperienceTypeId($request->experience_type_id)->firstOrFail()->weight;
+					}
+				);
+			}
+
+			echo view('filterpage.summarylist', [ 'summaries' => $summary]);
+		}
 	}
 }

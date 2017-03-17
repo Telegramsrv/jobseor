@@ -35,6 +35,8 @@ class AvailableContact extends Model
 
 	public function isAvailable($first_user, $second_user)
 	{
+		if ($first_user == $second_user ) return true;
+
 		$availableContact = AvailableContact::whereUserId($first_user)->whereOwnerId($second_user)
 		                                    ->orWhere('user_id', $second_user)->whereOwnerId($first_user)
 			->whereDate('created_at', '>', date('Y-m-d H:m:s', time() - 24 * 60 * 60))
