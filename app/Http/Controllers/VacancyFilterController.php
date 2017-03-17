@@ -35,10 +35,10 @@ class VacancyFilterController extends Controller
 		$this->data['employments']['-1'] = 'Любая';
 
 		$this->data['education_types'] = $educationType->getForm();
-		$this->data['education_types']['-1'] = 'Любая';
+		$this->data['education_types']['-1'] = 'Любое';
 
 		$this->data['experience_types'] = $experienceType->getForm();
-		$this->data['experience_types']['-1'] = 'Любая';
+		$this->data['experience_types']['-1'] = 'Любой';
 
 
 		return view('filterpage.vacancyindex', $this->data);

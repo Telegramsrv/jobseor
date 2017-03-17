@@ -48,4 +48,14 @@ class Profession extends Model
 		}
 		return $buff;
 	}
+
+	public function getFormAll()
+	{
+		$buff = [];
+		foreach ($this->get() as $profession)
+		{
+			$buff[$profession->profession_id] = $profession->name;
+		}
+		return $buff;
+	}
 }
