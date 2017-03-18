@@ -17,6 +17,8 @@ class CreateSummariesTable extends Migration
             $table->increments('summary_id');
             $table->integer('user_id');
             $table->integer('category_id');
+            $table->integer('profession_id');
+            $table->integer('employment_id');
             $table->string('title');
             $table->integer('salary');
             $table->integer('currency_id');

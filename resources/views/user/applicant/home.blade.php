@@ -58,9 +58,9 @@
                 <a onclick="addEducation(this);">Добавить</a> /
                 <a onclick="enableEdit(this);">Редактировать</a>
             </p>
-            @foreach( $applicant->education as $item)
+            <h3>Образование:</h3>
+        @foreach( $applicant->education as $item)
                 <div class="clone2">
-                    <h3>Образование:</h3>
                     {!! Form::hidden('education_id', $item->education_id) !!}
                     <p>
                         Учебное заведение: <span class="edittext"> {{ $item->name }}</span>
@@ -93,9 +93,9 @@
                 <a onclick="addExperience(this);">Добавить</a> /
                 <a onclick="enableEdit(this);">Редактировать</a>
             </p>
-            @foreach( $applicant->experience as $item)
+            <h3>Опыт работы:</h3>
+        @foreach( $applicant->experience as $item)
                 <div class="clone3">
-                    <h3>Опыт работы:</h3>
                     {!! Form::hidden('experience_id', $item->experience_id) !!}
                     <p>
                         Компания: <span class="edittext"> {{ $item->name }}</span>

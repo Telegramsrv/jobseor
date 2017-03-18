@@ -52,4 +52,14 @@ class Summary extends Model
 	{
 		return $this->hasMany('App\Model\UserWatchedSummary', 'summary_id', 'summary_id');
 	}
+
+	public function employment()
+	{
+		return $this->belongsTo('App\Model\Employment', 'employment_id');
+	}
+
+	public function profession()
+	{
+		return $this->belongsTo('App\Model\Profession', 'profession_id');
+	}
 }

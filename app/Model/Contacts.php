@@ -22,4 +22,8 @@ use Illuminate\Database\Eloquent\Model;
 class Contacts extends Model
 {
 	protected $primaryKey = 'contact_id';
+
+	protected $fillable = [
+		'user_id', 'phone'
+	];
 }
