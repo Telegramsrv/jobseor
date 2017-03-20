@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Category;
 use App\Model\Currency;
 use App\Model\Employment;
+use App\Model\Profession;
 use App\Model\Summary;
 use App\Model\UserWatchedSummary;
 use Illuminate\Http\Request;
@@ -47,6 +48,11 @@ class SummaryController extends Controller
 				return redirect(route('summary.add'));//TODO error page
 			}
 		}
+
+		Category::whereCategoryId($request->category_id)->firstOrFail();
+		Profession::whereProfessionId($request->profession_id)->firstOrFail();
+		Currency::whereCurrencyId($request->currency_id)->firstOrFail();
+		Employment::whereEmploymentId($request->employment_id)->firstOrFail();
 
 		Summary::create($request->toArray());
 
@@ -107,6 +113,11 @@ class SummaryController extends Controller
 				return redirect(route('user.notepad'));//TODO error page
 			}
 		}
+		Category::whereCategoryId($request->category_id)->firstOrFail();
+		Profession::whereProfessionId($request->profession_id)->firstOrFail();
+		Currency::whereCurrencyId($request->currency_id)->firstOrFail();
+		Employment::whereEmploymentId($request->employment_id)->firstOrFail();
+
 		$oldsummary = Summary::whereUserId($request->user()->user_id)->whereSummaryId(
 			$request->summary_id
 		)->firstOrFail();
