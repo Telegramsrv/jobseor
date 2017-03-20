@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Company;
+use App\Model\Contacts;
 use App\Model\Country;
 use App\Model\Education;
 use App\Model\EducationType;
@@ -113,6 +114,8 @@ class UserController extends Controller
 	{
 		if ($request->ajax()) {
 			if ($request->user()->role_id == 3) {
+				$request['user_id'] = $request->user()->user_id;
+
 				if (strcmp($request->user()->name, $request->name)) {
 					$request->user()->name = $request->name;
 				}
@@ -131,6 +134,7 @@ class UserController extends Controller
 					$request->user()->contacts->phone = $request->phone;
 				}
 
+				Country::whereCountryId($request->country_id)->firstOrFail();
 				if ($request->user()->applicant->country_id != $request->country_id) {
 					$request->user()->applicant->country_id = $request->country_id;
 				}

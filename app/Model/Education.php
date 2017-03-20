@@ -29,6 +29,8 @@ class Education extends Model
 {
     protected $primaryKey = 'education_id';
 
+    protected $fillable = [ 'user_id', 'name', 'year_start', 'year_end', 'specialize', 'education_type_id'];
+
 	public $timestamps = false;
 
 	public function type()
