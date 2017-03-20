@@ -10,7 +10,8 @@
             <div class="row new">
                 <div class="col-xs-12">
                     <div class="info">
-                        <p>Максимально заполните все предлагаемые поля. Чем шире информация о вакансии, тем больше шансов привлечь толковых специалистов</p>
+                        <p>Максимально заполните все предлагаемые поля. Чем шире информация о вакансии, тем больше
+                            шансов привлечь толковых специалистов</p>
                     </div>
                 </div>
             </div>
@@ -50,9 +51,7 @@
                                     <p>Категория размещения вакансии<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    <div class="select_category border_illusion">
-                                        {!! Form::select('category_id', $categories, $vacancy->category_id, [ 'onchange' => 'updateProfession(this.value);', 'id' => 'select_category']) !!}
-                                    </div>
+                                    {!! Form::select('category_id', $categories, $vacancy->category_id, [ 'onchange' => 'updateProfession(this.value);', 'id' => 'select_category', 'class' => 'input_width']) !!}
                                 </div>
                             </div>
                         </div>
@@ -62,7 +61,7 @@
                                     <p>Спецыальность<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    <div class="select_category border_illusion specialize">
+                                    <div class="specialize">
 
                                     </div>
                                 </div>
@@ -74,9 +73,7 @@
                                     <p>Страна <span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    <div class="select_category select_vac_country">
-                                        {!! Form::select('country_id', $countries, $vacancy->country_id, [ 'id' => 'select_country']) !!}
-                                    </div>
+                                    {!! Form::select('country_id', $countries, $vacancy->country_id, [ 'id' => 'select_country', 'class' => 'input_width']) !!}
                                 </div>
                             </div>
                         </div>
@@ -87,7 +84,7 @@
                                 </div>
                                 <div class="col-xs-7">
                                     <div class="town">
-                                        {!! Form::text('city', $vacancy->city, [ 'class' => 'border_illusion', 'required']) !!}
+                                        {!! Form::text('city', $vacancy->city, [ 'class' => 'input_width', 'required']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +95,7 @@
                                     <p>Образование<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('education_type_id', $education_types, $vacancy->education_type_id, [ 'class' => 'border_illusion', 'id' => 'select_education']) !!}
+                                    {!! Form::select('education_type_id', $education_types, $vacancy->education_type_id, [ 'class' => 'input_width', 'id' => 'select_education']) !!}
                                 </div>
                             </div>
                         </div>
@@ -108,7 +105,7 @@
                                     <p>Занятость<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('employment_id', $employments, $vacancy->employment_id, [ 'class' => 'border_illusion', 'id' => 'select_employment']) !!}
+                                    {!! Form::select('employment_id', $employments, $vacancy->employment_id, [ 'class' => 'input_width', 'id' => 'select_employment']) !!}
                                 </div>
                             </div>
                         </div>
@@ -119,9 +116,9 @@
                                 </div>
                                 <div class="col-xs-7">
                                     <div>
-                                        {!! Form::number('salary', $vacancy->salary, [ 'class' => 'border_illusion']) !!}
+                                        {!! Form::number('salary', $vacancy->salary, [ 'class' => 'input_width']) !!}
 
-                                        {!! Form::select('currency_id', $currencies, $vacancy->currency_id,  [ 'class' => 'border_illusion', 'id' => 'select_currency']) !!}
+                                        {!! Form::select('currency_id', $currencies, $vacancy->currency_id,  [ 'class' => 'input_width', 'id' => 'select_currency']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +129,7 @@
                                     <p>Опыт работы<span>*</span></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    {!! Form::select('experience_type_id', $experience_types, $vacancy->experience_type_id, [ 'class' => 'border_illusion', 'id' => 'select_experience']) !!}
+                                    {!! Form::select('experience_type_id', $experience_types, $vacancy->experience_type_id, [ 'class' => 'input_width', 'id' => 'select_experience']) !!}
                                 </div>
                             </div>
                         </div>
@@ -142,8 +139,10 @@
                                     <p>Возраст</p>
                                 </div>
                                 <div class="col-xs-7">
-                                    <p>от {!! Form::number('age_min', $vacancy->age_min, [ 'class' => 'border_illusion']) !!}</p>
-                                    <p>до {!! Form::number('age_max', $vacancy->age_max, [ 'class' => 'border_illusion']) !!}</p>
+                                    <p>
+                                        от {!! Form::number('age_min', $vacancy->age_min, [ 'class' => 'input_width']) !!}</p>
+                                    <p>
+                                        до {!! Form::number('age_max', $vacancy->age_max, [ 'class' => 'input_width']) !!}</p>
                                 </div>
                             </div>
                         </div>
@@ -160,29 +159,29 @@
                             </div>
                         </div>
                         {{--<div class="row">--}}
-                            {{--<div class="col-xs-5">--}}
-                                {{--<div class="load_img">--}}
-                                    {{--<button type="button" name="button">Добавить фотографии</button>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-7">--}}
-                                {{--<div class="img-uploads-wrapper">--}}
-                                    {{--<div class="img-uploads-wrapper__inputs">--}}
-                                        {{--<input type="file" name="imgUpload1" id="imgUpload" multiple>--}}
-                                    {{--</div>--}}
+                        {{--<div class="col-xs-5">--}}
+                        {{--<div class="load_img">--}}
+                        {{--<button type="button" name="button">Добавить фотографии</button>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-7">--}}
+                        {{--<div class="img-uploads-wrapper">--}}
+                        {{--<div class="img-uploads-wrapper__inputs">--}}
+                        {{--<input type="file" name="imgUpload1" id="imgUpload" multiple>--}}
+                        {{--</div>--}}
 
-                                    {{--<div class="img-uploads-wrapper__add-buttons">--}}
-                                        {{--<div class="button-in-block">--}}
-                                            {{--<div class="add-button"></div>--}}
-                                            {{--<div class="add-button"></div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="button-in-block">--}}
-                                            {{--<div class="add-button"></div>--}}
-                                            {{--<div class="add-button"></div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                        {{--<div class="img-uploads-wrapper__add-buttons">--}}
+                        {{--<div class="button-in-block">--}}
+                        {{--<div class="add-button"></div>--}}
+                        {{--<div class="add-button"></div>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-in-block">--}}
+                        {{--<div class="add-button"></div>--}}
+                        {{--<div class="add-button"></div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
                         {{--</div>--}}
                     </div>
 
@@ -192,9 +191,11 @@
                             <div class="col-sm-8">
                                 <div class="post">
                                     <h3>VIP-объявление</h3>
-                                    <p>Чтобы получить резюме лучших соискателей, Ваши вакансии всегда должны быть на высоте</p>
+                                    <p>Чтобы получить резюме лучших соискателей, Ваши вакансии всегда должны быть на
+                                        высоте</p>
                                     <p>
-                                        <input type="checkbox"><strong> Заказать VIP-пакет и обеспечить привлечения лучших кандидатов в компанию</strong>
+                                        <input type="checkbox"><strong> Заказать VIP-пакет и обеспечить привлечения
+                                            лучших кандидатов в компанию</strong>
                                     </p>
                                     <img src="/img/VIP.png" alt="vip">
                                 </div>
@@ -210,10 +211,10 @@
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 @if (empty($vacancy->title))
                                     {!! Form::submit('Добавить вакансию', [ 'class' => 'button_width']) !!}
-                                    @else
+                                @else
                                     {!! Form::submit('Изменить', [ 'class' => 'button_width']) !!}
                                 @endif
-                                    {{--<button class="button_width" type="submit" onclick="window.location.href='/pay.php'"   form="form_for_all">Добавить вакансию</button>--}}
+                                {{--<button class="button_width" type="submit" onclick="window.location.href='/pay.php'"   form="form_for_all">Добавить вакансию</button>--}}
                             </div>
                         </div>
                     </div>
@@ -228,8 +229,7 @@
             updateProfession(value);
         });
 
-        function updateProfession(value)
-        {
+        function updateProfession(value) {
             $('.specialize').empty();
 
             $.ajax({
@@ -245,8 +245,7 @@
             });
         }
 
-        function preview()
-        {
+        function preview() {
             $('.preview').remove();
             var title = $("input[name*='title']").val();
             var salary = $("input[name*='salary']").val();

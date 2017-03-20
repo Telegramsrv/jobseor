@@ -83,6 +83,14 @@ class VacancyController extends Controller
 			}
 		}
 
+		Category::whereCategoryId($request->category_id)->firstOrFail();
+		Profession::whereProfessionId($request->profession_id)->firstOrFail();
+		Country::whereCountryId($request->country_id)->firstOrFail();
+		EducationType::whereEducationTypeId($request->education_type_id)->firstOrFail();
+		Employment::whereEmploymentId($request->employment_id)->firstOrFail();
+		Currency::whereCurrencyId($request->currency_id)->firstOrFail();
+		ExperienceType::whereExperienceTypeId($request->experience_type_id)->firstOrFail();
+
 		Vacancy::create($request->toArray());
 
 		return redirect(route('user.notepad'));
@@ -168,10 +176,16 @@ class VacancyController extends Controller
 				return redirect(route('user.notepad'));//TODO error page
 			}
 		}
-		$oldvacancy = Vacancy::whereVacancyId($request->vacancy_id)->firstOrFail();
-		if ($oldvacancy->user_id != $request->user()->user_id) {
-			dd(504);//TODO add error page
-		}
+
+		Category::whereCategoryId($request->category_id)->firstOrFail();
+		Profession::whereProfessionId($request->profession_id)->firstOrFail();
+		Country::whereCountryId($request->country_id)->firstOrFail();
+		EducationType::whereEducationTypeId($request->education_type_id)->firstOrFail();
+		Employment::whereEmploymentId($request->employment_id)->firstOrFail();
+		Currency::whereCurrencyId($request->currency_id)->firstOrFail();
+		ExperienceType::whereExperienceTypeId($request->experience_type_id)->firstOrFail();
+
+		$oldvacancy = Vacancy::whereUserId($request->user()->user_id)->whereVacancyId($request->vacancy_id)->firstOrFail();
 		$oldvacancy->update($request->toArray());
 		$oldvacancy->save();
 

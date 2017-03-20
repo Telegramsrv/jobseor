@@ -135,7 +135,6 @@
                 },
                 success: function (data) {
                     $('.profession').append(data);
-                    $('select[name=profession_id]').removeClass('border_illusion').addClass('input_width');
                 }
             });
         }
