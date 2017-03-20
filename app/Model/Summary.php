@@ -29,13 +29,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $category_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCategoryId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedSummary[] $viewers
+ * @property int $profession_id
+ * @property int $employment_id
+ * @property-read \App\Model\Employment $employment
+ * @property-read \App\Model\Profession $profession
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereEmploymentId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereProfessionId($value)
  */
 class Summary extends Model
 {
     protected $primaryKey = 'summary_id';
 
     protected $fillable = [
-        'user_id', 'category_id', 'title', 'salary', 'currency_id', 'information'
+        'user_id', 'category_id', 'profession_id', 'employment_id','title', 'salary', 'currency_id', 'information'
     ];
 
     public function user()

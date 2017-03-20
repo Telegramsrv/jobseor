@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Category;
 use App\Model\Currency;
+use App\Model\Employment;
 use App\Model\Summary;
 use App\Model\UserWatchedSummary;
 use Illuminate\Http\Request;
@@ -23,10 +24,11 @@ class SummaryController extends Controller
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 
-	public function addNew(Request $request, Category $category, Currency $currency)
+	public function addNew(Request $request, Category $category, Currency $currency, Employment $employment)
 	{
 		$this->data['categories'] = $category->getForm();
 		$this->data['currencies'] = $currency->getForm();
+		$this->data['employments'] = $employment->getForm();
 		$this->data['summary'] = new Summary();
 
 		return view('user.applicant.addsummary', $this->data);
@@ -105,10 +107,9 @@ class SummaryController extends Controller
 				return redirect(route('user.notepad'));//TODO error page
 			}
 		}
-		$oldsummary = Summary::whereSummaryId($request->summary_id)->firstOrFail();
-		if ($oldsummary->user_id != $request->user()->user_id) {
-			dd(504);//TODO add error page
-		}
+		$oldsummary = Summary::whereUserId($request->user()->user_id)->whereSummaryId(
+			$request->summary_id
+		)->firstOrFail();
 		$oldsummary->update($request->toArray());
 		$oldsummary->save();
 
@@ -124,10 +125,7 @@ class SummaryController extends Controller
 
 	public function remove($id, Request $request)
 	{
-		$summary = Summary::whereSummaryId($id)->firstOrFail();
-		if ($summary->user_id != $request->user()->user_id) {
-			dd(504);//TODO add error page
-		}
+		$summary = Summary::whereUserId($request->user()->user_id)->whereSummaryId($id)->firstOrFail();
 		$summary->delete();
 
 		return redirect(route('user.notepad'));
