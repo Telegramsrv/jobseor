@@ -62,7 +62,7 @@ Route::post('/vacancy/add', [
 	'uses' => 'VacancyController@createNew'
 ]);
 
-Route::post('/vacancy/profession', [
+Route::post('/vacancy/get/profession', [
 	'as' => 'vacancy.profession',
 	'uses' => 'VacancyController@getProfession'
 ]);

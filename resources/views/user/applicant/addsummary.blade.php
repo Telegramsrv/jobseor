@@ -45,7 +45,30 @@
                             </div>
                             <div class="col-xs-7">
                                 <div class="town">
-                                    {!! Form::select('category_id', $categories, $summary->category_id, [ 'class' => 'input_width', 'id' => 'select_category', 'required']) !!}
+                                    {!! Form::select('category_id', $categories, $summary->category_id, [ 'class' => 'input_width', 'required', 'onchange' => 'updateProfession();']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="vac">
+                            <div class="col-xs-5">
+                                <p>Профессия<span>*</span></p>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="town profession">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="vac">
+                            <div class="col-xs-5">
+                                <p>Тип занятости<span>*</span></p>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="town">
+                                    {!! Form::select('employment_id', $employments, $summary->employment_id, [ 'class' => 'input_width', 'required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -58,7 +81,7 @@
                             <div class="col-xs-7">
                                 <div>
                                     {!! Form::number('salary', $summary->salary,  [ 'class' => 'input_width']) !!}
-                                    {!! Form::select('currency_id', $currencies, $summary->currency_id, [ 'class' => 'input_width', 'id' => 'select_currency']) !!}
+                                    {!! Form::select('currency_id', $currencies, $summary->currency_id, [ 'class' => 'input_width']) !!}
                                 </div>
                             </div>
                         </div>
@@ -96,12 +119,33 @@
         </div>
     </div>
     <script>
+        $(document).ready(function () {
+            updateProfession();
+        });
+
+        function updateProfession() {
+            var category_id = $('select[name=category_id]').val();
+            $('.profession').empty();
+            $.ajax({
+                url: '{{ route("vacancy.profession") }}',
+                method: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    category_id: category_id
+                },
+                success: function (data) {
+                    $('.profession').append(data);
+                    $('select[name=profession_id]').removeClass('border_illusion').addClass('input_width');
+                }
+            });
+        }
+
         function preview() {
             $('.preview').remove();
             var title = $("input[name*='title']").val();
             var salary = $("input[name*='salary']").val();
-            var category_id = $("#select_category").val();
-            var currency_id = $("#select_currency").val();
+            var category_id = $("select[name=category_id]").val();
+            var currency_id = $("select[name=currency_id]").val();
             var information = $("textarea").val();
 
 
@@ -118,7 +162,7 @@
                 },
                 success: function (data) {
                     $('.add_vac').after(data);
-                    $(window).scrollTop($('.preview').offset().top);//speed?
+                    $(window).scrollTop($('.preview').offset().top);
                 }
             });
             return false;
