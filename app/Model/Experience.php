@@ -28,6 +28,8 @@ class Experience extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [ 'user_id', 'name', 'year_start', 'year_end', 'position'];
+
     public function user()
     {
     	return $this->belongsTo('App\Model\User','user_id');

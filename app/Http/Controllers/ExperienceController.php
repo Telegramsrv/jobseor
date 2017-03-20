@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+	/**
+	 * @param Request $request
+	 */
+
 	public function newExperience(Request $request)
 	{
 		if ($request->ajax()) {
@@ -14,20 +18,25 @@ class ExperienceController extends Controller
 		}
 	}
 
+	/**
+	 * @param Request $request
+	 */
+
 	public function addExperience(Request $request)
 	{
 		if ($request->ajax())
 		{
-			$experience = new Experience();
-			$experience->user_id = $request->user()->user_id;
-			$experience->name = $request->name;
-			$experience->year_start = $request->year_start;
-			$experience->year_end = $request->year_end;
-			$experience->position = $request->position;
-			$experience->save();
+			$request['user_id'] = $request->user()->user_id;
+			Experience::create($request->toArray());
 			echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return string
+	 */
 
     public function editExperience(Request $request)
     {
@@ -40,26 +49,17 @@ class ExperienceController extends Controller
 				return '0';
 			}
 
-		    if (strcmp($experience->name, $request->name)) {
-			    $experience->name = $request->name;
-		    }
-
-		    if ($experience->year_start != $request->year_start) {
-			    $experience->year_start = $request->year_start;
-		    }
-
-		    if ($experience->year_end != $request->year_end) {
-			    $experience->year_end = $request->year_end;
-		    }
-
-		    if (strcmp($experience->position, $request->position)) {
-			    $experience->position = $request->position;
-		    }
+		    $request['user_id'] = $request->user()->user_id;
+			$experience->update($request->toArray());
 
 		    $experience->save();
 		    echo json_encode([ 'class' => 'success', 'message' => 'Изменения успешно сохранены!']);
 	    }
     }
+
+	/**
+	 * @param Request $request
+	 */
 
 	public function removeExperience(Request $request)
 	{
