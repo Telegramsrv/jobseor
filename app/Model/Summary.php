@@ -3,20 +3,21 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Model\Summary
  *
- * @property int $summary_id
- * @property int $user_id
- * @property string $title
- * @property int $salary
- * @property int $currency_id
- * @property string $information
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \App\Model\Currency $currency
- * @property-read \App\Model\User $user
+ * @property int                                                                           $summary_id
+ * @property int                                                                           $user_id
+ * @property string                                                                        $title
+ * @property int                                                                           $salary
+ * @property int                                                                           $currency_id
+ * @property string                                                                        $information
+ * @property \Carbon\Carbon                                                                $created_at
+ * @property \Carbon\Carbon                                                                $updated_at
+ * @property-read \App\Model\Currency                                                      $currency
+ * @property-read \App\Model\User                                                          $user
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCurrencyId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereInformation($value)
@@ -26,33 +27,44 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereUserId($value)
  * @mixin \Eloquent
- * @property int $category_id
+ * @property int                                                                           $category_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereCategoryId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedSummary[] $viewers
- * @property int $profession_id
- * @property int $employment_id
- * @property-read \App\Model\Employment $employment
- * @property-read \App\Model\Profession $profession
+ * @property int                                                                           $profession_id
+ * @property int                                                                           $employment_id
+ * @property-read \App\Model\Employment                                                    $employment
+ * @property-read \App\Model\Profession                                                    $profession
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereEmploymentId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereProfessionId($value)
  */
 class Summary extends Model
 {
-    protected $primaryKey = 'summary_id';
+	use SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'category_id', 'profession_id', 'employment_id','title', 'salary', 'currency_id', 'information'
-    ];
+	protected $primaryKey = 'summary_id';
 
-    public function user()
-    {
-    	return $this->belongsTo('App\Model\User','user_id');
-    }
+	protected $dates = [ 'deleted_at'];
 
-    public function currency()
-    {
-    	return $this->belongsTo('App\Model\Currency','currency_id');
-    }
+	protected $fillable = [
+		'user_id',
+		'category_id',
+		'profession_id',
+		'employment_id',
+		'title',
+		'salary',
+		'currency_id',
+		'information'
+	];
+
+	public function user()
+	{
+		return $this->belongsTo('App\Model\User', 'user_id');
+	}
+
+	public function currency()
+	{
+		return $this->belongsTo('App\Model\Currency', 'currency_id');
+	}
 
 	public function viewers()
 	{

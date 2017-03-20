@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Model\Vacancy
@@ -59,7 +60,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Vacancy extends Model
 {
+	use SoftDeletes;
+
 	protected $primaryKey = 'vacancy_id';
+
+	protected $dates = [ 'deleted_at'];
 
 	protected $fillable = [
 		'user_id', 'title', 'category_id', 'profession_id', 'country_id', 'city', 'education_type_id', 'employment_id',

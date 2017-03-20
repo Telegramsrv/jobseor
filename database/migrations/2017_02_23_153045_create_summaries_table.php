@@ -24,6 +24,7 @@ class CreateSummariesTable extends Migration
             $table->integer('currency_id');
             $table->longText('information');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

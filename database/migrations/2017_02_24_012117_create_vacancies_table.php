@@ -29,6 +29,7 @@ class CreateVacanciesTable extends Migration
             $table->integer('age_min')->nullable();
             $table->integer('age_max')->nullable();
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
