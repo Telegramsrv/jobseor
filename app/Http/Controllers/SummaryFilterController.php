@@ -7,6 +7,7 @@ use App\Model\Country;
 use App\Model\EducationType;
 use App\Model\Employment;
 use App\Model\ExperienceType;
+use App\Model\Profession;
 use App\Model\Summary;
 use Illuminate\Http\Request;
 
@@ -29,10 +30,14 @@ class SummaryFilterController extends Controller
 		Country $country,
 		Employment $employment,
 		EducationType $educationType,
-		ExperienceType $experienceType
+		ExperienceType $experienceType,
+		Profession $profession
 	) {
 		$this->data['categories'] = $category->getForm();
 		$this->data['categories']['-1'] = 'Все';
+
+		$this->data['professions'] = $profession->getFormAll();
+		$this->data['professions']['-1'] = 'Любая';
 
 		$this->data['countries'] = $country->getForm();
 		$this->data['countries']['-1'] = 'Любая';
@@ -60,7 +65,16 @@ class SummaryFilterController extends Controller
 			if ($request->category_id != -1) {
 				$summary = $summary->whereCategoryId($request->category_id);
 			}
+
+			if ($request->profession_id != -1) {
+				$summary = $summary->whereProfessionId($request->profession_id);
+			}
+
+			if ($request->employment_id != -1) {
+				$summary = $summary->whereEmploymentId($request->employment_id);
+			}
 			$summary = $summary->get();
+
 			if ($request->country_id != -1) {
 				$summary = $summary->filter(
 					function ($item) use ($request) {
@@ -68,13 +82,7 @@ class SummaryFilterController extends Controller
 					}
 				);
 			}
-//			if ($request->employment_id != -1) {
-//				$summary = $summary->filter(
-//					function ($item) use ($request) {
-//						return $item->user->applicant->country->country_id == $request->country_id;
-//					}
-//				);
-//			}
+
 			if ($request->education_type_id != 5) {
 				$summary = $summary->filter(
 					function ($item) use ($request) {
@@ -82,6 +90,7 @@ class SummaryFilterController extends Controller
 					}
 				);
 			}
+
 			if ($request->experience_type_id != -1) {
 				$summary = $summary->filter(
 					function ($item) use ($request,$experienceType) {
