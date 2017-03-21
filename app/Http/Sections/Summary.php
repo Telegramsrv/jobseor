@@ -5,7 +5,10 @@ namespace App\Http\Sections;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
+use App\Model\Category;
 use App\Model\Currency;
+use App\Model\Employment;
+use App\Model\Profession;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Section;
@@ -41,13 +44,15 @@ class Summary extends Section
      */
     public function onDisplay()
     {
-	    $display = AdminDisplay::datatables()->with('user')
+	    $display = AdminDisplay::datatables()->with('user')->with('category')->with('profession')
 	                           ->setHtmlAttribute('class', 'table-primary');
 	    $display->setColumns(
 		    \AdminColumn::text('summary_id', '#')->setWidth('10px'),
 		    \AdminColumn::text('user.name', 'ФИО')->setWidth('100px'),
 		    \AdminColumn::text('user.email', 'Email')->setWidth('100px'),
-		    \AdminColumn::text('title', 'Название')->setWidth('250px')
+		    \AdminColumn::text('title', 'Название')->setWidth('150px'),
+		    \AdminColumn::text('category.name', 'Категория')->setWidth('100px'),
+		    \AdminColumn::text('profession.name', 'Професия')->setWidth('100px')
 	    );
 
 	    return $display;
@@ -67,6 +72,9 @@ class Summary extends Section
 			    AdminFormElement::text('title', 'Название')->required(),
 			    AdminFormElement::number('salary', 'Зарплата от')->required(),
 			    AdminFormElement::select('currency_id', 'Валюта', Currency::class)->setDisplay('name')->required(),
+			    AdminFormElement::select('category_id', 'Категория', Category::class)->setDisplay('name')->required(),
+			    AdminFormElement::select('profession_id', 'Професия', Profession::class)->setDisplay('name')->required(),
+			    AdminFormElement::select('employment_id', 'Зайнятость', Employment::class)->setDisplay('name')->required(),
 			    AdminFormElement::wysiwyg('information','Профейсиональные навыки'),
 		    ]
 	    );

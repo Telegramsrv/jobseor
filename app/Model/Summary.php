@@ -80,4 +80,9 @@ class Summary extends Model
 	{
 		return $this->belongsTo('App\Model\Profession', 'profession_id');
 	}
+
+	public function category()
+	{
+		return $this->belongsTo('App\Model\Category', 'category_id');
+	}
 }
