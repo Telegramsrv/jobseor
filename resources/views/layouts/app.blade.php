@@ -30,7 +30,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2 col-xs-2" id="logo">
-            <a href="http://jobseor.com">
+            <a href="/">
               <img title="Поиск вакансий в Европе" src="/image/jobseor.png" alt="Логотип компании"  class="logotype" />
             </a>
         </div>
@@ -39,8 +39,9 @@
         <div class="col-md-6 float_right" style="margin-left: -15px;" id="headermenu">
           <div class="enter">
               <a href="/visa-country.php" style="padding-left: 10px; padding-right: 10px">Визы и страны</a>
-              <a href="/poisk-rezume.php" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a> 
-              <a href="/dobavit-rezume.php" style="padding-left: 10px; padding-right: 10px;">Добавить резюме</a> 
+              <a href="/summary" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a>
+              <a href="/vacancy" style="padding-left: 10px; padding-right: 10px;">Найти вакансию</a>
+              <a href="/dobavit-rezume.php" style="padding-left: 10px; padding-right: 10px;">Добавить резюме</a>
               <a href="/dobavit-vakansiyu.php" style="padding-left: 10px; padding-right: 10px;">Добавить вакансию</a>
               @if (Auth::guest())
               <a href="{{ route('login') }}" style="padding-left: 10px; padding-right: 10px;">Войти</a>

@@ -12,12 +12,14 @@
                     <div class="info_employer">
                         <div class="clearfix">
                             <div class="image_employer">
-                                <img alt="employer image" src="/{{ $user->image }}">
+                                <img alt="employer image" src="/{{ $summary->user->image }}">
                             </div>
                             <div class="how_find_employer">
                                 <h3>Должность: {{ $summary->title }}</h3>
                                 <h2><strong>Основная информация:</strong></h2>
+                                @if ( isset($user->applicant->country))
                                 <p>Страна: {{ $user->applicant->country->name }}</p>
+                                @endif
                                 <p>Город: {{ $user->applicant->city }}</p>
                                 @foreach( $user->applicant->education as $item)
                                     <p>Образование: {{ $item->type->name }}, {{ $item->name }}, {{ $item->year_start }}-{{ $item->year_end }} год, {{ $item->specialize }}.</p>
