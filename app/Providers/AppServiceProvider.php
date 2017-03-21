@@ -13,12 +13,26 @@ use Illuminate\Support\Facades\Schema;//commit must fixed
 class AppServiceProvider extends ServiceProvider
 {
 	/**
+	 * @var array
+	 */
+
+	protected $widgets = [
+		\App\Widgets\NavigationUserBlock::class
+	];
+
+	/**
 	 * Bootstrap any application services.
 	 *
 	 * @return void
 	 */
 	public function boot()
 	{
+		$widgetsRegistry = $this->app[\SleepingOwl\Admin\Contracts\Widgets\WidgetsRegistryInterface::class];
+
+		foreach ($this->widgets as $widget) {
+			$widgetsRegistry->registerWidget($widget);
+		}
+
 		Schema::defaultStringLength(191);
 		User::created(
 			function ($user) {
