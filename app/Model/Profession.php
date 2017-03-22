@@ -16,14 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Model\Category $category
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereCategoryId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereSlug($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereSubcategoryId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\Subcategory whereWeight($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereCategoryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereImage($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereSlug($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereSubcategoryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Profession whereWeight($value)
  * @mixin \Eloquent
  * @property int $profession_id
  * @property bool $free

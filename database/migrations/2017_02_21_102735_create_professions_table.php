@@ -20,7 +20,6 @@ class CreateProfessionsTable extends Migration
             $table->string('slug')->unique();
             $table->string('image');
             $table->integer('weight');
-            $table->boolean('free')->default(0);
             $table->timestamps();
         });
     }
