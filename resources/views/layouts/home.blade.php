@@ -13,6 +13,7 @@
                 <a href="{{ route('message.list') }}" style="cursor: pointer; padding: 10px;">Мои диалоги</a>
                 <a href="{{ route('user.notepad.history') }}" style="cursor: pointer; padding: 10px;">История</a>
                 <a href="{{ route('user.notepad.viewers') }}" style="cursor: pointer; padding: 10px;">Просмотры резюме</a>
+                <a href="{{ route('user.bookmarks') }}" style="cursor: pointer; padding: 10px;">Мои закладки</a>
                 <a href="{{ route('user.notepad') }}" style="padding: 10px;">Мои резюме и вакансии</a>
                 <a href="{{ route('user.edit') }}" style="cursor: pointer; padding: 10px;">Настройки</a>
             </p>

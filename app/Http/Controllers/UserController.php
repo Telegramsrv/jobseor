@@ -75,7 +75,7 @@ class UserController extends Controller
 	}
 
 	/**
-	 * @param Request       $request
+	 * @param Request $request
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
@@ -93,11 +93,11 @@ class UserController extends Controller
 
 	public function editPWD(Request $request)
 	{
-		if ($request->ajax())
-		{
+		if ($request->ajax()) {
 			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
 				$request->user()->password = \Hash::make($request->new_password);
 				$request->user()->save();
+
 				return redirect(route('user.edit'));
 			}
 			else {
@@ -203,10 +203,12 @@ class UserController extends Controller
 		$this->data['user'] = $user;
 		if ($user->role_id == 2) {
 			$this->data['company'] = $user->company;
+
 			return view('user.company.index', $this->data);
 		}
 		if ($user->role_id == 3) {
 			$this->data['applicant'] = $user->applicant;
+
 			return view('user.applicant.index', $this->data);
 		}
 	}
@@ -289,8 +291,8 @@ class UserController extends Controller
 
 	public function getBookMarks(Request $request)
 	{
-		$this->data['bookmarks'] = $request->user()->bookmarks;
-		dd($this->data);
+		$this->data['bookmarks'] = $request->user()->bookmarks()->orderBy('updated_at', 'desc')->get();
+
 		return view('user.bookmarks', $this->data);
 	}
 }
