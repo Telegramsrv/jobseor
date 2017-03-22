@@ -91,6 +91,11 @@ Route::post('/vacancy/{id}/delete', [
 	'as' => 'vacancy.remove',
 	'uses' => 'VacancyController@remove'
 ]);
+
+Route::post('/vacancy/{id}/bookmark', [
+	'as' => 'vacancy.bookmark',
+	'uses' => 'VacancyController@bookmark'
+]);
 // SUMMARY
 
 Route::get('/summary/add', [

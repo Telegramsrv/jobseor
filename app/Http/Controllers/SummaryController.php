@@ -178,8 +178,17 @@ class SummaryController extends Controller
 
 	public function bookmark($id, Request $request)
 	{
-		$bookmark = Bookmark::firstOrCreate([ 'user_id' => $request->user()->user_id, 'item_id' => $id, 'vacancy' => '0']);
-		if (!$bookmark->wasRecentlyCreated)
-			$bookmark->delete();
+		if ($request->ajax()) {
+			if (Summary::whereSummaryId($id)->first()->user_id == $request->user()->user_id) {
+				die('Failed');
+			}
+
+			$bookmark = Bookmark::firstOrCreate(
+				['user_id' => $request->user()->user_id, 'item_id' => $id, 'vacancy' => '0']
+			);
+			if (!$bookmark->wasRecentlyCreated) {
+				$bookmark->delete();
+			}
+		}
 	}
 }

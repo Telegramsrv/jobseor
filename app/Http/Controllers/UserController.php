@@ -281,6 +281,12 @@ class UserController extends Controller
 		}
 	}
 
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
 	public function getBookMarks(Request $request)
 	{
 		$this->data['bookmarks'] = $request->user()->bookmarks;

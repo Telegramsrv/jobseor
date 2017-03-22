@@ -25,7 +25,14 @@
                             </a>
                         </div>
                         <div class="info_employer">
-                            <h2 id="writte_main-name">{{ $vacancy->title }}</h2>
+                            <h2 id="writte_main-name">
+                                {{ $vacancy->title }}
+                                @if($isBookmark)
+                                    <button class="btn btn-danger btn-xs" onclick="updateBookmarks();"> Удалить из избранных</button>
+                                @else
+                                    <button class="btn btn-success btn-xs" onclick="updateBookmarks();"> В избранное</button>
+                                @endif
+                            </h2>
                             <div class="clearfix">
                                 <div class="image_employer">
                                     <img title="Имя Фамилия" alt="employer image" src="{{ $user->image }}">
@@ -84,6 +91,17 @@
         </div>
     </div>
     <script>
+        function updateBookmarks() {
+            $.ajax({
+                url: '{{ route("vacancy.bookmark", [ 'id' => $vacancy->vacancy_id]) }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}'},
+                success: function (data) {
+                    location.reload();
+                }
+            })
+        }
+
         $(document).ready(function () {
             $.ajax({
                 url: '{{ route("contact.index") }}',

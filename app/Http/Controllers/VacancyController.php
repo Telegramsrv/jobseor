@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Bookmark;
 use App\Model\Category;
 use App\Model\Country;
 use App\Model\Currency;
@@ -204,6 +205,7 @@ class VacancyController extends Controller
 		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
 		$this->data['vacancy'] = $vacancy;
 		$this->data['user'] = $vacancy->user;
+		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(1)->get()->isNotEmpty();
 		if ($request->user()->user_id != $vacancy->user_id && $request->user()->role_id != 1) {
 			$vacancy_view = UserWatchedVacancy::whereUserId($request->user()->user_id)
 			                                  ->firstOrCreate(
@@ -218,6 +220,13 @@ class VacancyController extends Controller
 		return view('vacancy.index', $this->data);
 	}
 
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+
 	public function remove($id, Request $request)
 	{
 		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
@@ -227,5 +236,26 @@ class VacancyController extends Controller
 		$vacancy->delete();
 
 		return redirect(route('user.notepad'));
+	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 */
+
+	public function bookmark($id, Request $request)
+	{
+		if ($request->ajax()) {
+			if (Vacancy::whereVacancyId($id)->first()->user_id == $request->user()->user_id) {
+				die('Failed');
+			}
+
+			$bookmark = Bookmark::firstOrCreate(
+				['user_id' => $request->user()->user_id, 'item_id' => $id, 'vacancy' => '1']
+			);
+			if (!$bookmark->wasRecentlyCreated) {
+				$bookmark->delete();
+			}
+		}
 	}
 }
