@@ -40,6 +40,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \App\Model\Company $company
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $recivemessage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $sentmessage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Bookmark[] $bookmarks
  */
 class User extends Authenticatable
 {
@@ -103,5 +104,10 @@ class User extends Authenticatable
     public function recivemessage()
     {
 	    return $this->hasMany('App\Model\Message', 'user_id', 'recipient_id');
+    }
+
+    public function bookmarks()
+    {
+		return $this->hasMany('App\Model\Bookmark', 'user_id', 'user_id');
     }
 }

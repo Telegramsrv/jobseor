@@ -128,11 +128,20 @@ Route::get('/summary/{id}', [
 	'uses' => 'SummaryController@view'
 ]);
 
+Route::post('/summary/{id}/bookmark', [
+	'as' => 'summary.bookmark',
+	'uses' => 'SummaryController@bookmark'
+]);
 //USER
 
 Route::get('/home', [
 	'as' => 'user.home',
     'uses' =>   'UserController@index'
+]);
+
+Route::get('/bookmarks', [
+	'as' => 'user.bookmarks',
+	'uses' =>   'UserController@getBookMarks'
 ]);
 
 Route::get('/notepad', [

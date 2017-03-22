@@ -15,7 +15,14 @@
                                 <img alt="employer image" src="/{{ $summary->user->image }}">
                             </div>
                             <div class="how_find_employer">
-                                <h3>Должность: {{ $summary->title }}</h3>
+                                <h3>
+                                    Должность: {{ $summary->title }}
+                                    @if($isBookmark)
+                                        <button class="btn btn-danger btn-xs" onclick="updateBookmarks();"> Удалить из избранных</button>
+                                    @else
+                                        <button class="btn btn-success btn-xs" onclick="updateBookmarks();"> В избранное</button>
+                                    @endif
+                                </h3>
                                 <h2><strong>Основная информация:</strong></h2>
                                 @if ( isset($user->applicant->country))
                                 <p>Страна: {{ $user->applicant->country->name }}</p>
@@ -46,6 +53,17 @@
         </div>
     </div>
     <script>
+        function updateBookmarks() {
+            $.ajax({
+                url: '{{ route("summary.bookmark", [ 'id' => $summary->summary_id]) }}',
+                method: "POST",
+                data: { _token: '{{ csrf_token() }}'},
+                success: function (data) {
+                    location.reload();
+                }
+            })
+        }
+
         $(document).ready(function () {
             $.ajax({
                 url: '{{ route("contact.index") }}',

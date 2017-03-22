@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Bookmark;
 use App\Model\Category;
 use App\Model\Currency;
 use App\Model\Employment;
@@ -154,6 +155,8 @@ class SummaryController extends Controller
 		$summary = Summary::whereSummaryId($id)->firstOrFail();
 		$this->data['summary'] = $summary;
 		$this->data['user'] = $summary->user;
+		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(0)->get()->isNotEmpty();
+
 		if ($request->user()->user_id != $summary->user_id && $request->user()->role_id != 1) {
 			$summary_view = UserWatchedSummary::whereUserId($request->user()->user_id)
 			                                  ->firstOrCreate(
@@ -166,5 +169,17 @@ class SummaryController extends Controller
 		}
 
 		return view('summary.index', $this->data);
+	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 */
+
+	public function bookmark($id, Request $request)
+	{
+		$bookmark = Bookmark::firstOrCreate([ 'user_id' => $request->user()->user_id, 'item_id' => $id, 'vacancy' => '0']);
+		if (!$bookmark->wasRecentlyCreated)
+			$bookmark->delete();
 	}
 }

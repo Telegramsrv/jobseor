@@ -57,6 +57,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $profession_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereProfessionId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedVacancy[] $viewers
+ * @property \Carbon\Carbon $deleted_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereDeletedAt($value)
  */
 class Vacancy extends Model
 {

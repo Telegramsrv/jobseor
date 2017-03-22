@@ -36,6 +36,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Model\Profession                                                    $profession
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereEmploymentId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereProfessionId($value)
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \App\Model\Category $category
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\Summary whereDeletedAt($value)
  */
 class Summary extends Model
 {

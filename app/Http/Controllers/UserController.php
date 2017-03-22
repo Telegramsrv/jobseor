@@ -280,4 +280,11 @@ class UserController extends Controller
 			return view('vacancy.history', $this->data);
 		}
 	}
+
+	public function getBookMarks(Request $request)
+	{
+		$this->data['bookmarks'] = $request->user()->bookmarks;
+		dd($this->data);
+		return view('user.bookmarks', $this->data);
+	}
 }
