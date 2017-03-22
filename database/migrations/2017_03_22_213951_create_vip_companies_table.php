@@ -16,7 +16,7 @@ class CreateVipCompaniesTable extends Migration
         Schema::create('vip_companies', function (Blueprint $table) {
             $table->increments('id');
 	        $table->integer('company_id');
-	        $table->integer('vip_applicant_settings_id');
+	        $table->integer('vip_company_settings_id');
             $table->timestamps();
         });
     }

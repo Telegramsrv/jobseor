@@ -179,7 +179,15 @@ Route::post('/settings/info', [
 	'uses' =>   'UserController@editInfo'
 ]);
 
+Route::get('/vip', [
+	'as' => 'user.vip',
+	'uses' =>   'UserController@getVIP'
+]);
 
+Route::post('/vip', [
+	'as' => 'user.vip.post',
+	'uses' =>   'UserController@postVIP'
+]);
 //EXPERIENCE
 
 Route::post('/settings/experience/new', [

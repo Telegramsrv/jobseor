@@ -10,6 +10,10 @@ use App\Model\EducationType;
 use App\Model\User;
 use App\Model\UserWatchedSummary;
 use App\Model\UserWatchedVacancy;
+use App\Model\VipApplicant;
+use App\Model\VipApplicantSetting;
+use App\Model\VipCompany;
+use App\Model\VipCompanySetting;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -294,5 +298,45 @@ class UserController extends Controller
 		$this->data['bookmarks'] = $request->user()->bookmarks()->orderBy('updated_at', 'desc')->get();
 
 		return view('user.bookmarks', $this->data);
+	}
+
+	/**
+	 * @param Request             $request
+	 * @param VipApplicantSetting $vipApplicantSetting
+	 * @param VipCompanySetting   $vipCompanySetting
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function getVIP(
+		Request $request,
+		VipApplicantSetting $vipApplicantSetting,
+		VipCompanySetting $vipCompanySetting
+	) {
+		if ($request->user()->role_id == 2) {
+			$activity = VipCompany::whereCompanyId($request->user()->company->company_id)->get();
+			$activity = $activity->filter(
+				function ($item) use ($request) {
+					return strtotime($item->created_at) + $item->settings->time * 24 * 60 >= time();
+				}
+			);
+			$this->data['VIP'] = $activity;
+			$this->data['vip_type'] = $vipCompanySetting->getForm();
+		}
+
+		if ($request->user()->role_id == 3) {
+			$activity = VipApplicant::whereApplicantId($request->user()->applicant->applicant_id)->get();
+
+			$activity = $activity->filter(
+				function ($item) use ($request) {
+					return strtotime($item->created_at) + $item->settings->time * 24 * 60 >= time();
+				}
+			);
+			$this->data['VIP'] = $activity;
+			$this->data['vip_type'] = $vipApplicantSetting->getForm();
+		}
+		$this->data['user'] = $request->user();
+
+		return view('user.vip', $this->data);
 	}
 }
