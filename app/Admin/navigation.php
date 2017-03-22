@@ -115,6 +115,12 @@ return [
 		    (new Page(\App\Model\ExperienceType::class))
 			    ->setPriority(250)
 			    ->setTitle('Виды стажа'),
+		    (new Page(\App\Model\VipApplicantSetting::class))
+			    ->setPriority(300)
+			    ->setTitle('Настройки для VIP Соискателей'),
+		    (new Page(\App\Model\VipCompanySetting::class))
+			    ->setPriority(350)
+			    ->setTitle('Настройки для VIP Компаний'),
 	    ]
     ],
 
