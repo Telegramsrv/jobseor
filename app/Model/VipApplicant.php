@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VipApplicant extends Model
 {
-	protected $fillable = [ 'company_id', 'vip_applicant_settings_id'];
+	protected $fillable = [ 'applicant_id', 'vip_applicant_settings_id'];
 
 	public function applicant()
 	{

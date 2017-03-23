@@ -353,7 +353,7 @@ class UserController extends Controller
 					$request->user()->balance -= $VipSettings->cost;
 					VipCompany::create(
 						[
-							'company_id'                => $request->user()->company->company_id,
+							'company_id'              => $request->user()->company->company_id,
 							'vip_company_settings_id' => $VipSettings->id
 						]
 					);
@@ -362,7 +362,30 @@ class UserController extends Controller
 					echo json_encode(['class' => 'success', 'message' => 'VIP аккаунт успешно активирован!']);
 				}
 				else {
-					echo json_encode(['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']);
+					echo json_encode(
+						['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']
+					);
+				}
+			}
+
+			if ($request->user()->role_id == 3) {
+				$VipSettings = VipApplicantSetting::whereId($request->vip_id)->firstOrFail();
+				if ($VipSettings->cost < $request->user()->balance) {
+					$request->user()->balance -= $VipSettings->cost;
+					VipApplicant::create(
+						[
+							'applicant_id'              => $request->user()->applicant->applicant_id,
+							'vip_applicant_settings_id' => $VipSettings->id
+						]
+					);
+					$request->user()->save();
+
+					echo json_encode(['class' => 'success', 'message' => 'VIP аккаунт успешно активирован!']);
+				}
+				else {
+					echo json_encode(
+						['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']
+					);
 				}
 			}
 		}
