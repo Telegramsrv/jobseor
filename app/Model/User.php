@@ -132,7 +132,7 @@ class User extends Authenticatable
 		);
 
 		if ($activity->isNotEmpty()) {
-			return $activity;
+			return $activity[0];
 		}
 		else {
 			return false;

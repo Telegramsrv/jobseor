@@ -37,6 +37,10 @@ class AvailableContact extends Model
 	{
 		if ($first_user == $second_user ) return true;
 
+		$user = User::whereUserId($first_user)->first();
+		if ($user->getVIP())
+			return true;
+
 		$availableContact = AvailableContact::whereUserId($first_user)->whereOwnerId($second_user)
 		                                    ->orWhere('user_id', $second_user)->whereOwnerId($first_user)
 			->whereDate('created_at', '>', date('Y-m-d H:m:s', time() - 24 * 60 * 60))
