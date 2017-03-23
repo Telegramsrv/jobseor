@@ -88,4 +88,21 @@ class Summary extends Model
 	{
 		return $this->belongsTo('App\Model\Category', 'category_id');
 	}
+
+	public function isVip()
+	{
+		$active = VipSummary::whereSummaryId($this->summary_id)->get();
+
+		$active = $active->filter(
+			function ($item) {
+				return strtotime($item->created_at) + $item->settings->time * 24 * 60 * 60 >= time();
+			}
+		);
+		if ($active->isNotEmpty()) {
+			return $active[0];
+		}
+		else {
+			return false;
+		}
+	}
 }

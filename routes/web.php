@@ -133,6 +133,17 @@ Route::get('/summary/{id}', [
 	'uses' => 'SummaryController@view'
 ]);
 
+Route::get('/summary/{id}/vip', [
+	'as' => 'summary.vip',
+	'uses' => 'SummaryController@getVip'
+]);
+
+Route::post('/summary/{id}/vip', [
+	'as' => 'summary.vip.post',
+	'uses' => 'SummaryController@postVip'
+]);
+
+
 Route::post('/summary/{id}/bookmark', [
 	'as' => 'summary.bookmark',
 	'uses' => 'SummaryController@bookmark'

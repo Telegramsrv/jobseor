@@ -9,6 +9,8 @@ use App\Model\Employment;
 use App\Model\Profession;
 use App\Model\Summary;
 use App\Model\UserWatchedSummary;
+use App\Model\VipSummary;
+use App\Model\VipSummarySettings;
 use Illuminate\Http\Request;
 
 class SummaryController extends Controller
@@ -155,7 +157,9 @@ class SummaryController extends Controller
 		$summary = Summary::whereSummaryId($id)->firstOrFail();
 		$this->data['summary'] = $summary;
 		$this->data['user'] = $summary->user;
-		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(0)->get()->isNotEmpty();
+		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(
+			0
+		)->get()->isNotEmpty();
 
 		if ($request->user()->user_id != $summary->user_id && $request->user()->role_id != 1) {
 			$summary_view = UserWatchedSummary::whereUserId($request->user()->user_id)
@@ -188,6 +192,44 @@ class SummaryController extends Controller
 			);
 			if (!$bookmark->wasRecentlyCreated) {
 				$bookmark->delete();
+			}
+		}
+	}
+
+	public function getVip($id, Request $request, VipSummarySettings $settings)
+	{
+		$summary = Summary::whereSummaryId($id)->whereUserId($request->user()->user_id)->firstOrFail();
+		if ($summary->isVip()) {
+			return redirect(route('user.notepad'));
+		}
+		else {
+			$this->data['user'] = $request->user();
+			$this->data['settings'] = $settings->getForm();
+
+			return view('summary.vip', $this->data);
+		}
+	}
+
+	public function postVip($id, Request $request)
+	{
+		if ($request->ajax()) {
+			$summary = Summary::whereSummaryId($id)->whereUserId($request->user()->user_id)->firstOrFail();
+			$settings = VipSummarySettings::whereId($request->settings_id)->firstOrFail();
+
+			if ($request->user()->balance >= $settings->cost) {
+				VipSummary::create(
+					[
+						'summary_id'  => $summary->summary_id,
+						'settings_id' => $settings->id
+					]
+				);
+				$request->user()->balance -= $settings->cost;
+				$request->user()->save();
+
+				echo json_encode(['class' => 'success', 'message' => 'VIP резюме успешно активировано!']);
+			}
+			else {
+				echo json_encode(['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']);
 			}
 		}
 	}
