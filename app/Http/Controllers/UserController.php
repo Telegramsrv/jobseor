@@ -339,4 +339,32 @@ class UserController extends Controller
 
 		return view('user.vip', $this->data);
 	}
+
+	/**
+	 * @param Request $request
+	 */
+
+	public function postVIP(Request $request)
+	{
+		if ($request->ajax()) {
+			if ($request->user()->role_id == 2) {
+				$VipSettings = VipCompanySetting::whereId($request->vip_id)->firstOrFail();
+				if ($VipSettings->cost < $request->user()->balance) {
+					$request->user()->balance -= $VipSettings->cost;
+					VipCompany::create(
+						[
+							'company_id'                => $request->user()->company->company_id,
+							'vip_company_settings_id' => $VipSettings->id
+						]
+					);
+					$request->user()->save();
+
+					echo json_encode(['class' => 'success', 'message' => 'VIP аккаунт успешно активирован!']);
+				}
+				else {
+					echo json_encode(['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']);
+				}
+			}
+		}
+	}
 }
