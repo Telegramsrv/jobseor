@@ -3,6 +3,23 @@
         <div class="headervakanse">
             Найдено: {{ $summaries->count() }} резюме.
         </div>
+        <h4>VIP Резюме</h4>
+        @foreach($vips as $summary)
+            <div class="vakanceblock">
+                <div class="avatarvacanse">
+                    <img src="/{{ $summary->user->image }}" alt="Аватар без фото" title="{{ $summary->title }}">
+                </div>
+                <h2><a href=" {{ route('summary.view', [ 'id' => $summary->summary_id]) }}">{{ $summary->title }}</a>
+                </h2>
+                <p>{{ $summary->user->name }}</p>
+                <p>Опыт работы : {{ $summary->user->applicant->experience_year() }} год.
+                    • {{ str_limit($summary->information, 97) }}… • Зарплата
+                    от {{ $summary->salary }} {{ $summary->currency->name }} </p>
+            </div>
+        @endforeach
+
+        <hr/>
+        <h4>Резюме по вашему запросу</h4>
 
         @foreach($summaries as $summary)
             <div class="vakanceblock">

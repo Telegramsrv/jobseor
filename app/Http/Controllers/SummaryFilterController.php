@@ -59,7 +59,7 @@ class SummaryFilterController extends Controller
 	 * @param ExperienceType $experienceType
 	 */
 
-	public function get(Request $request, Summary $summary,ExperienceType $experienceType)
+	public function get(Request $request, Summary $summary, ExperienceType $experienceType)
 	{
 		if ($request->ajax()) {
 			if ($request->category_id != -1) {
@@ -73,7 +73,7 @@ class SummaryFilterController extends Controller
 			if ($request->employment_id != -1) {
 				$summary = $summary->whereEmploymentId($request->employment_id);
 			}
-			$summary = $summary->get();
+			$summary = $summary->orderBy('updated_at', 'desc')->get();
 
 			if ($request->country_id != -1) {
 				$summary = $summary->filter(
@@ -93,13 +93,23 @@ class SummaryFilterController extends Controller
 
 			if ($request->experience_type_id != -1) {
 				$summary = $summary->filter(
-					function ($item) use ($request,$experienceType) {
-						return $item->user->applicant->experience_year() >= $experienceType->whereExperienceTypeId($request->experience_type_id)->firstOrFail()->weight;
+					function ($item) use ($request, $experienceType) {
+						return $item->user->applicant->experience_year() >= $experienceType->whereExperienceTypeId(
+								$request->experience_type_id
+							)->firstOrFail()->weight;
 					}
 				);
 			}
 
-			echo view('filterpage.summarylist', [ 'summaries' => $summary]);
+			$this->data['summaries'] = $summary;
+			$vips = $summary->filter(
+				function ($item) {
+					return $item->isVip() !== false;
+				}
+			);
+			$this->data['vips'] = $vips->random($vips->count() >= 3 ? 3 : $vips->count());;
+
+			echo view('filterpage.summarylist', $this->data);
 		}
 	}
 }
