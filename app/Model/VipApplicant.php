@@ -17,4 +17,12 @@ class VipApplicant extends Model
 	{
 		return $this->belongsTo('App\Model\VipApplicantSetting', 'vip_applicant_settings_id');
 	}
+
+	public function timeleft()
+	{
+		$date1 = new \DateTime(date('Y-m-d H:i:s'));
+		$date2 = new \DateTime(date('Y-m-d H:i:s', strtotime($this->created_at) + $this->settings->time * 60 * 60 * 24));
+
+		return $date2->diff($date1);
+	}
 }

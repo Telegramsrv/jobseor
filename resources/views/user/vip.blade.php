@@ -19,12 +19,10 @@
             <h3>VIP аккаунт</h3>
             <div class="row">
                 <div class="col-xs-12">
-                    @if ($VIP->isNotEmpty())
+                    @if ($VIP)
                         <h3>
                             До окончания VIP аккаунта осталось -
-                            {!! date_diff(date_create(date('Y-m-d H:m:s')),
-			          date_create(date('Y-m-d H:m:s', strtotime($VIP[0]->created_at) + $VIP[0]->settings->time * 60 * 60 * 24))
-			)->format('%d Дней %h Часов %i Минут %s Секунд')  !!}
+                            {!! $VIP[0]->timeleft()->format('%d Дней %h Часов %i Минут %s Секунд') !!}
                         </h3>
                     @else
                         <h4>
@@ -52,7 +50,7 @@
                         },
                         success: function (data) {
                             data = JSON.parse(data);
-                            $('.status').addClass('alert alert-'+ data['class']).append(data['message']);
+                            $('.status').addClass('alert alert-' + data['class']).append(data['message']);
                         }
                     });
                 });

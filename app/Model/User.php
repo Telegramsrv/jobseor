@@ -8,16 +8,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * App\Model\User
  *
- * @property int $user_id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string $phone
- * @property string $type
- * @property string $image
- * @property string $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int                                                                                                            $user_id
+ * @property string                                                                                                         $name
+ * @property string                                                                                                         $email
+ * @property string                                                                                                         $password
+ * @property string                                                                                                         $phone
+ * @property string                                                                                                         $type
+ * @property string                                                                                                         $image
+ * @property string                                                                                                         $remember_token
+ * @property \Carbon\Carbon                                                                                                 $created_at
+ * @property \Carbon\Carbon                                                                                                 $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereEmail($value)
@@ -30,84 +30,112 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereUserId($value)
  * @mixin \Eloquent
- * @property int $role_id
- * @property int $balance
+ * @property int                                                                                                            $role_id
+ * @property int                                                                                                            $balance
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereBalance($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereRoleId($value)
- * @property-read \App\Model\Role $role
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Contacts[] $contacts
- * @property-read \App\Model\Applicant $applicant
- * @property-read \App\Model\Company $company
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $recivemessage
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $sentmessage
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Bookmark[] $bookmarks
+ * @property-read \App\Model\Role                                                                                           $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Contacts[]                                            $contacts
+ * @property-read \App\Model\Applicant                                                                                      $applicant
+ * @property-read \App\Model\Company                                                                                        $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[]                                             $recivemessage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[]                                             $sentmessage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Bookmark[]                                            $bookmarks
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+	use Notifiable;
 
-    protected $primaryKey = 'user_id';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'role_id',
-    ];
+	protected $primaryKey = 'user_id';
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+		'role_id',
+	];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'password',
+		'remember_token',
+	];
 
-    public function hasRole($id)
-    {
-    	return $this->role_id == $id;
-    }
+	public function hasRole($id)
+	{
+		return $this->role_id == $id;
+	}
 
-    public function role()
-    {
-    	return $this->belongsTo('App\Model\Role','role_id');
-    }
+	public function role()
+	{
+		return $this->belongsTo('App\Model\Role', 'role_id');
+	}
 
-    public function company()
-    {
-	    return $this->belongsTo('App\Model\Company', 'user_id', 'user_id');
-    }
+	public function company()
+	{
+		return $this->belongsTo('App\Model\Company', 'user_id', 'user_id');
+	}
 
-    public function applicant()
-    {
-	    return $this->belongsTo('App\Model\Applicant', 'user_id', 'user_id');
-    }
+	public function applicant()
+	{
+		return $this->belongsTo('App\Model\Applicant', 'user_id', 'user_id');
+	}
 
 	public function contacts()
 	{
 		return $this->hasOne('App\Model\Contacts', 'user_id', 'user_id');
-    }
+	}
 
-    public function setUserName($name)
-    {
-    	$this->name = $name;
-    	$this->save();
-    }
+	public function setUserName($name)
+	{
+		$this->name = $name;
+		$this->save();
+	}
 
-    public function sentmessage()
-    {
+	public function sentmessage()
+	{
 		return $this->hasMany('App\Model\Message', 'user_id', 'sender_id');
-    }
+	}
 
-    public function recivemessage()
-    {
-	    return $this->hasMany('App\Model\Message', 'user_id', 'recipient_id');
-    }
+	public function recivemessage()
+	{
+		return $this->hasMany('App\Model\Message', 'user_id', 'recipient_id');
+	}
 
-    public function bookmarks()
-    {
+	public function bookmarks()
+	{
 		return $this->hasMany('App\Model\Bookmark', 'user_id', 'user_id');
-    }
+	}
+
+	public function getVIP()
+	{
+		if ($this->role_id == 2) {
+			$activity = VipCompany::whereCompanyId($this->company->company_id)->get();
+		}
+
+		if ($this->role_id == 3) {
+			$activity = VipApplicant::whereApplicantId($this->applicant->applicant_id)->get();
+		}
+
+		$activity = $activity->filter(
+			function ($item) {
+				return strtotime($item->created_at) + $item->settings->time * 24 * 60 * 60 >= time();
+			}
+		);
+
+		if ($activity->isNotEmpty()) {
+			return $activity;
+		}
+		else {
+			return false;
+		}
+	}
 }

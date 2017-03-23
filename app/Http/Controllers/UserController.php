@@ -314,25 +314,12 @@ class UserController extends Controller
 		VipCompanySetting $vipCompanySetting
 	) {
 		if ($request->user()->role_id == 2) {
-			$activity = VipCompany::whereCompanyId($request->user()->company->company_id)->get();
-			$activity = $activity->filter(
-				function ($item) use ($request) {
-					return strtotime($item->created_at) + $item->settings->time * 24 * 60 >= time();
-				}
-			);
-			$this->data['VIP'] = $activity;
+			$this->data['VIP'] = $request->user()->getVIP();
 			$this->data['vip_type'] = $vipCompanySetting->getForm();
 		}
 
 		if ($request->user()->role_id == 3) {
-			$activity = VipApplicant::whereApplicantId($request->user()->applicant->applicant_id)->get();
-
-			$activity = $activity->filter(
-				function ($item) use ($request) {
-					return strtotime($item->created_at) + $item->settings->time * 24 * 60 >= time();
-				}
-			);
-			$this->data['VIP'] = $activity;
+			$this->data['VIP'] = $request->user()->getVIP();
 			$this->data['vip_type'] = $vipApplicantSetting->getForm();
 		}
 		$this->data['user'] = $request->user();
