@@ -107,7 +107,9 @@ class SummaryFilterController extends Controller
 					return $item->isVip() !== false;
 				}
 			);
-			$this->data['vips'] = $vips->random($vips->count() >= 3 ? 3 : $vips->count());;
+			$this->data['vips'] = $vips;
+			if ($vips->isNotEmpty())
+				$this->data['vips'] = $vips->random($vips->count() >= 3 ? 3 : $vips->count());;
 
 			echo view('filterpage.summarylist', $this->data);
 		}

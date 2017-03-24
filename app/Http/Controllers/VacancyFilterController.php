@@ -81,10 +81,20 @@ class VacancyFilterController extends Controller
 			if ($request->education_type_id != -1) {
 				$vacancy = $vacancy->whereEducationTypeId($request->education_type_id);
 			}
+			$vacancy = $vacancy->orderBy('updated_at', 'desc')->get();
 
-			$vacancy = $vacancy->get();
+			$this->data['vacancies'] = $vacancy;
 
-			echo view('filterpage.vacancylist', [ 'vacancies' => $vacancy]);
+			$vips = $vacancy->filter(
+				function ($item) {
+					return $item->isVip() != false;
+				}
+			);
+			$this->data['vips'] = $vips;
+			if ($vips->isNotEmpty())
+				$this->data['vips'] = $vips->random($vips->count() >= 3 ? 3 : $vips->count());
+
+			echo view('filterpage.vacancylist', $this->data);
 		}
 	}
 
