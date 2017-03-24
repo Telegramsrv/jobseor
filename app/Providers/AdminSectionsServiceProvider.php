@@ -28,6 +28,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
         \App\Model\Vacancy::class => 'App\Http\Sections\Vacancy',
         \App\Model\Employment::class => 'App\Http\Sections\Employment',
         \App\Model\ExperienceType::class => 'App\Http\Sections\ExperienceType',
+        \App\Model\VipVacancySettings::class => 'App\Http\Sections\VipVacancySettings',
+        \App\Model\VipSummarySettings::class => 'App\Http\Sections\VipSummarySettings',
     ];
 
     /**
