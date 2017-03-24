@@ -196,6 +196,14 @@ class SummaryController extends Controller
 		}
 	}
 
+	/**
+	 * @param                    $id
+	 * @param Request            $request
+	 * @param VipSummarySettings $settings
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+	 */
+
 	public function getVip($id, Request $request, VipSummarySettings $settings)
 	{
 		$summary = Summary::whereSummaryId($id)->whereUserId($request->user()->user_id)->firstOrFail();
@@ -209,6 +217,11 @@ class SummaryController extends Controller
 			return view('summary.vip', $this->data);
 		}
 	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 */
 
 	public function postVip($id, Request $request)
 	{

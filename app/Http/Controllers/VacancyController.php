@@ -12,6 +12,8 @@ use App\Model\ExperienceType;
 use App\Model\Profession;
 use App\Model\UserWatchedVacancy;
 use App\Model\Vacancy;
+use App\Model\VipVacancy;
+use App\Model\VipVacancySettings;
 use Illuminate\Http\Request;
 
 class VacancyController extends Controller
@@ -255,6 +257,57 @@ class VacancyController extends Controller
 			);
 			if (!$bookmark->wasRecentlyCreated) {
 				$bookmark->delete();
+			}
+		}
+	}
+
+	/**
+	 * @param                    $id
+	 * @param Request            $request
+	 * @param VipVacancySettings $settings
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+	 */
+
+	public function getVip($id, Request $request, VipVacancySettings $settings)
+	{
+		$vacancy = Vacancy::whereVacancyId($id)->whereUserId($request->user()->user_id)->firstOrFail();
+		if ($vacancy->isVip()) {
+			return redirect(route('user.notepad'));
+		}
+		else {
+			$this->data['user'] = $request->user();
+			$this->data['settings'] = $settings->getForm();
+
+			return view('vacancy.vip', $this->data);
+		}
+	}
+
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 */
+
+	public function postVip($id, Request $request)
+	{
+		if ($request->ajax()) {
+			$vacancy = Vacancy::whereVacancyId($id)->whereUserId($request->user()->user_id)->firstOrFail();
+			$settings = VipVacancySettings::whereId($request->settings_id)->firstOrFail();
+
+			if ($request->user()->balance >= $settings->cost) {
+				VipVacancy::create(
+					[
+						'vacancy_id'  => $vacancy->vacancy_id,
+						'settings_id' => $settings->id
+					]
+				);
+				$request->user()->balance -= $settings->cost;
+				$request->user()->save();
+
+				echo json_encode(['class' => 'success', 'message' => 'VIP резюме успешно активировано!']);
+			}
+			else {
+				echo json_encode(['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']);
 			}
 		}
 	}

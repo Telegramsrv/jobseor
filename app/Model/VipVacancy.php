@@ -4,6 +4,23 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Model\VipVacancy
+ *
+ * @property int $id
+ * @property int $vacancy_id
+ * @property int $settings_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Model\VipSummarySettings $settings
+ * @property-read \App\Model\Vacancy $vacancy
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereSettingsId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereVacancyId($value)
+ * @mixin \Eloquent
+ */
 class VipVacancy extends Model
 {
 	protected $fillable = ['vacancy_id', 'settings_id'];
