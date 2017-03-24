@@ -35,7 +35,7 @@
                             {!! $summary->isVip()->timeleft()->format('%d Дней %h Часов %i Минут') !!}
                         </p>
                         @else
-                        <a href="">Сделать VIP</a>
+                        <a href="{{ route('summary.vip', [ 'id' => $summary->summary_id]) }}">Сделать VIP</a>
                     @endif
                 </div>
             </div>

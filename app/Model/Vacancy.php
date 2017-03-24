@@ -117,4 +117,21 @@ class Vacancy extends Model
 	{
 		return $this->hasMany('App\Model\UserWatchedVacancy', 'vacancy_id', 'vacancy_id');
 	}
+
+	public function isVip()
+	{
+		$active = VipVacancy::whereVacancyId($this->vacancy_id)->get();
+
+		$active = $active->filter(
+			function ($item) {
+				return strtotime($item->created_at) + $item->settings->time * 24 * 60 * 60 >= time();
+			}
+		);
+		if ($active->isNotEmpty()) {
+			return $active[0];
+		}
+		else {
+			return false;
+		}
+	}
 }

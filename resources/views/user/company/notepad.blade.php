@@ -28,6 +28,14 @@
                     {!! Form::open([ 'route' => [ 'vacancy.remove', $vacancy->vacancy_id], 'method' => 'POST']) !!}
                     {!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}
                     {!! Form::close() !!}
+                    @if($vacancy->isVip())
+                        <p>
+                            Осталось -
+                            {!! $vacancy->isVip()->timeleft()->format('%d Дней %h Часов %i Минут') !!}
+                        </p>
+                    @else
+                        <a href="{{ route('vacancy.vip', [ 'id' => $vacancy->vacancy_id]) }}">Сделать VIP</a>
+                    @endif
                 </div>
             </div>
         @endforeach
