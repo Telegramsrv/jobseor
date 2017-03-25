@@ -41,9 +41,25 @@ class VipSummary extends Section
     {
 	    $display = \AdminDisplay::datatables()->with('summary')->with('settings')
 	                           ->setHtmlAttribute('class', 'table-primary');
+
+	    $display->setColumnFilters(
+		    [
+			    null,
+			    \AdminColumnFilter::text()->setPlaceholder('Резюме №'),
+			    \AdminColumnFilter::select()->setPlaceholder('Название резюме')->setModel(new Summary())->setDisplay('title'),
+			    \AdminColumnFilter::select()->setPlaceholder('Название VIP тарифа')->setModel(new VipSummarySettings())->setDisplay('name'),
+			    \AdminColumnFilter::range()->setFrom(
+				    \AdminColumnFilter::text()->setPlaceholder('Срок с')
+			    )->setTo(
+				    \AdminColumnFilter::text()->setPlaceholder('Срок по')
+			    ),
+			    \AdminColumnFilter::date()->setPlaceholder('Дата с')->setFormat('Y-m-d')
+		    ]
+	    );
+
 	    $display->setColumns(
 		    \AdminColumn::text('id', '#')->setWidth('10px'),
-		    \AdminColumn::text('summary_id', 'Резюме #')->setWidth('10px'),
+		    \AdminColumn::text('summary_id', 'Резюме №')->setWidth('10px'),
 		    \AdminColumn::text('summary.title', 'Название резюме')->setWidth('100px'),
 		    \AdminColumn::text('settings.name', 'Название VIP тарифа')->setWidth('100px'),
 		    \AdminColumn::text('settings.time', 'Срок работы')->setWidth('10px'),
@@ -64,7 +80,7 @@ class VipSummary extends Section
 		    [
 			    \AdminFormElement::select('summary_id', 'Резюме', Summary::class)->setDisplay('title')->required(),
 			    \AdminFormElement::select('settings_id', 'VIP Тариф', VipSummarySettings::class)->setDisplay('name')->required(),
-		        \AdminFormElement::date('created_at', 'Дата с')->required()
+		        \AdminFormElement::datetime('created_at', 'Дата с')->required()
 		    ]
 	    );
     }
