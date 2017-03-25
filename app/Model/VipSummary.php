@@ -41,4 +41,9 @@ class VipSummary extends Model
 		$date2 = new \DateTime(date('Y-m-d H:i:s', strtotime($this->created_at) + $this->settings->time * 60 * 60 * 24));
 		return $date2->diff($date1);
 	}
+
+	public function timeleftToString()
+	{
+		return $this->timeleft()->format('%d %h:%i:%s');
+	}
 }
