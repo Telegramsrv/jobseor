@@ -97,6 +97,9 @@ return [
 		    (new Page(\App\Model\VipSummary::class))
 			    ->setPriority(150)
 			    ->setTitle('VIP Резюме'),
+		    (new Page(\App\Model\VipVacancy::class))
+			    ->setPriority(200)
+			    ->setTitle('VIP Вакансии'),
 	    ]
     ],
 
