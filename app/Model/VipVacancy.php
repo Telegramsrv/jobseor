@@ -20,10 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereVacancyId($value)
  * @mixin \Eloquent
+ * @property string $end_date
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipVacancy whereEndDate($value)
  */
 class VipVacancy extends Model
 {
-	protected $fillable = ['vacancy_id', 'settings_id'];
+	protected $fillable = ['vacancy_id', 'settings_id', 'end_date'];
 
 	public function vacancy()
 	{
@@ -38,10 +40,14 @@ class VipVacancy extends Model
 	public function timeleft()
 	{
 		$date1 = new \DateTime(date('Y-m-d H:i:s'));
-		$date2 = new \DateTime(
-			date('Y-m-d H:i:s', strtotime($this->created_at) + $this->settings->time * 60 * 60 * 24)
-		);
-
+		$date2 = new \DateTime($this->end_date);
 		return $date2->diff($date1);
+	}
+
+	public function timeleftToString()
+	{
+		if ($this->timeleft()->invert)
+			return $this->timeleft()->format('%d дней %h:%i:%s');
+		else return '-';
 	}
 }

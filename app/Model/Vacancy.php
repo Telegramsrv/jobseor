@@ -2,32 +2,33 @@
 
 namespace App\Model;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Model\Vacancy
  *
- * @property int $Vacancy_id
- * @property int $user_id
- * @property string $title
- * @property int $category_id
- * @property int $subcategory_id
- * @property int $country_id
- * @property string $city
- * @property int $education_type_id
- * @property string $employment
- * @property int $salary
- * @property int $currency_id
- * @property int $experience_type_id
- * @property int $age_min
- * @property int $age_max
- * @property string $description
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \App\Model\Category $category
- * @property-read \App\Model\Country $country
- * @property-read \App\Model\User $user
+ * @property int                                                                           $Vacancy_id
+ * @property int                                                                           $user_id
+ * @property string                                                                        $title
+ * @property int                                                                           $category_id
+ * @property int                                                                           $subcategory_id
+ * @property int                                                                           $country_id
+ * @property string                                                                        $city
+ * @property int                                                                           $education_type_id
+ * @property string                                                                        $employment
+ * @property int                                                                           $salary
+ * @property int                                                                           $currency_id
+ * @property int                                                                           $experience_type_id
+ * @property int                                                                           $age_min
+ * @property int                                                                           $age_max
+ * @property string                                                                        $description
+ * @property \Carbon\Carbon                                                                $created_at
+ * @property \Carbon\Carbon                                                                $updated_at
+ * @property-read \App\Model\Category                                                      $category
+ * @property-read \App\Model\Country                                                       $country
+ * @property-read \App\Model\User                                                          $user
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereAgeMax($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereAgeMin($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereCategoryId($value)
@@ -46,18 +47,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereVacancyId($value)
  * @mixin \Eloquent
- * @property int $vacancy_id
- * @property int $employment_id
- * @property-read \App\Model\Currency $currency
- * @property-read \App\Model\ExperienceType $experiencetype
+ * @property int                                                                           $vacancy_id
+ * @property int                                                                           $employment_id
+ * @property-read \App\Model\Currency                                                      $currency
+ * @property-read \App\Model\ExperienceType                                                $experiencetype
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereEmploymentId($value)
- * @property-read \App\Model\ExperienceType $experience_type
- * @property-read \App\Model\EducationType $education
- * @property-read \App\Model\Profession $profession
- * @property int $profession_id
+ * @property-read \App\Model\ExperienceType                                                $experience_type
+ * @property-read \App\Model\EducationType                                                 $education
+ * @property-read \App\Model\Profession                                                    $profession
+ * @property int                                                                           $profession_id
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereProfessionId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserWatchedVacancy[] $viewers
- * @property \Carbon\Carbon $deleted_at
+ * @property \Carbon\Carbon                                                                $deleted_at
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Vacancy whereDeletedAt($value)
  */
 class Vacancy extends Model
@@ -66,11 +67,23 @@ class Vacancy extends Model
 
 	protected $primaryKey = 'vacancy_id';
 
-	protected $dates = [ 'deleted_at'];
+	protected $dates = ['deleted_at'];
 
 	protected $fillable = [
-		'user_id', 'title', 'category_id', 'profession_id', 'country_id', 'city', 'education_type_id', 'employment_id',
-	    'salary', 'currency_id', 'experience_type_id', 'age_min', 'age_max', 'description'
+		'user_id',
+		'title',
+		'category_id',
+		'profession_id',
+		'country_id',
+		'city',
+		'education_type_id',
+		'employment_id',
+		'salary',
+		'currency_id',
+		'experience_type_id',
+		'age_min',
+		'age_max',
+		'description'
 	];
 
 	public function user()
@@ -120,13 +133,10 @@ class Vacancy extends Model
 
 	public function isVip()
 	{
-		$active = VipVacancy::whereVacancyId($this->vacancy_id)->get();
+		$active = VipVacancy::whereVacancyId($this->vacancy_id)
+		                    ->where('end_date', '>=', date('Y-m-d H:i:s'))
+		                    ->get();
 
-		$active = $active->filter(
-			function ($item) {
-				return strtotime($item->created_at) + $item->settings->time * 24 * 60 * 60 >= time();
-			}
-		);
 		if ($active->isNotEmpty()) {
 			return $active[0];
 		}

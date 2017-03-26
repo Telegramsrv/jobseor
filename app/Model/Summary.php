@@ -92,8 +92,8 @@ class Summary extends Model
 	public function isVip()
 	{
 		$active = VipSummary::whereSummaryId($this->summary_id)
-			->where('end_date', '>=', date('Y-m-d H:i:s'))
-			->get();
+		                    ->where('end_date', '>=', date('Y-m-d H:i:s'))
+		                    ->get();
 
 		if ($active->isNotEmpty()) {
 			return $active[0];

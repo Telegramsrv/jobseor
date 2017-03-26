@@ -188,7 +188,9 @@ class VacancyController extends Controller
 		Currency::whereCurrencyId($request->currency_id)->firstOrFail();
 		ExperienceType::whereExperienceTypeId($request->experience_type_id)->firstOrFail();
 
-		$oldvacancy = Vacancy::whereUserId($request->user()->user_id)->whereVacancyId($request->vacancy_id)->firstOrFail();
+		$oldvacancy = Vacancy::whereUserId($request->user()->user_id)->whereVacancyId(
+			$request->vacancy_id
+		)->firstOrFail();
 		$oldvacancy->update($request->toArray());
 		$oldvacancy->save();
 
@@ -207,7 +209,9 @@ class VacancyController extends Controller
 		$vacancy = Vacancy::whereVacancyId($id)->firstOrFail();
 		$this->data['vacancy'] = $vacancy;
 		$this->data['user'] = $vacancy->user;
-		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(1)->get()->isNotEmpty();
+		$this->data['isBookmark'] = Bookmark::whereItemId($id)->whereUserId($request->user()->user_id)->whereVacancy(
+			1
+		)->get()->isNotEmpty();
 		if ($request->user()->user_id != $vacancy->user_id && $request->user()->role_id != 1) {
 			$vacancy_view = UserWatchedVacancy::whereUserId($request->user()->user_id)
 			                                  ->firstOrCreate(
@@ -293,12 +297,13 @@ class VacancyController extends Controller
 		if ($request->ajax()) {
 			$vacancy = Vacancy::whereVacancyId($id)->whereUserId($request->user()->user_id)->firstOrFail();
 			$settings = VipVacancySettings::whereId($request->settings_id)->firstOrFail();
-
+			$end_date = date('Y-m-d H:i:s', strtotime('+' . $settings->time . ' day'));
 			if ($request->user()->balance >= $settings->cost) {
 				VipVacancy::create(
 					[
 						'vacancy_id'  => $vacancy->vacancy_id,
-						'settings_id' => $settings->id
+						'settings_id' => $settings->id,
+						'end_date'    => $end_date
 					]
 				);
 				$request->user()->balance -= $settings->cost;
@@ -307,7 +312,9 @@ class VacancyController extends Controller
 				echo json_encode(['class' => 'success', 'message' => 'VIP резюме успешно активировано!']);
 			}
 			else {
-				echo json_encode(['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']);
+				echo json_encode(
+					['class' => 'danger', 'message' => 'Недостаточно средств!Пожалуйста пополните Ваш счёт.']
+				);
 			}
 		}
 	}

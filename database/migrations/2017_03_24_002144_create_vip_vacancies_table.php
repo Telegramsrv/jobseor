@@ -18,6 +18,7 @@ class CreateVipVacanciesTable extends Migration
 	        $table->integer('vacancy_id');
 	        $table->integer('settings_id');
 	        $table->timestamps();
+	        $table->dateTime('end_date');
         });
     }
 

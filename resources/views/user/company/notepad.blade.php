@@ -12,18 +12,19 @@
         </div>
         @foreach($vacancies as $vacancy)
             <div class="vakanceblock">
-                <div class="avatarvacanse">
-                    <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $vacancy->title }}">
-                </div>
-                <div class="col-md-8">
-                    <h2><a href="{{ route('vacancy.view', [ 'id' => $vacancy->vacancy_id]) }}">{{ $vacancy->title }}</a>
+                <div class="col-md-10">
+                    <div class="avatarvacanse">
+                        <img src="/{{ $user->image }}" alt="Аватар без фото" title="{{ $vacancy->title }}">
+                    </div>
+                    <h2>
+                        <a href="{{ route('vacancy.view', [ 'id' => $vacancy->vacancy_id]) }}">{{ $vacancy->title }}</a>
                     </h2>
                     <p>{{ $user->name }}</p>
                     <p>{{ $vacancy->employment->name }} занятость. Опыт работы
                         : {{ $vacancy->experience_type->name }}. {{ $vacancy->education->name }} образование.
                         • {{ str_limit($vacancy->description, 97) }}…</p>
                 </div>
-                <div class="col-md-4 pull-right">
+                <div class="col-md-2 pull-right">
                     <a href="{{ route('vacancy.edit', ['id' => $vacancy->vacancy_id]) }}"> Редактировать</a>
                     {!! Form::open([ 'route' => [ 'vacancy.remove', $vacancy->vacancy_id], 'method' => 'POST']) !!}
                     {!! Form::submit('Удалить', [ 'class' => 'button_width']) !!}
