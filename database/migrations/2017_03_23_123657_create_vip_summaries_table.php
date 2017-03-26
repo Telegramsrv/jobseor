@@ -18,6 +18,7 @@ class CreateVipSummariesTable extends Migration
             $table->integer('summary_id');
             $table->integer('settings_id');
             $table->timestamps();
+            $table->dateTime('end_date');
         });
     }
 

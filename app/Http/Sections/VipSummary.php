@@ -44,7 +44,6 @@ class VipSummary extends Section
 
 	    $display->setColumnFilters(
 		    [
-			    null,
 			    \AdminColumnFilter::text()->setPlaceholder('Резюме №'),
 			    \AdminColumnFilter::select()->setPlaceholder('Название резюме')->setModel(new Summary())->setDisplay('title'),
 			    \AdminColumnFilter::select()->setPlaceholder('Название VIP тарифа')->setModel(new VipSummarySettings())->setDisplay('name'),
@@ -53,17 +52,29 @@ class VipSummary extends Section
 			    )->setTo(
 				    \AdminColumnFilter::text()->setPlaceholder('Срок по')
 			    ),
-			    \AdminColumnFilter::date()->setPlaceholder('Дата с')->setFormat('Y-m-d')
+			    \AdminColumnFilter::range()->setFrom(
+				    \AdminColumnFilter::date()->setPlaceholder('Дата с')->setFormat('Y-m-d')
+			    )->setTo(
+				    \AdminColumnFilter::date()->setPlaceholder('Дата по')->setFormat('Y-m-d')
+			    ),
+			    \AdminColumnFilter::range()->setFrom(
+				    \AdminColumnFilter::date()->setPlaceholder('Дата с')->setFormat('Y-m-d')
+			    )->setTo(
+				    \AdminColumnFilter::date()->setPlaceholder('Дата по')->setFormat('Y-m-d')
+			    ),
 		    ]
 	    );
 
 	    $display->setColumns(
-		    \AdminColumn::text('id', '#')->setWidth('10px'),
-		    \AdminColumn::text('summary_id', 'Резюме №')->setWidth('10px'),
+		    \AdminColumn::text('summary_id', 'Резюме №')->setWidth('5px'),
 		    \AdminColumn::text('summary.title', 'Название резюме')->setWidth('100px'),
-		    \AdminColumn::text('settings.name', 'Название VIP тарифа')->setWidth('100px'),
+		    \AdminColumn::text('settings.name', 'Название VIP тарифа')->setWidth('70px'),
 		    \AdminColumn::text('settings.time', 'Срок работы')->setWidth('10px'),
-		    \AdminColumn::text('created_at', 'Дата с')->setWidth('50px')
+		    \AdminColumn::text('created_at', 'Дата с')->setWidth('100px'),
+		    \AdminColumn::text('end_date', 'Дата по')->setWidth('100px'),
+		    \AdminColumn::custom('Осталось времени', function ($element){
+		    	return $element->timeleftToString();
+		    })->setWidth('100px')
 	    );
 
 	    return $display;
@@ -80,7 +91,8 @@ class VipSummary extends Section
 		    [
 			    \AdminFormElement::select('summary_id', 'Резюме', Summary::class)->setDisplay('title')->required(),
 			    \AdminFormElement::select('settings_id', 'VIP Тариф', VipSummarySettings::class)->setDisplay('name')->required(),
-		        \AdminFormElement::datetime('created_at', 'Дата с')->required()
+		        \AdminFormElement::datetime('created_at', 'Дата с')->required(),
+		        \AdminFormElement::datetime('end_date', 'Дата по')->required()
 		    ]
 	    );
     }

@@ -20,10 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\VipSummary whereSummaryId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\VipSummary whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $end_date
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\VipSummary whereEndDate($value)
  */
 class VipSummary extends Model
 {
-	protected $fillable = [ 'summary_id', 'settings_id'];
+	protected $fillable = [ 'summary_id', 'settings_id', 'end_date'];
 
     public function summary()
     {
@@ -38,12 +40,14 @@ class VipSummary extends Model
 	public function timeleft()
 	{
 		$date1 = new \DateTime(date('Y-m-d H:i:s'));
-		$date2 = new \DateTime(date('Y-m-d H:i:s', strtotime($this->created_at) + $this->settings->time * 60 * 60 * 24));
+		$date2 = new \DateTime($this->end_date);
 		return $date2->diff($date1);
 	}
 
 	public function timeleftToString()
 	{
-		return $this->timeleft()->format('%d %h:%i:%s');
+		if ($this->timeleft()->invert)
+			return $this->timeleft()->format('%d дней %h:%i:%s');
+		else return '-';
 	}
 }

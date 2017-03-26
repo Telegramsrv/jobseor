@@ -228,12 +228,13 @@ class SummaryController extends Controller
 		if ($request->ajax()) {
 			$summary = Summary::whereSummaryId($id)->whereUserId($request->user()->user_id)->firstOrFail();
 			$settings = VipSummarySettings::whereId($request->settings_id)->firstOrFail();
-
+			$end_date = date('Y-m-d H:i:s', strtotime('+'.$settings->time.' day'));
 			if ($request->user()->balance >= $settings->cost) {
 				VipSummary::create(
 					[
 						'summary_id'  => $summary->summary_id,
-						'settings_id' => $settings->id
+						'settings_id' => $settings->id,
+					    'end_date' => $end_date
 					]
 				);
 				$request->user()->balance -= $settings->cost;

@@ -91,13 +91,10 @@ class Summary extends Model
 
 	public function isVip()
 	{
-		$active = VipSummary::whereSummaryId($this->summary_id)->get();
+		$active = VipSummary::whereSummaryId($this->summary_id)
+			->where('end_date', '>=', date('Y-m-d H:i:s'))
+			->get();
 
-		$active = $active->filter(
-			function ($item) {
-				return strtotime($item->created_at) + $item->settings->time * 24 * 60 * 60 >= time();
-			}
-		);
 		if ($active->isNotEmpty()) {
 			return $active[0];
 		}
