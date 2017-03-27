@@ -15,7 +15,10 @@
             <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
             <div class="avatarvacanse">
                 <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}">
-                {{--                    {!! Form::file('image', [ 'class' => 'input_width hidden']) !!}--}}
+                {!! Form::open(['id' => 'input_file_form']) !!}
+                {!! Form::file('image', [ 'class' => 'input_width hidden', 'required', 'id' => 'input_file']) !!}
+                {!! Form::submit('Изменить', [ 'class' => 'input_width hidden']) !!}
+                {!! Form::close() !!}
             </div>
 
             <h1>
@@ -59,7 +62,7 @@
                 <a onclick="enableEdit(this);">Редактировать</a>
             </p>
             <h3>Образование:</h3>
-        @foreach( $applicant->education as $item)
+            @foreach( $applicant->education as $item)
                 <div class="clone2">
                     {!! Form::hidden('education_id', $item->education_id) !!}
                     <p>
@@ -94,7 +97,7 @@
                 <a onclick="enableEdit(this);">Редактировать</a>
             </p>
             <h3>Опыт работы:</h3>
-        @foreach( $applicant->experience as $item)
+            @foreach( $applicant->experience as $item)
                 <div class="clone3">
                     {!! Form::hidden('experience_id', $item->experience_id) !!}
                     <p>
@@ -310,5 +313,27 @@
                 }
             })
         }
+
+        $(document).ready(function (e) {
+            $('#input_file_form').on('submit', (function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("user.edit.image") }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('.headervakanse').append(data);
+                    }
+                });
+            }));
+
+        });
+
     </script>
 @endsection

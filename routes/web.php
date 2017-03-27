@@ -200,6 +200,11 @@ Route::post('/settings/info', [
 	'uses' =>   'UserController@editInfo'
 ]);
 
+Route::post('/settings/image', [
+	'as' => 'user.edit.image',
+	'uses' =>   'UserController@updateImage'
+]);
+
 
 //EXPERIENCE
 
