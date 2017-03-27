@@ -72,12 +72,10 @@
                                     <div class="info_o">
                                         <p>Возраст от {{ $vacancy->age_min }} до {{ $vacancy->age_max }}</p>
                                     </div>
-                                    <hr/>
                                     <div class="info_o contacts">
                                     </div>
                                 </div>
                             </div>
-
                             <div class="text_employer">
                                 <p id="text_written">
                                     {!! $vacancy->description !!}
@@ -120,7 +118,7 @@
                 data: { _token: '{{ csrf_token() }}', user_id: '{{ $user->user_id }}' },
                 success: function (data) {
                     $('.contacts').empty();
-                    $('.contacts').appendChild(data);
+                    $('.contacts').append(data);
                 }
             })
         }
