@@ -53,6 +53,13 @@ class AvailableContactController extends Controller
 				$user->balance -= 5;
 				$user->save();
 
+				//add send email
+				\Mail::send('dispatch.contacts', $this->data, function ($m) use ($request) {
+					$m->from('oleksii.yaryi@gmail.com', 'JobSeor');
+
+					$m->to( $request->user()->email, $request->user()->name )->subject('Открытие контактов пользователя!');
+				});
+
 				echo view('contact.get', $this->data);
 			}
 			else {
