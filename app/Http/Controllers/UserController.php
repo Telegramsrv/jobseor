@@ -11,6 +11,8 @@ use App\Model\User;
 use App\Model\UserWatchedSummary;
 use App\Model\UserWatchedVacancy;
 use Illuminate\Http\Request;
+//use Intervention\Image\ImageManager;
+use Image;
 
 class UserController extends Controller
 {
@@ -294,5 +296,34 @@ class UserController extends Controller
 		$this->data['bookmarks'] = $request->user()->bookmarks()->orderBy('updated_at', 'desc')->get();
 
 		return view('user.bookmarks', $this->data);
+	}
+
+	public function updateImage(Request $request)
+	{
+		if ($request->ajax()) {
+//			$manager = new ImageManager(array('driver' => 'gd'));
+//			$manager->make($request->file('image')->getRealPath())->resize(500, 500)->save(
+//				base_path() . '/public/image/user/' . $request->file('image')->getClientOriginalName()
+//			);
+			$mime = $request->file('image')->getMimeType();
+
+			if (in_array($mime, [ 'image/jpeg', 'image/png', 'image/gif'])) {
+
+
+				Image::make($request->file('image')->getRealPath())->resize(500, 500)->save(
+					base_path() . '/public/image/user/' . $request->file('image')->getClientOriginalName()
+				);
+
+				if (!strstr($request->user()->image, '/user/default.png')) {
+					\File::delete(base_path() . '/public/' . $request->user()->image);
+				}
+
+				$request->user()->image = 'image/user/' . $request->file('image')->getClientOriginalName();
+				$request->user()->save();
+
+				echo json_encode(['class' => 'success', 'message' => 'Аватар успешно изменен!']);
+			}
+			else echo json_encode(['class' => 'danger', 'message' => 'Ошибка!Неверный тип файла!(Доступные типы: jpeg,gif,png)']);
+		}
 	}
 }

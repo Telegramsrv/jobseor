@@ -328,7 +328,8 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        $('.headervakanse').append(data);
+                        showNotificantion(data);
+                        location.reload();
                     }
                 });
             }));
