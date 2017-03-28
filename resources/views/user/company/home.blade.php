@@ -14,6 +14,10 @@
         <p class="editpersonal"><a onclick="enableEdit(this);">Редактировать</a></p>
         <div class="avatarvacanse">
             <img alt="Аватар {{ $user->name }}" title="Avatar" src="/{{ $user->image }}">
+            {!! Form::open(['id' => 'input_file_form']) !!}
+            {!! Form::file('image', [ 'class' => 'input_width hidden', 'required', 'id' => 'input_file']) !!}
+            {!! Form::submit('Изменить', [ 'class' => 'input_width hidden']) !!}
+            {!! Form::close() !!}
         </div>
         <h1>
             <span class="edittext">{{ $user->name }}</span>
@@ -107,5 +111,28 @@
                 }
             })
         }
+
+
+        $(document).ready(function (e) {
+            $('#input_file_form').on('submit', (function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("user.edit.image") }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        showNotificantion(data);
+                        location.reload();
+                    }
+                });
+            }));
+
+        });
     </script>
 @endsection
