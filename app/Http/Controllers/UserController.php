@@ -7,6 +7,7 @@ use App\Model\Contacts;
 use App\Model\Country;
 use App\Model\Education;
 use App\Model\EducationType;
+use App\Model\MessageNotification;
 use App\Model\User;
 use App\Model\UserWatchedSummary;
 use App\Model\UserWatchedVacancy;
@@ -95,17 +96,32 @@ class UserController extends Controller
 
 	public function editPWD(Request $request)
 	{
-		if ($request->ajax()) {
-			if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
-				$request->user()->password = \Hash::make($request->new_password);
-				$request->user()->save();
+		if (\Hash::check($request->password, $request->user()->getAuthPassword())) {
+			$request->user()->password = \Hash::make($request->new_password);
+			$request->user()->save();
 
-				return redirect(route('user.edit'));
-			}
-			else {
-				die('Неверный пароль!');
-			}
+			return redirect(route('user.edit'));
 		}
+		else {
+			die('Неверный пароль!');
+		}
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
+
+	public function editNotification(Request $request)
+	{
+		if ($request->message_notification)
+			MessageNotification::firstOrCreate([ 'user_id' => $request->user()->user_id]);
+		else {
+			MessageNotification::whereUserId($request->user()->user_id)->firstOrFail()->delete();
+		}
+
+		return redirect(route('user.edit'));
 	}
 
 	/**

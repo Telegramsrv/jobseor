@@ -40,5 +40,30 @@
                 {!! Form::close() !!}
             </div>
         </div>
+        <div class="block">
+            <div class="change_password">
+                {!! Form::open([ 'route' => 'user.edit.notification', 'method' => 'post']) !!}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>Настройки рассылки</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <p>Новые сообщения</p><small>(Уведомление о новых сообщениях)</small>
+                    </div>
+                    <div class="col-xs-7">
+                        {!! Form::checkbox('message_notification', '1', $user->getMessageNotificaion, [ 0, 1]) !!}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5"></div>
+                    <div class="col-xs-7">
+                        {!! Form::submit('Изменить', [ 'class' => 'button-main']) !!}
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
     </div>
 @endsection

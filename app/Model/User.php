@@ -110,4 +110,9 @@ class User extends Authenticatable
     {
 		return $this->hasMany('App\Model\Bookmark', 'user_id', 'user_id');
     }
+
+    public function getMessageNotificaion()
+    {
+    	return $this->belongsTo('App\Model\MessageNotification', 'user_id', 'user_id');
+    }
 }

@@ -195,6 +195,12 @@ Route::post('/settings/pwd', [
 	'uses' =>   'UserController@editPWD'
 ]);
 
+Route::post('/settings/notification', [
+	'as' => 'user.edit.notification',
+	'uses' =>   'UserController@editNotification'
+]);
+
+
 Route::post('/settings/info', [
 	'as' => 'user.edit.info',
 	'uses' =>   'UserController@editInfo'
