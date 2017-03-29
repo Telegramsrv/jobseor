@@ -57,6 +57,14 @@ class AppServiceProvider extends ServiceProvider
 					    'phone' => ''
 					]
 				);
+
+				$token = base64_encode(\GuzzleHttp\json_encode([ 'email' => $user->email, 'name' => $user->name]));
+					\Mail::send('dispatch.registration', [ 'user' => $user, 'token' => $token], function ($m) use ($user) {
+						$m->from('notification@jobseor.com', 'JobSeor');
+
+						$m->to( $user->email, $user->name )->subject('Подтверждение регистрации!');
+					});
+
 			}
 		);
 	}

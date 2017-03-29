@@ -160,6 +160,11 @@ Route::post('/summary/{id}/bookmark', [
 ]);
 //USER
 
+Route::get('/confirm/token={token}', [
+	'as' => 'email.confirm',
+	'uses' =>   'PageController@confirmEmail'
+]);
+
 Route::get('/home', [
 	'as' => 'user.home',
     'uses' =>   'UserController@index'
