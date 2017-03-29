@@ -41,6 +41,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $recivemessage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Message[] $sentmessage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Bookmark[] $bookmarks
+ * @property bool $confirm
+ * @method static \Illuminate\Database\Query\Builder|\App\Model\User whereConfirm($value)
  */
 class User extends Authenticatable
 {

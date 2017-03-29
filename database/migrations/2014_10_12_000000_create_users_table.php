@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
 	        $table->string('image')->nullable();
 	        $table->double('balance')->default(0);
+	        $table->boolean('confirm')->default(0);
 	        $table->rememberToken();
             $table->timestamps();
         });

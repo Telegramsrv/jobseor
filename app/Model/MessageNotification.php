@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\MessageNotification whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\MessageNotification whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Model\User $user
  */
 class MessageNotification extends Model
 {
