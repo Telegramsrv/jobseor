@@ -68,6 +68,19 @@ class MessageController extends Controller
 		$message->recipient_id = $recipient->user_id;
 		$message->message = $request->message;
 		$message->save();
+
+		//add send email
+		if ($recipient->getMessageNotificaion){
+			\Mail::send('dispatch.message', [
+				'sender' => $request->user(),
+			    'recipient' => $recipient
+			], function ($m) use ($recipient) {
+				$m->from('notification@jobseor.com', 'JobSeor');
+
+				$m->to( $recipient->email, $recipient->name )->subject('Новое сообщение!');
+			});
+		}
+
 		return redirect(route('message.user', [ 'id' => $id]));
 	}
 }
