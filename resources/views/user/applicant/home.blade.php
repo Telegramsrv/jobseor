@@ -5,6 +5,12 @@
 @endsection
 
 @section('home_content')
+    @if (!$user->confirm)
+        <div class="alert alert-danger">
+            <strong>Внммннее!</strong>
+            Подтвердиее Ваш <u>email</u> адрес!
+        </div>
+    @endif
     <div class="headervakanse" id="balance">
         <p style="font-size: 19px;">Баланс: <span style="color: orange;">{{ $user->balance }}</span> Seorik
             <button class="button-main">Пополнить</button>
