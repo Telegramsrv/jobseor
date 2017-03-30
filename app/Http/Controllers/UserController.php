@@ -314,6 +314,10 @@ class UserController extends Controller
 		return view('user.bookmarks', $this->data);
 	}
 
+	/**
+	 * @param Request $request
+	 */
+
 	public function updateImage(Request $request)
 	{
 		if ($request->ajax()) {
@@ -341,5 +345,21 @@ class UserController extends Controller
 			}
 			else echo json_encode(['class' => 'danger', 'message' => 'Ошибка!Неверный тип файла!(Доступные типы: jpeg,gif,png)']);
 		}
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+
+	public function getPayment(Request $request)
+	{
+		return view('user.payment');
+	}
+
+	public function postPayment(Request $request)
+	{
+		dd($request->toArray());
 	}
 }

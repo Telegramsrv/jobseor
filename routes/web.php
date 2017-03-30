@@ -317,3 +317,15 @@ Route::post('/summary', [
 	'as' => 'summary.filter',
 	'uses' => 'SummaryFilterController@get'
 ]);
+
+// PAYMENTS
+
+Route::get('/payment', [
+	'as' => 'payment',
+	'uses' => 'UserController@getPayment'
+]);
+
+Route::post('/payment', [
+	'as' => 'payment',
+	'uses' => 'UserController@postPayment'
+]);
