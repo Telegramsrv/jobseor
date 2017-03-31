@@ -25,15 +25,15 @@
                     <div class="twoblock">
                         Срок действия карты
                         <p>
-                            {!! Form::number('card_exp_month', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'MM']) !!}
+                            {!! Form::select('card_exp_month', $exp_month, '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'MM', 'maxlength' => '2']) !!}
                             /
-                            {!! Form::number('card_exp_year', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'ГГ']) !!}
+                            {!! Form::select('card_exp_year', $exp_year, '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'ГГ', 'maxlength' => '2']) !!}
                         </p>
                     </div>
                     <div class="twoblock">
                         Код CVV
                         <p>
-                            {!! Form::number('card_cvv', '', [ 'required', 'placeholder' => '123']) !!} <br/>
+                            {!! Form::number('card_cvv', '', [ 'required', 'placeholder' => '123', 'maxlength' => '3']) !!} <br/>
                             <small>Три цифры(указаные на обратной стороне карты)</small>
                         </p>
                     </div>
