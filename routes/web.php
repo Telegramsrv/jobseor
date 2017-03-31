@@ -329,3 +329,8 @@ Route::post('/payment', [
 	'as' => 'payment',
 	'uses' => 'UserController@postPayment'
 ]);
+
+Route::post('/payment/callback', [
+	'as' => 'payment.callback',
+	'uses' => 'UserController@callbackLiqPay'
+]);

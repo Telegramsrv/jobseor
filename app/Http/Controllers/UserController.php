@@ -361,43 +361,59 @@ class UserController extends Controller
 
 	public function getPayment(Request $request)
 	{
-		$this->data['exp_month'] = [ '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-		$this->data['exp_year'] = [ '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
-		return view('user.payment', $this->data);
+//		$exp_month = [];
+//		for ($i = 1; $i < 13; $i++) {
+//			$key = strval($i < 10 ? 0 : '') . strval($i);
+//			$exp_month[$key] = $i;
+//		}
+//
+//		$exp_year = [];
+//		for ($i = 16; $i < 31; $i++) {
+//			$value = strval(20) . strval($i);
+//			$exp_year[$i] = $value;
+//		}
+//
+//		$this->data['exp_month'] = $exp_month;
+//		$this->data['exp_year'] = $exp_year;
+
+		return view('user.liqpay');
 	}
+
+	/**
+	 * @param Request $request
+	 */
 
 	public function postPayment(Request $request)
 	{
-		$payment = Payment::create(
-			[
-				'user_id' => $request->user()->user_id,
-				'card'    => $request->card_id,
-				'balance' => $request->user()->balance,
-				'amount'  => $request->amount,
-			    'status'  => 'created'
-			]
-		);
+		if ($request->ajax()) {
+			$payment = Payment::create(
+				[
+					'user_id' => $request->user()->user_id,
+					'balance' => $request->user()->balance,
+					'amount'  => $request->amount,
+					'status'  => 'created'
+				]
+			);
 
-		$public_key = '';
-		$private_key = '';
-		$card = str_replace(" ", "", $request->card_id);
-		$liqpay = new \LiqPay($public_key, $private_key);
-		$res = $liqpay->api(
-			"request",
-			array(
-				'action'         => 'pay',
-				'version'        => '3',
-				'phone'          => $request->card_phone,
-				'amount'         => $request->amount,
-				'currency'       => \LiqPay::CURRENCY_USD,
-				'description'    => 'Пополнение счёта на сайте Jobseor на сумму ' . $request->amount . ' USD',
-				'order_id'       => $payment->generateOrderId(),
-				'card'           => $card,
-				'card_exp_month' => $request->card_exp_month,
-				'card_exp_year'  => $request->card_exp_year,
-				'card_cvv'       => $request->card_cvv,
-				'ip'             => $request->ip()
-			)
-		);
+			$public_key = 'i76628239824';
+			$private_key = '2SRGrmp89beMlsUwKOQeZNyYeRbC56c8La3fLDD3';
+
+			$liqpay = new \LiqPay($public_key, $private_key);
+
+			$html = $liqpay->cnb_form(
+				array(
+					'action'      => 'pay',
+					'amount'      => $request->amount,
+					'currency'    => \LiqPay::CURRENCY_USD,
+					'description' => 'Пополнение счёта на сайте Jobseor на сумму ' . $request->amount . ' USD',
+					'order_id'    => $payment->generateOrderId(),
+					'version'     => '3',
+					'server_url'  => route('payment.callback'),
+					'result_url'  => route('user.home'),
+					'sandbox'     => '1',//TODO remove dev
+				)
+			);
+			echo $html;
+		}
 	}
 }
