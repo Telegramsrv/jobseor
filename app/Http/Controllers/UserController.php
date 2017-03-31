@@ -416,4 +416,26 @@ class UserController extends Controller
 			echo $html;
 		}
 	}
+
+	/**
+	 * @param Request $request
+	 * @param Payment $payment
+	 */
+
+	public function callbackLiqPay(Request $request, Payment $payment)
+	{
+		$payment = $payment->getOrderByOrdeId($request->data);
+		$data = \GuzzleHttp\json_decode(base64_decode($request->data));
+		$payment->response = base64_decode($request->data);
+		$payment->status = $data->status;
+		$payment->card = $data->sender_card_mask2;
+		$payment->save();
+
+		$user = $payment->user;
+
+		if ($payment->status == 'success'){
+			$user->balance += $payment->amount;
+			$user->save();
+		}
+	}
 }
