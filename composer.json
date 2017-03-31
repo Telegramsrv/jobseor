@@ -13,7 +13,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.0",
         "laravelrus/sleepingowl": "4.*@dev",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "liqpay/liqpay": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

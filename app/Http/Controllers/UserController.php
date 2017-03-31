@@ -361,5 +361,24 @@ class UserController extends Controller
 	public function postPayment(Request $request)
 	{
 		dd($request->toArray());
+		$public_key = '';
+		$private_key = '';
+		$liqpay = new \LiqPay($public_key, $private_key);
+		$res = $liqpay->api("request", array(
+			'action'         => 'pay',
+			'version'        => '3',
+			'phone'          => '380950000001',
+			'amount'         => $request->amount,
+			'currency'       => 'USD',
+			'description'    => 'Пополнение счёта на сайте Jobseor на сумму '.$request->amount.' USD',
+			'order_id'       => 'order_id_1',
+			'card'           => $request->card_id,
+			'card_exp_month' => $request->card_exp_month,
+			'card_exp_year'  => $request->card_exp_year,
+			'card_cvv'       => $request->card_cvv,
+		    'ip'             => $request->ip()
+		));
+
+		dd($res);
 	}
 }

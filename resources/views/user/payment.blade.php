@@ -25,9 +25,9 @@
                     <div class="twoblock">
                         Срок действия карты
                         <p>
-                            {!! Form::number('card_mounth', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'MM']) !!}
+                            {!! Form::number('card_exp_month', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'MM']) !!}
                             /
-                            {!! Form::number('card_year', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'ГГ']) !!}
+                            {!! Form::number('card_exp_year', '', [ 'class' => 'twoinput', 'required', 'placeholder' => 'ГГ']) !!}
                         </p>
                     </div>
                     <div class="twoblock">
@@ -43,6 +43,12 @@
                     {!! Form::text('card_owner', '', [ 'class' => 'input_width', 'required', 'placeholder' => 'Имя и Фамилия']) !!}
                     <br/>
                     <small>Латинскими буквами,как указано на карте</small>
+                </p>
+                <p>Номер телефона</p>
+                <p>
+                    {!! Form::text('card_phone', '', [ 'class' => 'input_width', 'required', 'placeholder' => '+380950000001']) !!}
+                    <br/>
+                    <small>На данный номер телефона прийдет пароль подтверждения платежа</small>
                 </p>
                 <p style="margin: 20px 0px;">
                     {!! Form::submit('Оплатить') !!}
