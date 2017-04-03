@@ -25,56 +25,57 @@
     </script>
 </head>
 <body>
-    <div id="app">
-       <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2 col-xs-2" id="logo">
-            <a href="/">
-              <img title="Поиск вакансий в Европе" src="/image/jobseor.png" alt="Логотип компании"  class="logotype" />
-            </a>
-        </div>
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-6 float_right" style="margin-left: -15px;" id="headermenu">
-          <div class="enter">
-              <a href="/visa-country.php" style="padding-left: 10px; padding-right: 10px">Визы и страны</a>
-              <a href="/summary" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a>
-              <a href="/vacancy" style="padding-left: 10px; padding-right: 10px;">Найти вакансию</a>
-              <a href="/dobavit-rezume.php" style="padding-left: 10px; padding-right: 10px;">Добавить резюме</a>
-              <a href="/dobavit-vakansiyu.php" style="padding-left: 10px; padding-right: 10px;">Добавить вакансию</a>
-              @if (Auth::guest())
-              <a href="{{ route('login') }}" style="padding-left: 10px; padding-right: 10px;">Войти</a>
-              @else
+<div id="app">
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 col-xs-2" id="logo">
+                    <a href="/">
+                        <img title="Поиск вакансий в Европе" src="/image/jobseor.png" alt="Логотип компании"
+                             class="logotype"/>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-6 float_right" style="margin-left: -15px;" id="headermenu">
+                    <div class="enter">
+                        <a href="/country" style="padding-left: 10px; padding-right: 10px">Визы и страны</a>
+                        <a href="/summary" style="padding-left: 10px; padding-right: 10px;">Найти резюме</a>
+                        <a href="/vacancy" style="padding-left: 10px; padding-right: 10px;">Найти вакансию</a>
+                        @if (Auth::guest())
+                            <a href="{{ route('login') }}" style="padding-left: 10px; padding-right: 10px;">Войти</a>
+                        @else
+                            <a href="{{ route('user.home') }}">Личный кабинет</a>
 
-              <a href="{{ route('logout') }}"
-                 onclick="event.preventDefault();
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                  Выйти
-              </a>
+                                Выйти
+                            </a>
 
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-              </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
 
-              @endif
-          </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
-        @yield('content')
-<footer>
-          <div class="footer_logo">
+    </header>
+    @yield('content')
+    <footer>
+        <div class="footer_logo">
             <a href="">
-              <img title="Поиск вакансий, доска вакансий" src="/image/jobseor-company.png" alt="Доска поиска вакансий" />
+                <img title="Поиск вакансий, доска вакансий" src="/image/jobseor-company.png"
+                     alt="Доска поиска вакансий"/>
             </a>
-          </div>
-    <div class="footer_right">
-        <p><a href="/support.php" >Техническая поддержка </a></p>
-        <p>Все права защищены ®</p>
-    </div>
-  </footer>
+        </div>
+        <div class="footer_right">
+            <p><a href="/support.php">Техническая поддержка </a></p>
+            <p>Все права защищены ®</p>
+        </div>
+    </footer>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
