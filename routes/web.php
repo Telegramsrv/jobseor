@@ -322,15 +322,15 @@ Route::post('/summary', [
 
 Route::get('/payment', [
 	'as' => 'payment',
-	'uses' => 'UserController@getPayment'
+	'uses' => 'PaymentController@getPayment'
 ]);
 
 Route::post('/payment', [
 	'as' => 'payment',
-	'uses' => 'UserController@postPayment'
+	'uses' => 'PaymentController@postPayment'
 ]);
 
 Route::post('/payment/callback', [
 	'as' => 'payment.callback',
-	'uses' => 'UserController@callbackLiqPay'
+	'uses' => 'PaymentController@callbackLiqPay'
 ]);

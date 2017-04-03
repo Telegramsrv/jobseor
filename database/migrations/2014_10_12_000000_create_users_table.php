@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('role_id');
-	        $table->string('image')->nullable();
+	        $table->string('image')->default('image/default/user.png');
 	        $table->double('balance')->default(0);
 	        $table->boolean('confirm')->default(0);
 	        $table->rememberToken();
